@@ -22,6 +22,7 @@
 }
 
 .logoText {
+  color: var(--gray-light-gray-90, #4a494f);
   text-align: center;
   font-family: Poppins;
   font-size: 19.971px;
