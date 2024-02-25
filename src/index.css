@@ -1,1 +1,9 @@
 /* Font, color :root 작성 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  font-family: "pretendard", "Poppins", sans-serif;
+}
