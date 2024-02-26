@@ -4,15 +4,20 @@ import SelectBox from "../common/textField/SelectBox/SelectBox";
 import { SELECT_TYPE } from "../common/textField/SelectBox/selectType";
 
 export function Choi() {
+  const [inputValue, setInputValue] = useState("");
   const [selectValue, setSelectValue] = useState("");
 
   const handleSelectValue = (value) => {
     setSelectValue(value);
   };
+  const handleInputValue = (value) => {
+    setInputValue(value);
+  };
 
   return (
     <div>
-      <Input />
+      {inputValue}
+      <Input inputValue={inputValue} handleInputValue={handleInputValue} />
       <br />
       {selectValue}
       <SelectBox
