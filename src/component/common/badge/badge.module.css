@@ -1,0 +1,28 @@
+.badgeForm {
+  display: inline-flex;
+  padding: 0px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.07px;
+}
+.other {
+  background: #fff0d6;
+  color: #ff8832;
+}
+.coworker {
+  background: #f8f0ff;
+  color: #9935ff;
+}
+.family {
+  background: #e4fbdc;
+  color: #2ba600;
+}
+.friend {
+  background: #e2f5ff;
+  color: #00a2fe;
+}
