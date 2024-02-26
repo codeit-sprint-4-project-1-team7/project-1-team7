@@ -1,0 +1,192 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 0;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.toNameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.toName {
+  color: var(--gray-800, #2b2b2b);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 42px;
+  letter-spacing: -0.28px;
+}
+
+.imojiContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.writedContainer {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.line {
+  display: none;
+  height: 1px;
+  flex-shrink: 0;
+  background: #ededed;
+}
+
+.imageContainer {
+  display: flex;
+  position: relative;
+}
+
+.image {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.imageText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: 2px solid #e3e3e3;
+  border-radius: 14px;
+  background-color: #fff;
+  color: #484848;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  padding: 0 5px;
+}
+
+.textPadding {
+  padding: 2px;
+}
+
+.writed {
+  color: var(--gray-900, #181818);
+  font-style: normal;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.numOfWrited {
+  font-weight: 700;
+}
+
+.writedText {
+  font-weight: 400;
+}
+
+.writedBar,
+.shareContainerBar {
+  width: 1px;
+  height: 28px;
+  background: var(--gray-200, #eee);
+}
+
+.badgeAndShareContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badgeAndDropdownContainer {
+  display: flex;
+  align-items: center;
+}
+
+.shareContainer {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.shareButton {
+  position: relative;
+}
+
+.shareButtonContainer {
+  position: absolute;
+  width: 138px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #ccc);
+  background: var(--white, #fff);
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  top: 30px;
+}
+
+.shareButtonKakaoElement {
+  padding: 22px 16px 12px 16px;
+}
+
+.shareButtonURLElement {
+  padding: 12px 16px 22px 16px;
+}
+.shareButtonKakaoElement:hover,
+.shareButtonURLElement:hover {
+  background: var(--gray-100, #f6f6f6);
+  border-radius: 8px;
+}
+
+@media (max-width: 1370px) {
+  .shareButtonContainer {
+    right: 0;
+  }
+}
+
+@media (max-width: 860px) {
+  .imageContainer,
+  .writed,
+  .writedBar {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerContainer {
+    flex-direction: column;
+    align-items: normal;
+    padding: 0;
+  }
+
+  .imojiContainer {
+    gap: 0;
+    justify-content: center;
+  }
+
+  .toNameContainer {
+    padding: 12px 0px;
+  }
+
+  .toName {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.18px;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .badgeAndShareContainer {
+    padding: 8px 0;
+  }
+}
