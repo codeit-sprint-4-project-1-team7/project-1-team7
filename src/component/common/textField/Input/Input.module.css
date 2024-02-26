@@ -1,0 +1,115 @@
+.input {
+  /*input 부분 */
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #ccc);
+  background: var(--white, #fff);
+  /*폰트 부분 */
+  color: var(--gray-500, #555);
+  font-family: Pretendard;
+  font-size: 16px; /* Font/16 Regular */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: -0.16px;
+}
+
+.input:focus {
+  /*input 부분 */
+  border: 2px solid var(--gray-500, #555);
+  /*폰트 부분 */
+  color: var(--gray-900, #181818);
+}
+
+.input:active {
+  /*input 부분 */
+  border: 2px solid var(--gray-700, #3a3a3a);
+  /*폰트 부분 */
+  color: var(--gray-900, #181818);
+}
+
+.input:focus::placeholder,
+.input:active::placeholder {
+  color: var(--gray-900, #181818);
+  font-family: Pretendard;
+  font-size: 16px; /* Font/16 Regular */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: -0.16px;
+}
+
+.input:hover {
+  /*input 부분 */
+  border: 1px solid var(--gray-500, #555);
+  /*폰트 부분 */
+  color: var(--gray-500, #555);
+}
+
+.input:hover::placeholder {
+  color: var(--gray-500, #555);
+  font-family: Pretendard;
+  font-size: 16px; /* Font/16 Regular */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: -0.16px;
+}
+
+.disabled {
+  /*input 부분 */
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #ccc);
+  background: var(--gray-100, #f6f6f6);
+  /*폰트 부분 */
+  color: var(--gray-400, #999);
+  font-family: Pretendard;
+  font-size: 16px; /* Font/16 Regular */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: -0.16px;
+}
+
+.error {
+  /*input 부분 */
+  outline: none;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Error, #dc3a3a);
+  background: var(--white, #fff);
+  /*폰트 부분 */
+  color: var(--gray-900, #181818);
+  font-family: Pretendard;
+  font-size: 16px; /* Font/16 Regular */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: -0.16px;
+}
+
+.error::placeholder {
+  color: var(--gray-900, #181818);
+  font-family: Pretendard;
+  font-size: 16px; /* Font/16 Regular */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: -0.16px;
+}
+
+.errorMessage {
+  margin-top: 4px;
+  color: var(--Error, #dc3a3a);
+  /* Font/12 Regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.06px;
+}
