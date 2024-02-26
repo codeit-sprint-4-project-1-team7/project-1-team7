@@ -12,9 +12,9 @@ function Header() {
             <img src={heaferIcon} alt="headerIcon" />
             <span className={styles.logoText}>{HEADER_LOGO_TEXT}</span>
           </div>
-          <button className={styles.button}>
+          <div className={styles.button}>
             <span className={styles.buttonText}>{HEADER_BUTTON_TEXT}</span>
-          </button>
+          </div>
         </div>
       </div>
       <div className={styles.line} />
