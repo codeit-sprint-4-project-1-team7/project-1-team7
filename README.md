@@ -12,6 +12,8 @@ git checkout <브랜치명(각자의 이름)>
 
 git pull origin main
 
+## 가급적이면 push 후 pr에서 merge 하도록 할게요! ##
+
 ## 개발한 내용을 main에 merge할 때 명령어입니다! ## 
 1. git checkout <브랜치명(각자의 이름)>     
 2. git pull origin main                 
@@ -19,5 +21,7 @@ git pull origin main
 4. git merge <브랜치명(각자의 이름)>      
 5. git push origin main                   
 
-## 충돌이 일어나면 반드시 DM을 주세요! ##
+## 기초 프로젝트의 코드 컨벤션 및 commit 메시지 구조에 대한 링크 ##
+https://www.notion.so/2dd85aea555d40ff872237f2a845ee26
 
+## 충돌이 일어나면 반드시 DM을 주세요! ##
