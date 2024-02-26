@@ -4,6 +4,7 @@ import { Toast } from '../common/toast/toast';
 import { Badge } from '../common/badge/badge';
 
 const tempRelation = '친구';
+
 export function Hong() {
   const [modal, setModal] = useState(false);
   const [toast, setToast] = useState(false);
