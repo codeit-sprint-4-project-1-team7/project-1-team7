@@ -7,7 +7,7 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
   const [clickedIdx, setClickedIdx] = useState(0);
   const [isError, setIsError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const dropDownRef = useRef(null);
+  const selectBoxRef = useRef(null);
 
   const buttonClassName = isDisabled
     ? styles.disabled
@@ -25,7 +25,7 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
   };
 
   const handleClickOutside = (e) => {
-    if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
+    if (selectBoxRef.current && !selectBoxRef.current.contains(e.target)) {
       setView(false);
     }
   };
@@ -41,7 +41,7 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
   }, [clickedIdx]);
 
   return (
-    <>
+    <div className={styles.container} ref={selectBoxRef}>
       <button
         className={buttonClassName}
         onClick={handleOnClick}
@@ -51,10 +51,7 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
         {/* TODO: image로 바꿔주기 */}
         <div>{view ? "⌃" : "⌄"}</div>
       </button>
-      <div
-        ref={dropDownRef}
-        className={view ? styles.DropDown : styles.invisible}
-      >
+      <div className={view ? styles.DropDown : styles.invisible}>
         {view &&
           selectType.map((select, idx) => (
             <DropDown
@@ -65,7 +62,7 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
           ))}
       </div>
       {isError && <div className={styles.errorMessage}>선택해주세요</div>}
-    </>
+    </div>
   );
 }
 

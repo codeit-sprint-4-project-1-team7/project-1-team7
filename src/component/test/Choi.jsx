@@ -20,6 +20,7 @@ export function Choi() {
       <Input inputValue={inputValue} handleInputValue={handleInputValue} />
       <br />
       {selectValue}
+      <br />
       <SelectBox
         selectValue={selectValue}
         handleSelectValue={handleSelectValue}

@@ -2,6 +2,10 @@
   display: none;
 }
 
+.container {
+  display: inline-block;
+}
+
 .button {
   display: flex;
   gap: 189px;
