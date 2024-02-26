@@ -79,7 +79,6 @@
 }
 .modalMessage::-webkit-scrollbar-thumb {
   background-color: #cccccc;
-  height: 75%; /* 스크롤바의 길이 */
   background-clip: padding-box;
   border-left: 16px solid #fff;
 }
