@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./SelectBox.module.css";
 import DropDown from "./DropDown";
 
-function SelectBox({
-  selectValue,
-  handleSelectValue,
-  selectType,
-  isDisabled = false,
-  isError = false,
-}) {
+function SelectBox({ selectValue, handleSelectValue, selectType }) {
   const [view, setView] = useState(false);
   const [clickedIdx, setClickedIdx] = useState(0);
+  const [isError, setIsError] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const dropDownRef = useRef(null);
 
   const buttonClassName = isDisabled
     ? styles.disabled
@@ -21,14 +18,26 @@ function SelectBox({
   const handleOnClick = () => {
     setView((prev) => !prev);
   };
+
   const handleOnClickDropDown = (idx) => {
     setClickedIdx(idx);
     setView((prev) => !prev);
   };
 
+  const handleClickOutside = (e) => {
+    if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
+      setView(false);
+    }
+  };
+
   useEffect(() => {
     // clickedIdx 변경될 때마다 handleSelectValue 호출
     handleSelectValue(selectType[clickedIdx]);
+
+    window.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [clickedIdx]);
 
   return (
@@ -42,7 +51,10 @@ function SelectBox({
         {/* TODO: image로 바꿔주기 */}
         <div>{view ? "⌃" : "⌄"}</div>
       </button>
-      <div className={view ? styles.DropDown : styles.invisible}>
+      <div
+        ref={dropDownRef}
+        className={view ? styles.DropDown : styles.invisible}
+      >
         {view &&
           selectType.map((select, idx) => (
             <DropDown
