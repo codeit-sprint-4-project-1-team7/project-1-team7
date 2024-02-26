@@ -13,13 +13,14 @@ const ToggleGroup = () => {
       {toggleItems.map((item) => {
         return item === activeItem ? (
           <button
+            key={item}
             className={`${styles.button} ${styles.active}`}
             onClick={handleBtnClick}
           >
             {item}
           </button>
         ) : (
-          <button className={styles.button} onClick={handleBtnClick}>
+          <button key={item} className={styles.button} onClick={handleBtnClick}>
             {item}
           </button>
         );
