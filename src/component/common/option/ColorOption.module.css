@@ -1,0 +1,43 @@
+.backgroundOptions {
+  display: grid;
+  grid-template-columns: repeat(4, 168px);
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.backgroundOrange {
+  background-color: var(--Orange-200);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+}
+
+.backgroundPurple {
+  background-color: var(--Purple-200);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+}
+
+.backgroundBlue {
+  background-color: var(--Blue-200);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+}
+
+.backgroundGreen {
+  background-color: var(--Green-200);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+}

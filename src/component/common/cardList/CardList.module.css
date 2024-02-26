@@ -1,0 +1,71 @@
+.cardListContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.cardContainer {
+  width: 275px;
+  height: 260px;
+  padding: 30px 24px 20px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--Purple-200, #ecd9ff);
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  z-index: -4;
+}
+
+.contentsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toName {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  align-self: stretch;
+  overflow: hidden;
+  color: var(--gray-900, #181818);
+  text-overflow: ellipsis;
+  /* Font/24 Bold */
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.24px;
+}
+
+.line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.badgeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.imageText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background-color: #fff;
+  color: #484848;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  padding: 0 5px;
+}
