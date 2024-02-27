@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import exampleImg from "../../../asset/img/headerIcon/rollingIcon.png";
+import exampleImg from "../../../asset/img/headerIcon/rolling-icon.png";
 function ProfileImages({
   imageContainerStyle,
   imageStyle,
