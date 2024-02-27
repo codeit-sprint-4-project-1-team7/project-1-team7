@@ -7,15 +7,7 @@ import arrowDown from "../../../../asset/img/textFieldIcon/arrow_down.png";
 function SelectBox({ selectValue, handleSelectValue, selectType }) {
   const [view, setView] = useState(false);
   const [clickedIdx, setClickedIdx] = useState(0);
-  const [isError, setIsError] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
   const selectBoxRef = useRef(null);
-
-  const buttonClassName = isDisabled
-    ? styles.disabled
-    : isError
-    ? styles.error
-    : styles.button;
 
   const handleOnClick = () => {
     setView((prev) => !prev);
@@ -26,13 +18,12 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
     setView((prev) => !prev);
   };
 
-  const handleClickOutside = (e) => {
-    if (selectBoxRef.current && !selectBoxRef.current.contains(e.target)) {
-      setView(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (selectBoxRef.current && !selectBoxRef.current.contains(e.target)) {
+        setView(false);
+      }
+    };
     // clickedIdx 변경될 때마다 handleSelectValue 호출
     handleSelectValue(selectType[clickedIdx]);
 
@@ -40,17 +31,12 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
     return () => {
       window.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [clickedIdx]);
+  }, [clickedIdx, handleSelectValue, selectType]);
 
   return (
     <div className={styles.container} ref={selectBoxRef}>
-      <button
-        className={buttonClassName}
-        onClick={handleOnClick}
-        disabled={isDisabled}
-      >
+      <button className={styles.button} onClick={handleOnClick}>
         <div>{selectValue}</div>
-        {/* TODO: image로 바꿔주기 */}
         <div className={styles.imgContainer}>
           {view ? (
             <img className={styles.img} src={arrowDown} alt="arrowDown" />
@@ -69,9 +55,18 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
             />
           ))}
       </div>
-      {isError && <div className={styles.errorMessage}>선택해주세요</div>}
     </div>
   );
 }
 
 export default SelectBox;
+
+// TODO: 추후에 error 상황이나 disabled 상황 있을시 추가 예정
+// const [isError, setIsError] = useState(false);
+// const [isDisabled, setIsDisabled] = useState(false);
+// const buttonClassName = isDisabled
+//   ? styles.disabled
+//   : isError
+//   ? styles.error
+//   : styles.button;
+//    {isError && <div className={styles.errorMessage}>선택해주세요</div>}
