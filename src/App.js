@@ -12,6 +12,7 @@ import Post from "./component/pages/Post";
 import PostDetail from "./component/pages/PostDetail";
 import PostDetailEdit from "./component/pages/PostDetailEdit";
 import PostMessage from "./component/pages/PostMessage";
+import Layout from "./component/pages/Layout";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="choi" element={<Choi />} />
           <Route path="hong" element={<Hong />} />
         </Route>
-        <Route path="/">
+        <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
           <Route path="list" element={<List />} />
           <Route path="post">
