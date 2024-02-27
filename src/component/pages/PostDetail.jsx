@@ -1,5 +1,7 @@
+import HeaderService from "../common/header/HeaderService";
+
 function PostDetail() {
-  return <div>PostDetail</div>;
+  return <HeaderService></HeaderService>;
 }
 
 export default PostDetail;
