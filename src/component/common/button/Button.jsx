@@ -12,7 +12,8 @@ import ToggleButton from "./ToggleButton";
  *
  * @returns
  */
-const Button = ({
+
+function Button({
   children,
   type = "outlined",
   width,
@@ -20,7 +21,7 @@ const Button = ({
   icon,
   disabled,
   onClick,
-}) => {
+}) {
   if (type === "circle") {
     return <CircleButton icon={icon} onClick={onClick} />;
   }
@@ -45,6 +46,6 @@ const Button = ({
       {children && <span className={styles.name}>{children}</span>}
     </button>
   );
-};
+}
 
 export default Button;
