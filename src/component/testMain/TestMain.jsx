@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Main() {
+function TestMain() {
   return (
     <>
       <h1>임시 메인 페이지입니다.</h1>
@@ -14,22 +14,22 @@ function Main() {
       </h1>
       <br />
       <h2>
-        <Link to="/kim">김수환</Link>
+        <Link to="kim">김수환</Link>
       </h2>
       <h2>
-        <Link to="/yang">양서연</Link>
+        <Link to="yang">양서연</Link>
       </h2>
       <h2>
-        <Link to="/yun">윤아영</Link>
+        <Link to="yun">윤아영</Link>
       </h2>
       <h2>
-        <Link to="/choi">최원석</Link>
+        <Link to="choi">최원석</Link>
       </h2>
       <h2>
-        <Link to="/hong">홍성욱</Link>
+        <Link to="hong">홍성욱</Link>
       </h2>
     </>
   );
 }
 
-export default Main;
+export default TestMain;
