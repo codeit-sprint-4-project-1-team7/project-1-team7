@@ -12,19 +12,19 @@ function ColorOption() {
   return (
     <div className={styles.backgroundOptions}>
       <button type='button' value='orange' className={styles.backgroundOrange} onClick={handleClick}>
-        {'orange' === clickItem && <img src={checkIcon} alt="check" />}
+        {'orange' === clickItem && <img className={styles.backgroundChecked} src={checkIcon} alt="check" />}
       </button>
 
       <button type='button' value='purple' className={styles.backgroundPurple} onClick={handleClick}>
-        {'purple' === clickItem && <img src={checkIcon} alt="check" />}
+        {'purple' === clickItem && <img className={styles.backgroundChecked} src={checkIcon} alt="check" />}
       </button>
 
       <button type='button' value='blue' className={styles.backgroundBlue} onClick={handleClick}>
-        {'blue' === clickItem && <img src={checkIcon} alt="check" />}
+        {'blue' === clickItem && <img className={styles.backgroundChecked} src={checkIcon} alt="check" />}
       </button>
 
       <button type='button' value='green' className={styles.backgroundGreen} onClick={handleClick}>
-        {'green' === clickItem && <img src={checkIcon} alt="check" />}
+        {'green' === clickItem && <img className={styles.backgroundChecked} src={checkIcon} alt="check" />}
       </button>
     </div>
   );
