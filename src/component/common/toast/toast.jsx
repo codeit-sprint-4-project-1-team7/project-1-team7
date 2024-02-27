@@ -1,4 +1,4 @@
-import styles from './toast.module.css';
+import styles from './Toast.module.css';
 
 export const Toast = ({ onClick }) => {
   return (

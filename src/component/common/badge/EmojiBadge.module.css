@@ -1,0 +1,21 @@
+.emojiBackground {
+  display: inline-flex;
+  padding: 8px 12px;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 32px;
+  background: rgba(0, 0, 0, 0.54);
+}
+.emoji {
+  width: 16px;
+  height: 21px;
+  line-height: 21px; /* 131.25% */
+}
+.count {
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+}
