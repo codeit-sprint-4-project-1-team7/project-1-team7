@@ -1,9 +1,15 @@
+import { useState } from "react";
 import Badge from "./Badge";
 import commonStyles from "./Header.module.css";
 import styles from "./HeaderService.module.css";
+import KaKaoShare from "./KaKaoShare";
 import ProfileImages from "./ProfileImages";
 
 function HeaderService() {
+  const [isShareDisplay, setIsShareDisplay] = useState(false);
+  const handleShareDisplayClick = () => {
+    setIsShareDisplay(!isShareDisplay);
+  };
   return (
     <>
       <div className={commonStyles.header}>
@@ -30,21 +36,39 @@ function HeaderService() {
             <div className={styles.badgeAndShareContainer}>
               <div className={styles.badgeAndDropdownContainer}>
                 <Badge />
-
                 <div className={styles.dropDownContainer}>dropDown</div>
               </div>
               <div className={styles.shareContainer}>
                 <div>빙그레버튼</div>
                 <div className={styles.shareContainerBar} />
-                <div className={styles.shareButton}>
+                <div
+                  className={styles.shareButton}
+                  onClick={handleShareDisplayClick}
+                >
                   공유버튼
+                  {isShareDisplay && (
+                    <div className={styles.shareButtonContainer}>
+                      <KaKaoShare
+                        className={styles.shareButtonElement}
+                        name="홍길동"
+                      />
+                      <div className={styles.shareButtonElement}>URL 공유</div>
+                    </div>
+                  )}
+                </div>
+                {/* <Button
+                  shape="square"
+                  width="100px"
+                  height="short"
+                  className={styles.shareButton}
+                >
                   <div className={styles.shareButtonContainer}>
                     <div className={styles.shareButtonKakaoElement}>
                       카카오톡 공유
                     </div>
                     <div className={styles.shareButtonURLElement}>URL 공유</div>
                   </div>
-                </div>
+                </Button> */}
               </div>
             </div>
           </div>
