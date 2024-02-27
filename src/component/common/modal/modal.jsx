@@ -1,7 +1,8 @@
+import { Badge } from '../badge/badge';
 import styles from './modal.module.css';
 
 const tempName = '홍성욱';
-const tempBadge = '임시 배지';
+const tempRelation = '동료';
 const tempDate = '임시 날짜';
 
 export const Modal = ({ onClick }) => {
@@ -19,7 +20,7 @@ export const Modal = ({ onClick }) => {
             <div className={styles.profileImg} alt="임시 프로필 이미지"></div>
             <div className={styles.profileForm}>
               <div className={styles.profileName}>{profileName}</div>
-              <div>{tempBadge}</div>
+              <Badge relation={tempRelation}></Badge>
             </div>
           </div>
           <div className={styles.modalDate}>{tempDate}</div>

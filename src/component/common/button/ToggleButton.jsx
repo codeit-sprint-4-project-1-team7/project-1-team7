@@ -1,9 +1,9 @@
 import { useState } from "react";
-import styles from "./ToggleBtn.module.css";
+import styles from "./ToggleButton.module.css";
 
 const toggleItems = ["컬러", "이미지"];
 
-const ToggleGroup = () => {
+const ToggleButton = () => {
   const [activeItem, isActiveItem] = useState(toggleItems[0]);
 
   const handleBtnClick = (e) => isActiveItem(e.target.innerText);
@@ -13,13 +13,14 @@ const ToggleGroup = () => {
       {toggleItems.map((item) => {
         return item === activeItem ? (
           <button
+            key={item}
             className={`${styles.button} ${styles.active}`}
             onClick={handleBtnClick}
           >
             {item}
           </button>
         ) : (
-          <button className={styles.button} onClick={handleBtnClick}>
+          <button key={item} className={styles.button} onClick={handleBtnClick}>
             {item}
           </button>
         );
@@ -28,4 +29,4 @@ const ToggleGroup = () => {
   );
 };
 
-export default ToggleGroup;
+export default ToggleButton;

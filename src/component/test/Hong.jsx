@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Modal } from '../common/modal/modal';
 import { Toast } from '../common/toast/toast';
+import { Badge } from '../common/badge/badge';
+
+const tempRelation = '친구';
 
 export function Hong() {
   const [modal, setModal] = useState(false);
@@ -29,6 +32,7 @@ export function Hong() {
       <h1>여기에 자유롭게 수정하면서 테스트 해보시면 됩니다!</h1>
       <button onClick={handleModal}>모달</button>
       <button onClick={handleToast}>토스트</button>
+      <Badge relation={tempRelation}></Badge>
 
       {toast && <Toast onClick={handleToast}></Toast>}
       {modal && <Modal onClick={handleModal}></Modal>}

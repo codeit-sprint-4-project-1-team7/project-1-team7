@@ -1,96 +1,96 @@
 import add from "../../asset/img/buttonIcon/add-24.png";
 import plus from "../../asset/img/buttonIcon/plus.png";
 import deleted from "../../asset/img/buttonIcon/deleted.png";
-import arrowRight from "../../asset/img/buttonIcon/arrow_right.png";
-import CircleBtn from "../common/button/CircleBtn";
-import SquareBtn from "../common/button/SquareBtn";
-import PrimaryBtn from "../common/button/PrimaryBtn";
-import SecondaryBtn from "../common/button/SecondaryBtn";
-import OutlinedBtn from "../common/button/OutlinedBtn";
-import ToggleGroup from "../common/button/ToggleGroup";
+import arrowRight from "../../asset/img/buttonIcon/arrow-right.png";
+import Button from "../common/button/Button";
+import ToggleButton from "../common/button/ToggleButton";
 
 export function Yun() {
   return (
     <>
       <h1>여기에 자유롭게 수정하면서 테스트 해보시면 됩니다!</h1>
-      <CircleBtn>
+      <Button type="dark" height="tall" shape="circle">
         <img src={plus} alt="더하기" />
-      </CircleBtn>
+      </Button>
 
       <br />
 
-      <CircleBtn disabled>
+      <Button type="dark" height="tall" shape="circle" disabled>
         <img src={plus} alt="더하기" />
-      </CircleBtn>
+      </Button>
 
       <br />
 
-      <CircleBtn type="arrow">
+      <Button type="arrow" height="standard" shape="circle" disabled>
         <img src={arrowRight} alt="오른쪽 화살표" />
-      </CircleBtn>
+      </Button>
 
       <br />
 
-      <SquareBtn disabled>
+      <Button type="outlined" height="compact" shape="square">
         <img src={deleted} alt="휴지통" />
-      </SquareBtn>
+      </Button>
 
       <br />
 
-      <SquareBtn>
+      <Button type="outlined" height="compact" shape="square" disabled>
         <img src={deleted} alt="휴지통" />
-      </SquareBtn>
+      </Button>
 
       <br />
       <br />
 
-      <PrimaryBtn width="28rem" height="standard">
+      <Button type="primary" width="280px" height="standard">
+        Primary_width280
+      </Button>
+
+      <br />
+      <br />
+
+      <Button type="primary" height="standard">
         Primary
-      </PrimaryBtn>
+      </Button>
 
       <br />
       <br />
 
-      <PrimaryBtn height="standard">Primary</PrimaryBtn>
-
-      <br />
-      <br />
-
-      <PrimaryBtn height="standard" disabled>
+      <Button type="primary" height="standard" disabled>
         Primary_disabled
-      </PrimaryBtn>
+      </Button>
 
       <br />
       <br />
 
-      <SecondaryBtn height="standard">Secondary</SecondaryBtn>
+      <Button type="secondary" height="standard">
+        Secondary
+      </Button>
 
       <br />
       <br />
 
-      <SecondaryBtn height="standard" disabled>
+      <Button type="secondary" height="standard" disabled>
         Secondary_disabled
-      </SecondaryBtn>
+      </Button>
 
       <br />
       <br />
 
-      <OutlinedBtn height="standard">
+      <Button type="outlined" height="standard">
         <img src={add} alt="추가" />
         Outlined
-      </OutlinedBtn>
+      </Button>
 
       <br />
       <br />
 
-      <OutlinedBtn height="standard" disabled>
+      <Button type="outlined" height="standard" disabled>
         Outlined_disabled
-      </OutlinedBtn>
+      </Button>
 
       <br />
       <br />
 
-      <ToggleGroup />
+      <ToggleButton />
 
       <br />
       <br />
