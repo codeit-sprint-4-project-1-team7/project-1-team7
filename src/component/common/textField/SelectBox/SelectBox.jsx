@@ -4,7 +4,7 @@ import DropDown from "./DropDown";
 import arrowTop from "../../../../asset/img/textFieldIcon/arrow_top.png";
 import arrowDown from "../../../../asset/img/textFieldIcon/arrow_down.png";
 
-function SelectBox({ selectValue, handleSelectValue, selectType }) {
+function SelectBox({ selectValue, onSelectValueChange, selectType }) {
   const [view, setView] = useState(false);
   const [clickedIdx, setClickedIdx] = useState(0);
   const selectBoxRef = useRef(null);
@@ -24,14 +24,14 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
         setView(false);
       }
     };
-    // clickedIdx 변경될 때마다 handleSelectValue 호출
-    handleSelectValue(selectType[clickedIdx]);
+    // clickedIdx 변경될 때마다 onSelectValueChange 호출
+    onSelectValueChange(selectType[clickedIdx]);
 
     window.addEventListener("mousedown", handleClickOutside);
     return () => {
       window.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [clickedIdx, handleSelectValue, selectType]);
+  }, [clickedIdx, onSelectValueChange, selectType]);
 
   return (
     <div className={styles.container} ref={selectBoxRef}>

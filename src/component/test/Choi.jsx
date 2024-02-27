@@ -17,13 +17,13 @@ export function Choi() {
   return (
     <div>
       {inputValue}
-      <Input inputValue={inputValue} handleInputValue={handleInputValue} />
+      <Input inputValue={inputValue} onInputValueChange={handleInputValue} />
       <br />
       {selectValue}
       <br />
       <SelectBox
         selectValue={selectValue}
-        handleSelectValue={handleSelectValue}
+        onSelectValueChange={handleSelectValue}
         selectType={SELECT_TYPE.relation}
       />
       <h1>여기에 자유롭게 수정하면서 테스트 해보시면 됩니다!</h1>
