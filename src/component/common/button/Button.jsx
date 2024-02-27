@@ -7,6 +7,7 @@ const Button = ({
   height = "standard",
   shape,
   disabled,
+  onClick,
 }) => {
   const className = `${styles.btn} ${styles[height]} ${styles[type]} ${
     shape ? styles[shape] : ""
@@ -19,6 +20,7 @@ const Button = ({
       style={style}
       className={className}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </button>
