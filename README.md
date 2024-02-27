@@ -22,6 +22,6 @@ git pull origin main
 5. git push origin main                   
 
 ## 기초 프로젝트의 코드 컨벤션 및 commit 메시지 구조에 대한 링크 ##
-https://www.notion.so/2dd85aea555d40ff872237f2a845ee26
+https://www.notion.so/2dd85aea555d40ff872237f2a845ee26?pvs=4
 
 ## 충돌이 일어나면 반드시 DM을 주세요! ##
