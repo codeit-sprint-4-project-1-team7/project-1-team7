@@ -1,0 +1,71 @@
+.ImgOptions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 288px));
+  gap: 16px;
+  max-width: 1200px;
+}
+
+.baseImg01 {
+  background-image: url('../../../asset/img/optionIcon/sample_Image_01.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 100%;
+  padding: 50% 0;
+}
+
+.baseImg02 {
+  background-image: url('../../../asset/img/optionIcon/sample_Image_02.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 100%;
+  padding: 50% 0;
+}
+
+.baseImg03 {
+  background-image: url('../../../asset/img/optionIcon/sample_Image_01.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 100%;
+  padding: 50% 0;
+}
+
+.baseImg04 {
+  background-image: url('../../../asset/img/optionIcon/sample_Image_02.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 100%;
+  padding: 50% 0;
+}
+
+
+.ImgChecked {
+  position: absolute;
+}
