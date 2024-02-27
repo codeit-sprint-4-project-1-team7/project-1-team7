@@ -1,5 +1,5 @@
 import styles from "./Header.module.css";
-import heaferIcon from "../../../asset/img/headerIcon/rollingIcon.png";
+import heaferIcon from "../../../asset/img/headerIcon/rolling-icon.png";
 
 const HEADER_LOGO_TEXT = "Rolling";
 const HEADER_BUTTON_TEXT = "롤링 페이퍼 만들기";
