@@ -2,12 +2,13 @@ import styles from "./Button.module.css";
 
 const Button = ({
   children,
+  type,
   width,
   height = "standard",
   shape,
   disabled,
 }) => {
-  const className = `${styles.btn} ${styles[height]} ${styles[color]} ${
+  const className = `${styles.btn} ${styles[height]} ${styles[type]} ${
     shape ? styles[shape] : ""
   }`;
   const style = width ? { width: `${width}` } : {};
