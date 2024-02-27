@@ -12,18 +12,18 @@
   letter-spacing: -0.07px;
 }
 .other {
-  background: #fff0d6;
-  color: #ff8832;
+  background: var(--orange-100);
+  color: var(--orange-500);
 }
 .coworker {
-  background: #f8f0ff;
-  color: #9935ff;
+  background: var(--purple-100);
+  color: var(--purple-600);
 }
 .family {
-  background: #e4fbdc;
-  color: #2ba600;
+  background: var(--green-100);
+  color: var(--green-500);
 }
 .friend {
-  background: #e2f5ff;
-  color: #00a2fe;
+  background: var(--blue-100);
+  color: var(--blue-500);
 }
