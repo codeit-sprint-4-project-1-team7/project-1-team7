@@ -1,4 +1,5 @@
 import { Badge } from '../badge/Badge';
+import PrimaryBtn from '../button/PrimaryBtn';
 import styles from './Modal.module.css';
 
 const tempName = '홍성욱';
@@ -46,7 +47,10 @@ export const Modal = ({ onClick }) => {
             메시지 입니다.
           </div>
         </div>
-        <button onClick={onClick}>확인</button>
+
+        <PrimaryBtn width="120px" height="standard" onClick={onClick}>
+          확인
+        </PrimaryBtn>
       </div>
     </div>
   );
