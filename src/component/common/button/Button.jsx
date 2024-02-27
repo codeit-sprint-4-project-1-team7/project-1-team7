@@ -1,18 +1,28 @@
 import styles from "./Button.module.css";
+import CircleButton from "./CircleButton";
+import ToggleButton from "./ToggleButton";
 
 const Button = ({
   children,
-  type,
+  type = "outlined",
   width,
   height = "standard",
-  shape,
+  icon,
   disabled,
   onClick,
 }) => {
+  if (type === "circle") {
+    return <CircleButton icon={icon} onClick={onClick} />;
+  }
+
+  if (type === "toggle") {
+    return <ToggleButton />;
+  }
+
   const className = `${styles.btn} ${styles[height]} ${styles[type]} ${
-    shape ? styles[shape] : ""
+    icon ? styles[icon] : ""
   }`;
-  const style = width ? { width: `${width}` } : {};
+  const style = width ? { width: `${width}px` } : {};
 
   return (
     <button
@@ -22,7 +32,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {children}
+      {children && <span className={styles.name}>{children}</span>}
     </button>
   );
 };
