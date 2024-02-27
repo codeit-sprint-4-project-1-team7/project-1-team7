@@ -1,5 +1,5 @@
-import { Badge } from '../badge/badge';
-import styles from './modal.module.css';
+import { Badge } from '../badge/Badge';
+import styles from './Modal.module.css';
 
 const tempName = '홍성욱';
 const tempRelation = '동료';

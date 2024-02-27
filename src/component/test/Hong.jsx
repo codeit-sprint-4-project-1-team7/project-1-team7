@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Modal } from '../common/modal/modal';
-import { Toast } from '../common/toast/toast';
-import { Badge } from '../common/badge/badge';
+import { Modal } from '../common/modal/Modal';
+import { Toast } from '../common/toast/Toast';
+import { Badge } from '../common/badge/Badge';
 
 const tempRelation = '친구';
 
