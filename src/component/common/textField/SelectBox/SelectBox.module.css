@@ -6,6 +6,15 @@
   display: inline-block;
 }
 
+.imgContainer {
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  background-color: inherit;
+}
+
 .button {
   display: flex;
   gap: 189px;

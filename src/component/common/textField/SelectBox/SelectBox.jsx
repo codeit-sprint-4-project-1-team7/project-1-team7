@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./SelectBox.module.css";
 import DropDown from "./DropDown";
+import arrowTop from "../../../../asset/img/textFieldIcon/arrow_top.png";
+import arrowDown from "../../../../asset/img/textFieldIcon/arrow_down.png";
 
 function SelectBox({ selectValue, handleSelectValue, selectType }) {
   const [view, setView] = useState(false);
@@ -49,7 +51,13 @@ function SelectBox({ selectValue, handleSelectValue, selectType }) {
       >
         <div>{selectValue}</div>
         {/* TODO: image로 바꿔주기 */}
-        <div>{view ? "⌃" : "⌄"}</div>
+        <div className={styles.imgContainer}>
+          {view ? (
+            <img className={styles.img} src={arrowDown} alt="arrowDown" />
+          ) : (
+            <img className={styles.img} src={arrowTop} alt="arrowTop" />
+          )}
+        </div>
       </button>
       <div className={view ? styles.DropDown : styles.invisible}>
         {view &&
