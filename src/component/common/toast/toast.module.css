@@ -1,4 +1,9 @@
 .toastBackground {
+  position: fixed;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,8 +13,11 @@
   padding: 19px 30px;
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.8);
-  gap: 253px;
   flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 320px;
+  }
 }
 .toastForm {
   display: flex;
@@ -27,8 +35,10 @@
   font-weight: 400;
   line-height: 26px;
   letter-spacing: -0.16px;
-
   padding-right: 241px;
+  @media (max-width: 768px) {
+    padding-right: 37px;
+  }
 }
 .toastClose {
   background-color: inherit;
