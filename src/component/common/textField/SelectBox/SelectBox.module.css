@@ -82,7 +82,7 @@
   background-color: var(--white);
   align-items: center;
   border-radius: 8px;
-  border: 1px solid var(--Error);
+  border: 1px solid var(--error);
   margin-bottom: 4px;
   /*font*/
   color: var(--gray-900);
@@ -95,7 +95,7 @@
 }
 
 .errorMessage {
-  color: var(--Error);
+  color: var(--error);
   /* Font/12 Regular */
   font-family: Pretendard;
   font-size: 12px;
