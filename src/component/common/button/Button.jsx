@@ -2,6 +2,16 @@ import styles from "./Button.module.css";
 import CircleButton from "./CircleButton";
 import ToggleButton from "./ToggleButton";
 
+/**
+ *
+ * @param {string} children
+ * @param {string} type (primary, secondary, outlined, circle, toggle)
+ * @param {string} width (280)
+ * @param {string} height (tall, standard, short)
+ * @param {string} icon (add, share, plus, delete, check)
+ *
+ * @returns
+ */
 const Button = ({
   children,
   type = "outlined",
