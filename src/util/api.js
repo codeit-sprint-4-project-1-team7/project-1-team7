@@ -1,9 +1,9 @@
 const API_URL = "https://rolling-api.vercel.app";
 
+const BACKGROUND_IMAGES_API_URL = `${API_URL}/background-images/`;
+const PROFILE_IMAGES_API_URL = `${API_URL}/profile-images/`;
 const RECIPIENT_API_URL = `${API_URL}/4-7/recipients/`;
-
 const MESSAGE_API_URL = `${API_URL}/messages/`;
-
 const ERROR_MESSAGE = "데이터를 불러오는데 실패했습니다.";
 
 async function getApi(url) {
@@ -49,6 +49,22 @@ async function deleteApi(url) {
   return body;
 }
 
+/* background-images
+GET /background-images/                       -- 기본 배경 이미지 조회
+*/
+
+export function getBackgroundImagesApiResponse() {
+  return getApi(BACKGROUND_IMAGES_API_URL);
+}
+
+/* profile-images
+GET /profile-images/                          -- 기본 프로필 이미지 조회
+*/
+
+export function getProfileImagesApiResponse() {
+  return getApi(PROFILE_IMAGES_API_URL);
+}
+
 /* recipient(대상)
 POST   /recipients/                           -- 롤링 페이퍼 대상 생성
 GET    /recipients/                           -- 롤링 페이퍼 대상 목록 조회
@@ -61,10 +77,10 @@ export function postRecipientApiResponse(obj) {
 }
 
 export function getRecipientsApiResponse(recipientId) {
-  const getRecipientsUrl = recipientId
+  const conditionalRecipientUrl = recipientId
     ? RECIPIENT_API_URL + recipientId + "/"
     : RECIPIENT_API_URL;
-  return getApi(getRecipientsUrl);
+  return getApi(conditionalRecipientUrl);
 }
 
 export function deleteRecipientApiResponse(recipientId) {
