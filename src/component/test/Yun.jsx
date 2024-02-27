@@ -1,9 +1,9 @@
 import add from "../../asset/img/buttonIcon/add-24.png";
 import plus from "../../asset/img/buttonIcon/plus.png";
 import deleted from "../../asset/img/buttonIcon/deleted.png";
-import arrowRight from "../../asset/img/buttonIcon/arrow_right.png";
+import arrowRight from "../../asset/img/buttonIcon/arrow-right.png";
 import Button from "../common/button/Button";
-import ToggleGroup from "../common/button/ToggleGroup";
+import ToggleButton from "../common/button/ToggleButton";
 
 export function Yun() {
   return (
@@ -90,7 +90,7 @@ export function Yun() {
       <br />
       <br />
 
-      <ToggleGroup />
+      <ToggleButton />
 
       <br />
       <br />
