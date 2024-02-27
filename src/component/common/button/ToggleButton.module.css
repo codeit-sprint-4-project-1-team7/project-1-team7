@@ -1,0 +1,21 @@
+.toggleArea {
+  display: flex;
+  width: 244px;
+  border-radius: 6px;
+  background-color: var(--gray-100);
+}
+
+.button {
+  padding: 7px 16px;
+  width: 50%;
+  height: 40px;
+}
+
+.active {
+  border-radius: 6px;
+  border: 2px solid var(--purple-600);
+  background-color: var(--white);
+  font-weight: var(--bold);
+  color: var(--purple-700);
+  letter-spacing: -0.16px;
+}
