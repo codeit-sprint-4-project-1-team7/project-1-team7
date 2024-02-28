@@ -19,3 +19,9 @@
   color: var(--purple-700);
   letter-spacing: -0.16px;
 }
+
+@media (max-width: 767px) {
+  .toggleArea {
+    width: 236px;
+  }
+}

@@ -1,5 +1,6 @@
-import { Badge } from '../badge/badge';
-import styles from './modal.module.css';
+import { Badge } from '../badge/Badge';
+import Button from '../button/Button';
+import styles from './Modal.module.css';
 
 const tempName = '홍성욱';
 const tempRelation = '동료';
@@ -43,10 +44,16 @@ export const Modal = ({ onClick }) => {
             메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지
             입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다.
             임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
+            메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지
+            입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다.
+            임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
             메시지 입니다.
           </div>
         </div>
-        <button onClick={onClick}>확인</button>
+
+        <Button type="primary" width="120px" onClick={onClick}>
+          확인
+        </Button>
       </div>
     </div>
   );
