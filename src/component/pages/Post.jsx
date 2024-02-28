@@ -35,7 +35,7 @@ function Post() {
         {selectedButtonName === BUTTON_NAME[0] && <ColorOption />}
         {selectedButtonName === BUTTON_NAME[1] && <ImageOption />}
         <div className={styles.createButton}>
-          <Button type="primary" height="tall" >
+            <Button type="primary" height="tall" disabled={!inputValue}>
             생성하기
           </Button>
         </div>
