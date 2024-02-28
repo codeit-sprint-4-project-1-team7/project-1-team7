@@ -63,7 +63,10 @@ function App() {
         <Routes>
           <Route path="/test">
             <Route index element={<TestMain />} />
-            <Route path="kim" element={<Kim />} />
+            <Route
+              path="kim"
+              element={<Kim contextMenuVisibleList={contextMenuVisibleList} />}
+            />
             <Route path="yang" element={<Yang />} />
             <Route path="yun" element={<Yun />} />
             <Route path="choi" element={<Choi />} />
