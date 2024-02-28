@@ -7,8 +7,11 @@ import { EmojiBadge } from "../badge/EmojiBadge";
 import { getReactionsApiResponse } from "../../../util/api";
 import EmojiPicker from "emoji-picker-react";
 import Button from "../button/Button";
+import copy from "copy-to-clipboard";
+import { Toast } from "../toast/Toast";
 
 function HeaderService({ contextMenuVisibleList }) {
+  const [isToastVisible, setIsToastVisible] = useState(false);
   const tempEmoji = "😍";
   const tempCount = 24;
 
@@ -16,11 +19,22 @@ function HeaderService({ contextMenuVisibleList }) {
     const response = await getReactionsApiResponse();
     if (!response) return;
   };
+  const handleShareUrlClick = () => {
+    console.log(window.location.href);
+    copy(window.location.href);
+    setIsToastVisible(!isToastVisible);
+  };
+  const handleToastCloseClick = () => setIsToastVisible(!isToastVisible);
 
   useEffect(() => {
-    // emojiFunc();
-    console.log(contextMenuVisibleList);
-  }, [contextMenuVisibleList]);
+    const timer = setTimeout(() => {
+      if (isToastVisible) setIsToastVisible(false);
+    }, 1500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isToastVisible]);
+
   return (
     <>
       <div className={commonStyles.header}>
@@ -98,23 +112,18 @@ function HeaderService({ contextMenuVisibleList }) {
                         className={styles.shareButtonElement}
                         name="홍길동"
                       />
-                      <div className={styles.shareButtonElement}>URL 공유</div>
+                      <div
+                        onClick={handleShareUrlClick}
+                        className={styles.shareButtonElement}
+                      >
+                        URL 공유
+                      </div>
                     </div>
                   )}
                 </div>
-                {/* <Button
-                  shape="square"
-                  width="100px"
-                  height="short"
-                  className={styles.shareButton}
-                >
-                  <div className={styles.shareButtonContainer}>
-                    <div className={styles.shareButtonKakaoElement}>
-                      카카오톡 공유
-                    </div>
-                    <div className={styles.shareButtonURLElement}>URL 공유</div>
-                  </div>
-                </Button> */}
+                {isToastVisible && <Toast onClick={handleToastCloseClick} />}
+                {/* <ModalPortal>
+                </ModalPortal> */}
               </div>
             </div>
           </div>
