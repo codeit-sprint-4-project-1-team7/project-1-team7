@@ -11,6 +11,12 @@ const getSampleMessages = async (id) => {
   return response.json();
 };
 
+const deleteSampleMessage = async (id) => {
+  await fetch(`https://rolling-api.vercel.app/7/messages/${id}/`, {
+    method: "DELETE",
+  });
+};
+
 // sampleCard
 function Card({ sender, relationship, content, createdAt, onButtonClick }) {
   return (
@@ -54,6 +60,13 @@ function PostDetailEdit() {
     const { results } = await getSampleMessages(postId);
 
     setMessages(results);
+  };
+
+  const onDeleteButtonClick = async (id) => {
+    await deleteSampleMessage(id);
+    setMessages((prevMessage) =>
+      prevMessage.filter((message) => message.id !== id)
+    );
   };
 
   useEffect(() => {
