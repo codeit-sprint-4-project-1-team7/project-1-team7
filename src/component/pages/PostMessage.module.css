@@ -1,0 +1,70 @@
+.container {
+  padding: 47px 30% 36px 30%;
+}
+
+.inputText {
+  margin-bottom: 12px;
+  color: var(--gray-900);
+
+  /* Font/24 Bold */
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px; /* 150% */
+  letter-spacing: -0.24px;
+}
+
+.inputContainer {
+  margin-bottom: 50px;
+}
+
+.profileText {
+  margin-bottom: 12px;
+  color: var(--gray-900);
+
+  /* Font/24 Bold */
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px; /* 150% */
+  letter-spacing: -0.24px;
+}
+
+.img {
+  margin-bottom: 50px;
+}
+
+.selectBoxText {
+  margin-bottom: 12px;
+  color: var(--gray-900);
+
+  /* Font/24 Bold */
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px; /* 150% */
+  letter-spacing: -0.24px;
+}
+
+.selectBoxContainer {
+  margin-bottom: 50px;
+}
+
+.textAreaText {
+  margin-bottom: 12px;
+  color: var(--gray-900);
+
+  /* Font/24 Bold */
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px; /* 150% */
+  letter-spacing: -0.24px;
+}
+
+.textAreaContainer {
+  margin-bottom: 50px;
+}

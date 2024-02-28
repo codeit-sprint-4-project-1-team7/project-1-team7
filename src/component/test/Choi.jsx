@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Input from "../common/textField/Input/Input";
-import SelectBox from "../common/textField/SelectBox/SelectBox";
-import { SELECT_TYPE } from "../common/textField/SelectBox/selectType";
-import TextArea from "../common/textField/TextArea/TextArea";
+import Input from "../common/textField/input/Input";
+import SelectBox from "../common/textField/selectBox/SelectBox";
+import TextArea from "../common/textField/textArea/TextArea";
+import { SELECT_TYPE } from "../common/textField/selectBox/selectType";
 import DOMPurify from "dompurify";
 
 export function Choi() {
