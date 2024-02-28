@@ -42,7 +42,7 @@
 }
 
 .selectButton {
-  padding: 42px 0 52px;
+  padding: 52px 0 42px;
   width: fit-content;
 }
 
@@ -55,10 +55,34 @@
   .container {
     padding: 40px 24px;
   }
+
+  .content {
+    max-width: 720px;
+  }
+
+  .selectButton {
+    padding: 40px 0 28px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .container {
     padding: 40px 24px;
+  }
+
+  .content {
+    max-width: 320px;
+  }
+
+  .inputBox {
+    padding-bottom: 48px;
+  }
+
+  .selectButton {
+    padding: 24px 0 28px;
+  }
+
+  .createButton {
+    padding: 80px 0 24px;
   }
 }
