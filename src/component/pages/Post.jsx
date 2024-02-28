@@ -4,6 +4,7 @@ import Input from "../common/textField/Input/Input";
 import ColorOption from "../common/option/ColorOption";
 import ToggleButton from "../common/button/ToggleButton";
 import ImageOption from "../common/option/ImageOption";
+import Button from "../common/button/Button";
 
 const BUTTON_NAME = ['컬러', '이미지']
 
@@ -33,6 +34,11 @@ function Post() {
         </div>
         {selectedButtonName === BUTTON_NAME[0] && <ColorOption />}
         {selectedButtonName === BUTTON_NAME[1] && <ImageOption />}
+        <div className={styles.createButton}>
+          <Button type="primary" height="tall" >
+            생성하기
+          </Button>
+        </div>
       </div>
     </div>
   )
