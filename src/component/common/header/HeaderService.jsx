@@ -6,32 +6,35 @@ import ProfileImages from "./ProfileImages";
 import { EmojiBadge } from "../badge/EmojiBadge";
 import { getReactionsApiResponse } from "../../../util/api";
 import EmojiPicker from "emoji-picker-react";
+import Button from "../button/Button";
+import copy from "copy-to-clipboard";
+import { Toast } from "../toast/Toast";
 
-function HeaderService() {
-  const [isShareDisplay, setIsShareDisplay] = useState(false);
-  const [isEmojiDisplay, setIsEmojiDisplay] = useState(false);
-  const [isEmojiApiDisplay, setIsEmojiApiDisplay] = useState(false);
+function HeaderService({ contextMenuVisibleList }) {
+  const [isToastVisible, setIsToastVisible] = useState(false);
   const tempEmoji = "😍";
   const tempCount = 24;
-  const handleShareDisplayClick = () => {
-    setIsShareDisplay(!isShareDisplay);
-  };
-  const handleEmojiDisplayClick = () => {
-    setIsEmojiDisplay(!isEmojiDisplay);
-  };
-
-  const handleEmojiApiDisplayClick = () => {
-    setIsEmojiApiDisplay(!isEmojiApiDisplay);
-  };
 
   const emojiFunc = async () => {
     const response = await getReactionsApiResponse();
     if (!response) return;
   };
+  const handleShareUrlClick = () => {
+    console.log(window.location.href);
+    copy(window.location.href);
+    setIsToastVisible(!isToastVisible);
+  };
+  const handleToastCloseClick = () => setIsToastVisible(!isToastVisible);
 
   useEffect(() => {
-    // emojiFunc();
-  });
+    const timer = setTimeout(() => {
+      if (isToastVisible) setIsToastVisible(false);
+    }, 1500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isToastVisible]);
+
   return (
     <>
       <div className={commonStyles.header}>
@@ -62,11 +65,8 @@ function HeaderService() {
                   <EmojiBadge emoji={tempEmoji} count={tempCount} />
                   <EmojiBadge emoji={tempEmoji} count={tempCount} />
                 </div>
-                <div
-                  onClick={handleEmojiDisplayClick}
-                  className={styles.dropDownContainer}
-                >
-                  {isEmojiDisplay && (
+                <div id="emojiListButton" className={styles.dropDownContainer}>
+                  {contextMenuVisibleList.isEmojiContextMenuVisible && (
                     <div className={styles.emojiContainer}>
                       <EmojiBadge emoji={tempEmoji} count={tempCount} />
                       <EmojiBadge emoji={tempEmoji} count={1} />
@@ -80,12 +80,16 @@ function HeaderService() {
                 </div>
               </div>
               <div className={styles.shareContainer}>
-                <div
-                  className={styles.addEmojiContainer}
-                  onClick={handleEmojiApiDisplayClick}
-                >
-                  빙그레버튼
-                  {isEmojiApiDisplay && (
+                <div className={styles.addEmojiContainer}>
+                  <Button
+                    id="addEmojiButton"
+                    type="outlined"
+                    height="short"
+                    icon="add"
+                  >
+                    추가
+                  </Button>
+                  {contextMenuVisibleList.isEmojiApiContextMenuVisible && (
                     <div
                       onClick={(e) => e.stopPropagation()}
                       className={styles.emojiApiContainer}
@@ -95,34 +99,31 @@ function HeaderService() {
                   )}
                 </div>
                 <div className={styles.shareContainerBar} />
-                <div
-                  className={styles.shareButton}
-                  onClick={handleShareDisplayClick}
-                >
-                  공유버튼
-                  {isShareDisplay && (
+                <div className={styles.shareButton}>
+                  <Button
+                    id="shareButton"
+                    type="outlined"
+                    height="short"
+                    icon="share"
+                  />
+                  {contextMenuVisibleList.isShareContextMenuVisible && (
                     <div className={styles.shareButtonContainer}>
                       <KaKaoShare
                         className={styles.shareButtonElement}
                         name="홍길동"
                       />
-                      <div className={styles.shareButtonElement}>URL 공유</div>
+                      <div
+                        onClick={handleShareUrlClick}
+                        className={styles.shareButtonElement}
+                      >
+                        URL 공유
+                      </div>
                     </div>
                   )}
                 </div>
-                {/* <Button
-                  shape="square"
-                  width="100px"
-                  height="short"
-                  className={styles.shareButton}
-                >
-                  <div className={styles.shareButtonContainer}>
-                    <div className={styles.shareButtonKakaoElement}>
-                      카카오톡 공유
-                    </div>
-                    <div className={styles.shareButtonURLElement}>URL 공유</div>
-                  </div>
-                </Button> */}
+                {isToastVisible && <Toast onClick={handleToastCloseClick} />}
+                {/* <ModalPortal>
+                </ModalPortal> */}
               </div>
             </div>
           </div>

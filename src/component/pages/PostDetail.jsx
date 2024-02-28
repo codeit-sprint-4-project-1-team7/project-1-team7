@@ -5,7 +5,7 @@ import {
 } from "../../util/api";
 import HeaderService from "../common/header/HeaderService";
 
-function PostDetail() {
+function PostDetail({ contextMenuVisibleList }) {
   const [testList, setTestList] = useState([]);
   const apiFunc = async () => {
     const res = await getProfileImagesApiResponse();
@@ -16,7 +16,7 @@ function PostDetail() {
   }, []);
   return (
     <>
-      <HeaderService />
+      <HeaderService contextMenuVisibleList={contextMenuVisibleList} />
       {testList?.map((item, i) => (
         <img key={i} src={item} alt={i} />
       ))}

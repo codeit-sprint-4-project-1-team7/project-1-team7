@@ -44,6 +44,8 @@
 .imageContainer {
   display: flex;
   position: relative;
+  width: 100px;
+  height: 28px;
 }
 
 .image {
@@ -135,11 +137,6 @@
 
 .shareButton {
   position: relative;
-  /* background-image: url(../../../asset/img/buttonIcon/deleted.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 24px;
-  height: 24px; */
 }
 .emojiContainer {
   position: absolute;
@@ -152,9 +149,9 @@
   right: 0px;
   padding: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 70px);
+  grid-template-columns: repeat(auto-fit, 69px);
   grid-template-rows: 1fr 1fr;
-  gap: 5px;
+  gap: 8px;
 }
 
 .addEmojiContainer {
@@ -174,12 +171,12 @@
   border: 1px solid var(--gray-300, #ccc);
   background: var(--white, #fff);
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-  top: 30px;
+  top: 40px;
   padding: 10px 0;
 }
 
 .shareButtonElement {
-  padding: 12px 16px 12px 16px;
+  padding: 12px 16px;
 }
 
 .shareButtonElement:hover {
