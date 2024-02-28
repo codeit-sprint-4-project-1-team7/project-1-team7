@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
 import heaferIcon from "../../../asset/img/headerIcon/rolling-icon.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const HEADER_LOGO_TEXT = "Rolling";
@@ -9,6 +9,7 @@ function Header() {
   const [isMakeRollingPaperVisible, setIsMakeRollingPaperVisible] =
     useState(false);
   const navigation = useNavigate();
+  const location = useLocation();
 
   const handleLogoClick = () => {
     navigation("/");
@@ -18,13 +19,8 @@ function Header() {
     navigation("/post");
   };
   useEffect(() => {
-    const searchUrl = window.location.href;
-    if (searchUrl.indexOf("post") !== -1) {
-      setIsMakeRollingPaperVisible(false);
-    } else {
-      setIsMakeRollingPaperVisible(true);
-    }
-  }, [isMakeRollingPaperVisible]);
+    setIsMakeRollingPaperVisible(!location.pathname.includes("post"));
+  }, [location.pathname]);
   return (
     <>
       <div className={styles.header}>
