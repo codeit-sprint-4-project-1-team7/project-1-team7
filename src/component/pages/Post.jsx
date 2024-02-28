@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./Post.module.css";
 import Input from "../common/textField/Input/Input";
 import ColorOption from "../common/option/ColorOption";
@@ -34,11 +35,13 @@ function Post() {
         </div>
         {selectedButtonName === BUTTON_NAME[0] && <ColorOption />}
         {selectedButtonName === BUTTON_NAME[1] && <ImageOption />}
-        <div className={styles.createButton}>
+        <Link to='/post/{id}' style={{textDecoration: 'none'}}>
+          <div className={styles.createButton}>
             <Button type="primary" height="tall" disabled={!inputValue}>
-            생성하기
-          </Button>
-        </div>
+              생성하기
+            </Button>
+          </div>
+        </Link>
       </div>
     </div>
   )
