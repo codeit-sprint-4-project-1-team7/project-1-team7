@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import Button from "../common/button/Button";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+import Button from "../common/button/Button";
 import styles from "./PostDetailEdit.module.css";
 
 // sampleAPI
@@ -14,6 +15,12 @@ const getSampleMessages = async (id) => {
 
 const deleteSampleMessage = async (id) => {
   await fetch(`https://rolling-api.vercel.app/7/messages/${id}/`, {
+    method: "DELETE",
+  });
+};
+
+const deleteSampleRollingPaper = async (id) => {
+  await fetch(`https://rolling-api.vercel.app/7/recipients/${id}/`, {
     method: "DELETE",
   });
 };
@@ -58,6 +65,7 @@ function PostDetailEdit() {
   // http://localhost:3000/post/2819/edit
   const { postId } = useParams();
   const [messages, setMessages] = useState([]);
+  const navigate = useNavigate();
 
   const fetchSampleMessages = async () => {
     const { results } = await getSampleMessages(postId);
@@ -65,11 +73,17 @@ function PostDetailEdit() {
     setMessages(results);
   };
 
-  const onDeleteButtonClick = async (id) => {
+  const onCardDeleteBtnClick = async (id) => {
     await deleteSampleMessage(id);
     setMessages((prevMessage) =>
       prevMessage.filter((message) => message.id !== id)
     );
+  };
+
+  const onPaperDeleteBtnClick = async () => {
+    await deleteSampleRollingPaper(postId);
+
+    navigate("/list");
   };
 
   useEffect(() => {
@@ -80,6 +94,14 @@ function PostDetailEdit() {
     <div>
       <h1>PostDetailEdit</h1>
       <div className={styles.cardListContainer}>
+        <Button
+          type="primary"
+          width="92"
+          height="standard"
+          onClick={onPaperDeleteBtnClick}
+        >
+          삭제하기
+        </Button>
         <div className={styles.cardList}>
           {messages.map(({ id, sender, relationship, content, createdAt }) => (
             <Card
@@ -88,7 +110,7 @@ function PostDetailEdit() {
               relationship={relationship}
               content={content}
               createdAt={createdAt}
-              onButtonClick={() => onDeleteButtonClick(id)}
+              onButtonClick={() => onCardDeleteBtnClick(id)}
             />
           ))}
         </div>
