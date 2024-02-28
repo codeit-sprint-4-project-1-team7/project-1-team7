@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../common/button/Button";
 import { useParams } from "react-router";
+import styles from "./PostDetailEdit.module.css";
 
 // sampleAPI
 const getSampleMessages = async (id) => {
