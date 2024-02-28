@@ -1,4 +1,4 @@
-import styles from './badge.module.css';
+import styles from './Badge.module.css';
 
 export const Badge = ({ relation }) => {
   let relClass = ``;

@@ -19,7 +19,7 @@
   align-items: center;
   padding: 40px;
   border-radius: 16px;
-  background: #fff;
+  background: var(--white);
   flex-shrink: 0;
   gap: 24px;
 }
@@ -46,14 +46,14 @@
   padding: 3px 0px;
 }
 .modalProfile .profileName {
-  color: #000;
+  color: var(--black);
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
 }
 .modalDate {
-  color: #999;
+  color: var(--gray-400);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -62,7 +62,7 @@
 }
 .modalMessageForm {
   padding-top: 16px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--gray-200);
 }
 .modalMessage {
   display: flex;
@@ -78,7 +78,7 @@
   flex-shrink: 0;
 }
 .modalMessage::-webkit-scrollbar-thumb {
-  background-color: #cccccc;
+  background-color: var(--gray-300);
   background-clip: padding-box;
-  border-left: 16px solid #fff;
+  border-left: 16px solid var(--white);
 }
