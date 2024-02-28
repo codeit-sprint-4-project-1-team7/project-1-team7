@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 0 300px;
+}
+
+.content {
+  max-width: 1200px;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.inputName {
+  color: var(--gray-900);
+  font-size: var(--xxl);
+  font-weight: var(--bold);
+}
+
+.describeBackgroundInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.describeTitle {
+  color: var(--gray-900);
+  font-size: var(--xxl);
+  font-weight: var(--bold);
+}
+
+.describeSubtitle {
+  color: var(--gray-500);
+  font-size: var(--m);
+  font-weight: var(--regular);
+}
+
+.selectButton {
+  padding: 42px 0 52px;
+}
+
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 40px 24px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 40px 24px;
+  }
+}
