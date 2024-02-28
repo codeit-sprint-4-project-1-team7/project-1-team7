@@ -15,6 +15,7 @@ import ToggleButton from "./ToggleButton";
 
 function Button({
   children,
+  id,
   type = "outlined",
   width,
   height = "standard",
@@ -37,6 +38,7 @@ function Button({
 
   return (
     <button
+      id={id}
       type="button"
       style={style}
       className={className}
