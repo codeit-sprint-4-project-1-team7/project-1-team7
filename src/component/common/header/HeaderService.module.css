@@ -147,9 +147,9 @@
   right: 0px;
   padding: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 70px);
+  grid-template-columns: repeat(auto-fit, 69px);
   grid-template-rows: 1fr 1fr;
-  gap: 5px;
+  gap: 8px;
 }
 
 .addEmojiContainer {
