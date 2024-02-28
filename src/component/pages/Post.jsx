@@ -2,18 +2,23 @@ import { useState } from "react";
 import styles from "./Post.module.css";
 import Input from "../common/textField/Input/Input";
 import ColorOption from "../common/option/ColorOption";
-import Button from "../common/button/Button";
+import ToggleButton from "../common/button/ToggleButton";
+import ImageOption from "../common/option/ImageOption";
+
+const BUTTON_NAME = ['컬러', '이미지']
 
 function Post() {
-  const [inputValue, setInputValue] = useState("")
-
+  const [inputValue, setInputValue] = useState("");
+  const [selectedButtonName, setSelectedButtonName] = useState("컬러");
+;
   const handleInputValue = (value) => setInputValue(value);
+  const handleButtonClick = (e) => setSelectedButtonName(e.target.innerText);
   
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.inputBox}>
-          <div className={styles.inputName}>To.{inputValue}</div>
+          <div className={styles.inputName}>To. {inputValue}</div>
           <Input inputValue={inputValue} onInputValueChange={handleInputValue}/>
         </div>
 
@@ -22,9 +27,12 @@ function Post() {
           <p className={styles.describeSubtitle}>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
         </div>
         <div className={styles.selectButton}>
-          <Button type="toggle" />
+          <div onClick={handleButtonClick}>
+            <ToggleButton />
+          </div>
         </div>
-        <ColorOption />
+        {selectedButtonName === BUTTON_NAME[0] && <ColorOption />}
+        {selectedButtonName === BUTTON_NAME[1] && <ImageOption />}
       </div>
     </div>
   )
