@@ -1,15 +1,37 @@
-import { useState } from "react";
-import Badge from "./Badge";
+import { useEffect, useState } from "react";
 import commonStyles from "./Header.module.css";
 import styles from "./HeaderService.module.css";
 import KaKaoShare from "./KaKaoShare";
 import ProfileImages from "./ProfileImages";
+import { EmojiBadge } from "../badge/EmojiBadge";
+import { getReactionsApiResponse } from "../../../util/api";
+import EmojiPicker from "emoji-picker-react";
 
 function HeaderService() {
   const [isShareDisplay, setIsShareDisplay] = useState(false);
+  const [isEmojiDisplay, setIsEmojiDisplay] = useState(false);
+  const [isEmojiApiDisplay, setIsEmojiApiDisplay] = useState(false);
+  const tempEmoji = "😍";
+  const tempCount = 24;
   const handleShareDisplayClick = () => {
     setIsShareDisplay(!isShareDisplay);
   };
+  const handleEmojiDisplayClick = () => {
+    setIsEmojiDisplay(!isEmojiDisplay);
+  };
+
+  const handleEmojiApiDisplayClick = () => {
+    setIsEmojiApiDisplay(!isEmojiApiDisplay);
+  };
+
+  const emojiFunc = async () => {
+    const response = await getReactionsApiResponse();
+    if (!response) return;
+  };
+
+  useEffect(() => {
+    // emojiFunc();
+  });
   return (
     <>
       <div className={commonStyles.header}>
@@ -35,11 +57,43 @@ function HeaderService() {
             <div className={styles.writedBar} />
             <div className={styles.badgeAndShareContainer}>
               <div className={styles.badgeAndDropdownContainer}>
-                <Badge />
-                <div className={styles.dropDownContainer}>dropDown</div>
+                <div className={styles.badgeContainer}>
+                  <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                  <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                  <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                </div>
+                <div
+                  onClick={handleEmojiDisplayClick}
+                  className={styles.dropDownContainer}
+                >
+                  {isEmojiDisplay && (
+                    <div className={styles.emojiContainer}>
+                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                      <EmojiBadge emoji={tempEmoji} count={1} />
+                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                      <EmojiBadge emoji={tempEmoji} count={5} />
+                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                    </div>
+                  )}
+                </div>
               </div>
               <div className={styles.shareContainer}>
-                <div>빙그레버튼</div>
+                <div
+                  className={styles.addEmojiContainer}
+                  onClick={handleEmojiApiDisplayClick}
+                >
+                  빙그레버튼
+                  {isEmojiApiDisplay && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className={styles.emojiApiContainer}
+                    >
+                      <EmojiPicker />
+                    </div>
+                  )}
+                </div>
                 <div className={styles.shareContainerBar} />
                 <div
                   className={styles.shareButton}
