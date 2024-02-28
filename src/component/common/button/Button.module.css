@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
+  outline: none;
 }
 
 .btn:disabled:not(:enabled) {
@@ -22,26 +23,17 @@
 
 .standard {
   padding: 8px 16px;
-  height: 40px;
+  min-height: 40px;
+  max-height: 42px;
   border-radius: 6px;
   letter-spacing: -0.16px;
 }
 
-.compact {
-  gap: 4px;
+.short {
   padding: 6px 16px;
   height: 36px;
   border-radius: 6px;
   font-weight: 500;
-}
-
-.short {
-  gap: 4px;
-  padding: 2px 16px;
-  height: 28px;
-  border-radius: 6px;
-  font-weight: 500;
-  letter-spacing: -0.07px;
 }
 
 .primary {
@@ -54,16 +46,12 @@
   background-color: var(--purple-700);
 }
 
-.primary:focus-visible {
-  border: 2px solid var(--purple-900);
+.primary:active {
   background-color: var(--purple-800);
 }
 
-.short.primary:focus-visible {
-  border-width: 1px;
-}
-
-.primary:active {
+.primary:focus-visible {
+  border: 2px solid var(--purple-900);
   background-color: var(--purple-800);
 }
 
@@ -108,52 +96,60 @@
   background-color: var(--white);
 }
 
-.circle {
-  border-radius: 50%;
-}
-
-.circle.tall {
-  padding: 16px;
-  width: 56px;
-  height: 56px;
-}
-
-.circle.standard {
-  padding: 12px;
-  width: 40px;
-  height: 40px;
-}
-
-.dark {
-  background-color: var(--gray-500);
-}
-
-.dark:disabled {
-  background-color: var(--gray-300);
-}
-
-.dark:hover {
-  background-color: var(--gray-600);
-}
-
-.dark:active {
-  background-color: var(--gray-700);
-}
-
-.dark:focus-visible {
-  border: 1px solid var(--gray-800);
-  background-color: var(--gray-700);
-}
-
-.arrow {
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--gray-300);
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.08));
-  backdrop-filter: blur(2px);
-}
-
-.square {
+.delete {
   padding: 6px;
   width: 36px;
-  height: 36px;
+  min-height: 36px;
+  max-height: 36px;
+  border-radius: 6px;
+  background: url("../../../asset/img/buttonIcon/deleted.svg") no-repeat center;
+}
+
+.share::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("../../../asset/img/buttonIcon/share-24.svg") no-repeat
+    center/contain;
+}
+
+.add::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("../../../asset/img/buttonIcon/add-24.svg") no-repeat
+    center/contain;
+}
+
+@media (max-width: 767px) {
+  .short {
+    padding: 2px 8px;
+    min-height: 28px;
+    max-height: 32px;
+    letter-spacing: -0.07px;
+  }
+
+  .short .name {
+    display: none;
+  }
+
+  .share::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("../../../asset/img/buttonIcon/share-24.svg") no-repeat
+      center/contain;
+  }
+
+  .add::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("../../../asset/img/buttonIcon/add-24.svg") no-repeat
+      center/contain;
+  }
 }
