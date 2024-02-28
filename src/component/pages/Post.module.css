@@ -43,6 +43,7 @@
 
 .selectButton {
   padding: 42px 0 52px;
+  width: fit-content;
 }
 
 .createButton {
