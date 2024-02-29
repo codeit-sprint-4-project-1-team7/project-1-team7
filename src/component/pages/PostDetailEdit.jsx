@@ -49,12 +49,16 @@ function PostDetailEdit() {
   // http://localhost:3000/post/2819/edit
   const { postId } = useParams();
   const [messages, setMessages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const fetchMessages = async () => {
-    const { results } = await getSampleMessages(postId);
+    try {
       const { results } = await getMessagesApiResponse(postId);
     setMessages(results);
+    } catch (error) {
+      setErrorMessage(error?.message);
+    }
   };
 
   const onCardDeleteBtnClick = async (id) => {
@@ -74,9 +78,10 @@ function PostDetailEdit() {
     fetchMessages();
   }, []);
 
-  return (
+  return errorMessage ? (
+    <div>{errorMessage}</div>
+  ) : (
     <div>
-      <h1>PostDetailEdit</h1>
       <div className={styles.cardListContainer}>
         <Button
           type="primary"
@@ -87,7 +92,7 @@ function PostDetailEdit() {
           삭제하기
         </Button>
         <div className={styles.cardList}>
-          {messages.map(({ id, sender, relationship, content, createdAt }) => (
+          {messages?.map(({ id, sender, relationship, content, createdAt }) => (
             <Card
               key={id}
               sender={sender}
