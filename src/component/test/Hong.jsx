@@ -5,6 +5,7 @@ import { Badge } from '../common/badge/Badge';
 import { EmojiBadge } from '../common/badge/EmojiBadge';
 
 import Button from '../common/button/Button';
+import ModalPortal from '../common/modal/ModalPortal';
 
 const tempRelation = '친구';
 const tempEmoji = '😍';
@@ -45,7 +46,9 @@ export function Hong() {
       </Button>
 
       {toast && <Toast onClick={handleToast}></Toast>}
-      {modal && <Modal onClick={handleModal}></Modal>}
+      {modal && (
+        <ModalPortal>{<Modal onClick={handleModal}></Modal>}</ModalPortal>
+      )}
     </>
   );
 }

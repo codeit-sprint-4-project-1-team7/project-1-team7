@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Badge } from '../badge/Badge';
 import Button from '../button/Button';
 import styles from './Modal.module.css';
@@ -8,6 +9,14 @@ const tempDate = '임시 날짜';
 
 export const Modal = ({ onClick }) => {
   const profileName = `From. ${tempName}`;
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     <div className={styles.modalBackground} onClick={onClick}>
       <div
