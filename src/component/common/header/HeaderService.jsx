@@ -4,29 +4,59 @@ import styles from "./HeaderService.module.css";
 import KaKaoShare from "./KaKaoShare";
 import ProfileImages from "./ProfileImages";
 import { EmojiBadge } from "../badge/EmojiBadge";
-import { getReactionsApiResponse } from "../../../util/api";
+import {
+  getReactionsApiResponse,
+  postReactionApiResponse,
+} from "../../../util/api";
 import EmojiPicker from "emoji-picker-react";
 import Button from "../button/Button";
 import copy from "copy-to-clipboard";
 import { Toast } from "../toast/Toast";
 import ModalPortal from "../modal/ModalPortal";
 
-function HeaderService({ contextMenuVisibleList }) {
-  const [isToastVisible, setIsToastVisible] = useState(false);
-  const tempEmoji = "😍";
-  const tempCount = 24;
+function HeaderService({
+  contextMenuVisibleList,
+  topEmojiList,
+  messageCount,
+  name,
+}) {
+  const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
 
-  const emojiFunc = async () => {
-    const response = await getReactionsApiResponse();
+  const [isToastVisible, setIsToastVisible] = useState(false);
+
+  const getEmoji = async () => {
+    //test recipientId: 2889
+    const response = await getReactionsApiResponse("2889");
     if (!response) return;
+    setContextMenuEmojiList(response.results);
+    return response.results;
   };
+
+  const postEmoji = async (e) => {
+    const obj = { emoji: e.emoji, type: "increase" };
+    const response = await postReactionApiResponse(obj, "2889");
+    if (!response) return;
+    return getEmoji();
+  };
+
+  const handleEmojiClick = async (e) => {
+    const emojiLists = await postEmoji(e);
+    setContextMenuEmojiList(emojiLists);
+  };
+
+  // const handleEmojiContextItemClick = (e) => {
+  //   console.log(e.target.innerHTML);
+  // };
+
   const handleShareUrlClick = () => {
     copy(window.location.href);
     setIsToastVisible(!isToastVisible);
   };
+
   const handleToastCloseClick = () => setIsToastVisible(!isToastVisible);
 
   useEffect(() => {
+    getEmoji();
     const timer = setTimeout(() => {
       if (isToastVisible) setIsToastVisible(false);
     }, 3000);
@@ -40,7 +70,7 @@ function HeaderService({ contextMenuVisibleList }) {
       <div className={commonStyles.header}>
         <div className={styles.headerContainer}>
           <div className={styles.toNameContainer}>
-            <span className={styles.toName}>To. Ashley Kim</span>
+            <span className={styles.toName}>To. {name}</span>
           </div>
           <div className={styles.line} />
           <div className={styles.imojiContainer}>
@@ -51,9 +81,8 @@ function HeaderService({ contextMenuVisibleList }) {
                 imageTextStyle={styles.imageText}
                 direction="right"
               />
-
               <div className={styles.writed}>
-                <span className={styles.numOfWrited}>23</span>
+                <span className={styles.numOfWrited}>{messageCount}</span>
                 <span className={styles.writedText}>명이 작성했어요!</span>
               </div>
             </div>
@@ -61,20 +90,24 @@ function HeaderService({ contextMenuVisibleList }) {
             <div className={styles.badgeAndShareContainer}>
               <div className={styles.badgeAndDropdownContainer}>
                 <div className={styles.badgeContainer}>
-                  <EmojiBadge emoji={tempEmoji} count={tempCount} />
-                  <EmojiBadge emoji={tempEmoji} count={tempCount} />
-                  <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                  {topEmojiList?.map((item) => (
+                    <EmojiBadge
+                      key={item.id}
+                      emoji={item.emoji}
+                      count={item.count}
+                    />
+                  ))}
                 </div>
                 <div id="emojiListButton" className={styles.dropDownContainer}>
                   {contextMenuVisibleList.isEmojiContextMenuVisible && (
                     <div className={styles.emojiContainer}>
-                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
-                      <EmojiBadge emoji={tempEmoji} count={1} />
-                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
-                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
-                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
-                      <EmojiBadge emoji={tempEmoji} count={5} />
-                      <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                      {contextMenuEmojiList?.map((item) => (
+                        <EmojiBadge
+                          key={item.id}
+                          emoji={item.emoji}
+                          count={item.count}
+                        />
+                      ))}
                     </div>
                   )}
                 </div>
@@ -90,11 +123,12 @@ function HeaderService({ contextMenuVisibleList }) {
                     추가
                   </Button>
                   {contextMenuVisibleList.isEmojiApiContextMenuVisible && (
-                    <div
-                      onClick={(e) => e.stopPropagation()}
-                      className={styles.emojiApiContainer}
-                    >
-                      <EmojiPicker />
+                    <div className={styles.emojiApiContainer}>
+                      <EmojiPicker
+                        searchDisabled={true}
+                        skinTonesDisabled={true}
+                        onEmojiClick={handleEmojiClick}
+                      />
                     </div>
                   )}
                 </div>
