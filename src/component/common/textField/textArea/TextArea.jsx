@@ -23,7 +23,7 @@ const formats = [
   "h1",
 ];
 
-function TextArea({ onQuillValueChange }) {
+function TextArea({ onQuillValueChange, textContainerRef }) {
   const handleQuillValueChange = (e) => {
     onQuillValueChange(e);
   };
@@ -41,6 +41,7 @@ function TextArea({ onQuillValueChange }) {
     <div className="container">
       <QuillToolbar />
       <ReactQuill
+        ref={textContainerRef}
         theme="snow"
         modules={modules}
         formats={formats}

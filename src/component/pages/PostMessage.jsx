@@ -7,6 +7,7 @@ import { getProfileImagesApiResponse } from "../../util/api";
 import styles from "./PostMessage.module.css";
 import Button from "../common/button/Button";
 import DOMPurify from "dompurify";
+import { fontMappings } from "../common/textField/selectBox/fontMappings";
 
 function PostMessage() {
   const [inputValue, setInputValue] = useState("");
@@ -14,7 +15,9 @@ function PostMessage() {
   const [currentFont, setCurrentFont] = useState("");
   const [quillValue, setQuillValue] = useState("");
   const [profileImgList, setProfileImgList] = useState([]);
+
   const textAreaRef = useRef(null);
+  const textContainerRef = useRef(null);
 
   const handleInputValue = (value) => {
     setInputValue(value);
@@ -34,11 +37,16 @@ function PostMessage() {
     setProfileImgList(res.imageUrls);
   };
 
-  const changeFontFamily = (style) => {
-    textAreaRef.current.style.fontFamily = style;
+  const changeFontFamily = (type) => {
+    const fontStyle = fontMappings[type];
+    const textContainer = textContainerRef.current.getEditor().root;
+    textContainer.style.fontFamily = fontStyle;
+    textAreaRef.current.style.fontFamily = fontStyle;
   };
 
-  console.log(currentFont);
+  //TODO: 컴포넌트 최적화 하기
+  // console.log(currentFont);
+  //console.log(textContainerRef.current.getEditor().root);
 
   useEffect(() => {
     getImgProfileList();
@@ -73,11 +81,15 @@ function PostMessage() {
         }}
         className="dompurifyBox"
       />
+      <br />
       <div>{quillValue}</div>
-
+      <br />
       <div className={styles.textAreaText}>내용을 입력해주세요</div>
       <div className={styles.textAreaContainer}>
-        <TextArea onQuillValueChange={handleQuillValue} />
+        <TextArea
+          onQuillValueChange={handleQuillValue}
+          textContainerRef={textContainerRef}
+        />
       </div>
 
       <div className={styles.selectBoxText}>폰트선택</div>
