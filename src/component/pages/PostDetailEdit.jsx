@@ -45,8 +45,7 @@ function Card({ sender, relationship, content, createdAt, onButtonClick }) {
 }
 
 function PostDetailEdit() {
-  // sampleId: 2819
-  // http://localhost:3000/post/2819/edit
+  // sampleId: 2951
   const { postId } = useParams();
   const [messages, setMessages] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
