@@ -123,10 +123,11 @@ img {
 img {
   vertical-align: top;
 }
-ol,
-ul,
-li {
-  list-style: none;
+ol {
+  list-style-type: decimal;
+}
+ul {
+  list-style-type: disc;
 }
 a {
   color: inherit;
