@@ -92,6 +92,7 @@ function PostDetailEdit() {
         >
           삭제하기
         </Button>
+        <ul className={styles.cardList}>
           {messages?.map(
             ({
               id,
@@ -112,6 +113,7 @@ function PostDetailEdit() {
               />
             )
           )}
+        </ul>
       </div>
     </div>
   );
