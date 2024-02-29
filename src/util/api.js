@@ -10,7 +10,7 @@ async function getApi(url) {
   const response = await fetch(url);
 
   if (!response?.ok) {
-    return new Error(ERROR_MESSAGE);
+    throw new Error(ERROR_MESSAGE);
   }
 
   const body = response.json();
@@ -26,7 +26,7 @@ async function postApi(url, obj) {
   });
 
   if (!response?.ok) {
-    return new Error(ERROR_MESSAGE);
+    throw new Error(ERROR_MESSAGE);
   }
 
   const body = response.json();
