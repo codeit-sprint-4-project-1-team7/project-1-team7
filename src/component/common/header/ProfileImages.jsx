@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import exampleImg from "../../../asset/img/headerIcon/rolling-icon.png";
+import exampleImg2 from "../../../asset/img/optionIcon/base_profile_icon.png";
+import exampleImg3 from "../../../asset/img/optionIcon/sample_Image_01.jpg";
 function ProfileImages({
   imageContainerStyle,
   imageStyle,
@@ -11,6 +13,21 @@ function ProfileImages({
   if (direction === "right") {
     plusNum = (textLength - 2) * 6;
   }
+  const itemNum = 4; //넘어온 임시 list 개수
+  const mockList = [
+    {
+      order: 1,
+      backgroundImage: exampleImg,
+    },
+    {
+      order: 2,
+      backgroundImage: exampleImg2,
+    },
+    {
+      order: 3,
+      backgroundImage: exampleImg3,
+    },
+  ];
 
   useEffect(() => {
     const imageTextElement = document.getElementById("imageText");
@@ -19,38 +36,51 @@ function ProfileImages({
     }
   }, [textLength]);
   return (
-    <div
-      className={imageContainerStyle}
-      style={direction === "left" ? { paddingLeft: `48px` } : null}
-    >
+    <>
       <div
-        className={imageStyle}
-        style={{
-          backgroundImage: `url(${exampleImg})`,
-          [direction]: direction === "right" ? `${48 + plusNum}px` : `0px`,
-          zIndex: -3,
-        }}
-      ></div>
-      <div
-        className={imageStyle}
-        style={{
-          backgroundImage: `url(${exampleImg})`,
-          [direction]: direction === "right" ? `${32 + plusNum}px` : `16px`,
-          zIndex: -2,
-        }}
-      ></div>
-      <div
-        className={imageStyle}
-        style={{
-          backgroundImage: `url(${exampleImg})`,
-          [direction]: direction === "right" ? `${16 + plusNum}px` : `32px`,
-          zIndex: -1,
-        }}
-      ></div>
-      <div id="imageText" className={imageTextStyle}>
-        +66
+        className={imageContainerStyle}
+        style={
+          direction === "left"
+            ? { paddingLeft: `48px` }
+            : { justifyContent: `right` }
+        }
+      >
+        {direction === "left"
+          ? mockList.map((item) => (
+              <div
+                key={item.order}
+                className={imageStyle}
+                style={{
+                  backgroundImage: `url(${item.backgroundImage})`,
+                  [direction]: `${16 * (item.order - 1)}px`,
+                  zIndex: -1,
+                }}
+              ></div>
+            ))
+          : mockList.reverse().map((item) => (
+              <div
+                key={item.order}
+                className={imageStyle}
+                style={{
+                  backgroundImage: `url(${item.backgroundImage})`,
+                  [direction]: `${
+                    16 *
+                      (itemNum > 3
+                        ? mockList.length + 1 - item.order
+                        : mockList.length - item.order) +
+                    plusNum
+                  }px`,
+                  zIndex: `${-4 + item.order}`,
+                }}
+              ></div>
+            ))}
+        {itemNum > 3 && (
+          <div id="imageText" className={imageTextStyle}>
+            +{itemNum}
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 }
 

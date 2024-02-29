@@ -2,6 +2,10 @@ import { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 function QuillToolbar() {
+  const font = Quill.import("attributors/style/font");
+  font.whitelist = ["Pretendard", "Poppins", "sans-serif"];
+  Quill.register(font, true);
+
   const icons = Quill.import("ui/icons");
 
   icons.color = `<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="3 3 24 24" fill="none">
@@ -26,6 +30,13 @@ function QuillToolbar() {
       </span>
       <span className="ql-formats">
         <select className="ql-color" />
+      </span>
+      <span className="ql-formats">
+        <select className="ql-font" defaultValue="Pretendard">
+          <option value="Pretendard">Pretendard</option>
+          <option value="Poppins">Poppins</option>
+          <option value="sans-serif">sans-serif</option>
+        </select>
       </span>
     </div>
   );

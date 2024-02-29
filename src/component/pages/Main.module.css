@@ -1,0 +1,128 @@
+.mainBackground {
+  margin-top: 60px;
+  padding: 0px 24px;
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mainContents01 {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  padding: 60px 0px 60px 60px;
+  border-radius: 16px;
+  background: var(--surface, #f6f8ff);
+}
+.mainContents02 {
+  padding: 60px 60px 60px 0px;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+.contentsText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.textPoint {
+  padding: 6px 12px;
+  border-radius: 50px;
+  background: var(--purple-600);
+  color: var(--white);
+  margin-bottom: 16px;
+
+  font-size: var(--xs);
+  font-weight: var(--bold);
+  line-height: 20px;
+  letter-spacing: -0.07px;
+}
+.mainImg {
+  background-image: url('../../asset/img/mainImg/mainImg_01.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 720px;
+  height: 204px;
+}
+.mainBottom {
+  display: flex;
+  width: 280px;
+  padding: 24px 0px 24px 0px;
+  justify-content: center;
+  align-items: center;
+}
+
+.textH1 {
+  color: var(--gray-900);
+  margin-bottom: 8px;
+  font-size: var(--xxl);
+  font-weight: var(--bold);
+  line-height: 36px;
+  letter-spacing: -0.24px;
+}
+.textSpan {
+  color: var(--gray-500);
+  font-size: var(--l);
+  font-weight: var(--regular);
+  line-height: 28px;
+  letter-spacing: -0.18px;
+}
+.mainContents01 img {
+  width: 720px;
+  height: 204px;
+}
+
+@media (max-width: 1024px) {
+  .mainBackground {
+    margin-top: 49px;
+  }
+  .mainContents01 {
+    flex-direction: column;
+    justify-content: normal;
+    align-items: center;
+    width: 100%;
+    min-width: 300px;
+    height: 440px;
+    padding: 0;
+  }
+  .contentsText {
+    width: 720px;
+    padding: 40px;
+  }
+  .mainBottom {
+    width: 100%;
+    min-width: 300px;
+  }
+  .textBr {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .mainBackground {
+    margin-top: 42px;
+  }
+  .mainContents01 {
+    height: 350px;
+    overflow: hidden;
+  }
+  .contentsText {
+    width: 100%;
+    padding: 24px 24px 0px 24px;
+    margin-bottom: 50px;
+  }
+  .mainContents01 img {
+    width: 354.51px;
+    height: 89.722px;
+  }
+  .textH1 {
+    font-size: var(--l);
+    line-height: 28px;
+    letter-spacing: -0.18px;
+  }
+  .textSpan {
+    font-size: var(--s);
+    line-height: 22px;
+    letter-spacing: -0.15px;
+  }
+}

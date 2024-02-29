@@ -12,10 +12,8 @@
   line-height: 21px; /* 131.25% */
 }
 .count {
-  color: #fff;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
+  color: var(--white);
+  font-size: var(--m);
+  font-weight: var(--regular);
   line-height: 20px; /* 125% */
 }

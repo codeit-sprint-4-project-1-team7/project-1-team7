@@ -1,8 +1,12 @@
 import ProfileImages from "../header/ProfileImages";
 import styles from "./CardList.module.css";
 import headerServiceStyles from "../header/HeaderService.module.css";
-import Badge from "../header/Badge";
+import { EmojiBadge } from "../badge/EmojiBadge";
+
 function CardList({ lists }) {
+  const tempEmoji = "😍";
+  const tempCount = 24;
+
   return (
     <div className={styles.cardListContainer}>
       {/* {lists ? (
@@ -49,7 +53,7 @@ function CardList({ lists }) {
           </div>
           <div className={styles.badgeContainer}>
             <div className={styles.line} />
-            <Badge />
+            <EmojiBadge emoji={tempEmoji} count={tempCount} />
           </div>
         </div>
       </div>
@@ -79,7 +83,7 @@ function CardList({ lists }) {
           </div>
           <div className={styles.badgeContainer}>
             <div className={styles.line} />
-            <Badge />
+            <EmojiBadge emoji={tempEmoji} count={tempCount} />
           </div>
         </div>
       </div>
@@ -109,7 +113,7 @@ function CardList({ lists }) {
           </div>
           <div className={styles.badgeContainer}>
             <div className={styles.line} />
-            <Badge />
+            <EmojiBadge emoji={tempEmoji} count={tempCount} />
           </div>
         </div>
       </div>
@@ -139,7 +143,7 @@ function CardList({ lists }) {
           </div>
           <div className={styles.badgeContainer}>
             <div className={styles.line} />
-            <Badge />
+            <EmojiBadge emoji={tempEmoji} count={tempCount} />
           </div>
         </div>
       </div>
