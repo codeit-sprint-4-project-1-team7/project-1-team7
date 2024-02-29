@@ -7,6 +7,9 @@ import { getProfileImagesApiResponse } from "../../util/api";
 import styles from "./PostMessage.module.css";
 import Button from "../common/button/Button";
 import DOMPurify from "dompurify";
+import { fontMappings } from "../common/textField/selectBox/fontMappings";
+import UserProfileOption from "../common/option/UserProfileOption";
+import baseProfile from "../../asset/img/optionIcon/base_profile_icon.png";
 
 function PostMessage() {
   const [inputValue, setInputValue] = useState("");
@@ -14,7 +17,10 @@ function PostMessage() {
   const [currentFont, setCurrentFont] = useState("");
   const [quillValue, setQuillValue] = useState("");
   const [profileImgList, setProfileImgList] = useState([]);
+  const [currentProfileImg, setCurrentProfileImg] = useState(baseProfile);
+
   const textAreaRef = useRef(null);
+  const textContainerRef = useRef(null);
 
   const handleInputValue = (value) => {
     setInputValue(value);
@@ -28,17 +34,28 @@ function PostMessage() {
   const handleQuillValue = (value) => {
     setQuillValue(value);
   };
+  const handleClickProfileImgList = (idx) => {
+    setCurrentProfileImg(profileImgList[idx]);
+  };
+  const handleChangeProfileImg = (value) => {
+    setCurrentProfileImg(value);
+  };
 
   const getImgProfileList = async () => {
     const res = await getProfileImagesApiResponse();
     setProfileImgList(res.imageUrls);
   };
 
-  const changeFontFamily = (style) => {
-    textAreaRef.current.style.fontFamily = style;
+  const changeFontFamily = (type) => {
+    const fontStyle = fontMappings[type];
+    const textContainer = textContainerRef.current.getEditor().root;
+    textContainer.style.fontFamily = fontStyle;
+    textAreaRef.current.style.fontFamily = fontStyle;
   };
 
-  console.log(currentFont);
+  //TODO: 컴포넌트 최적화 하기
+  // console.log(currentFont);
+  //console.log(textContainerRef.current.getEditor().root);
 
   useEffect(() => {
     getImgProfileList();
@@ -47,17 +64,36 @@ function PostMessage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.inputText}>From.</div>
+      <div className={styles.inputTitle}>From.</div>
       <div className={styles.inputContainer}>
         <Input inputValue={inputValue} onInputValueChange={handleInputValue} />
       </div>
 
-      <div className={styles.profileText}>프로필 이미지</div>
-      {profileImgList?.map((profileImg, i) => (
-        <img className={styles.img} key={i} src={profileImg} alt="profileImg" />
-      ))}
+      <div className={styles.profileImgTitle}>프로필 이미지</div>
+      <div className={styles.allProfileImgContainer}>
+        <UserProfileOption
+          currentProfileImg={currentProfileImg}
+          onChangeProfileImg={handleChangeProfileImg}
+        />
+        <div>
+          <div className={styles.porfileImgText}>
+            프로필 이미지를 선택해주세요!
+          </div>
+          <div className={styles.profileImgContainer}>
+            {profileImgList?.map((profileImg, i) => (
+              <img
+                className={styles.img}
+                key={i}
+                onClick={() => handleClickProfileImgList(i)}
+                src={profileImg}
+                alt="profileImg"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
 
-      <div className={styles.selectBoxText}>상대와의 관계</div>
+      <div className={styles.selectBoxTitle}>상대와의 관계</div>
       <div className={styles.selectBoxContainer}>
         <SelectBox
           selectValue={currentRelation}
@@ -73,14 +109,19 @@ function PostMessage() {
         }}
         className="dompurifyBox"
       />
+      <br />
       <div>{quillValue}</div>
+      <br />
 
-      <div className={styles.textAreaText}>내용을 입력해주세요</div>
+      <div className={styles.textAreaTitle}>내용을 입력해주세요</div>
       <div className={styles.textAreaContainer}>
-        <TextArea onQuillValueChange={handleQuillValue} />
+        <TextArea
+          onQuillValueChange={handleQuillValue}
+          textContainerRef={textContainerRef}
+        />
       </div>
 
-      <div className={styles.selectBoxText}>폰트선택</div>
+      <div className={styles.selectBoxTitle}>폰트선택</div>
       <div className={styles.selectBoxContainer}>
         <SelectBox
           selectValue={currentFont}

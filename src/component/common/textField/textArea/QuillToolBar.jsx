@@ -2,9 +2,10 @@ import { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 function QuillToolbar() {
-  const font = Quill.import("attributors/style/font");
-  font.whitelist = ["Pretendard", "Poppins", "sans-serif"];
-  Quill.register(font, true);
+  // TODO: 폰트도 부분적으로 바꾸고 싶으면 이거 적용하기
+  // const font = Quill.import("attributors/style/font");
+  // font.whitelist = ["Pretendard", "Poppins", "sans-serif"];
+  // Quill.register(font, true);
 
   const icons = Quill.import("ui/icons");
 
@@ -31,13 +32,23 @@ function QuillToolbar() {
       <span className="ql-formats">
         <select className="ql-color" />
       </span>
-      <span className="ql-formats">
+      {/*TODO: 폰트사이즈도 부분적으로 바꾸고 싶으면 이거 적용하기*/}
+      {/* <span className="ql-formats">
+        <select className="ql-size" defaultValue="medium">
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+          <option value="huge">Huge</option>
+        </select>
+      </span> */}
+      {/*TODO: 폰트도 부분적으로 바꾸고 싶으면 이거 적용하기*/}
+      {/* <span className="ql-formats">
         <select className="ql-font" defaultValue="Pretendard">
           <option value="Pretendard">Pretendard</option>
           <option value="Poppins">Poppins</option>
           <option value="sans-serif">sans-serif</option>
         </select>
-      </span>
+      </span> */}
     </div>
   );
 }

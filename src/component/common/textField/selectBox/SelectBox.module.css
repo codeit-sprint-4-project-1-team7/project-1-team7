@@ -17,7 +17,6 @@
 
 .button {
   display: flex;
-  gap: 189px;
   justify-content: space-between;
   width: 320px;
   padding: 12px 16px;
