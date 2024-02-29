@@ -1,0 +1,23 @@
+.listBackground {
+  margin-top: 50px;
+  padding: 0px 24px;
+  gap: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.cardListForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
+}
+.cardListForm h1 {
+  color: var(--black);
+  font-size: var(--xxl);
+  font-weight: var(--bold);
+  line-height: 36px;
+  letter-spacing: -0.24px;
+}
