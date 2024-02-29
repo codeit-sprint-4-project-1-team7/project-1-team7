@@ -9,6 +9,7 @@ import EmojiPicker from "emoji-picker-react";
 import Button from "../button/Button";
 import copy from "copy-to-clipboard";
 import { Toast } from "../toast/Toast";
+import ModalPortal from "../modal/ModalPortal";
 
 function HeaderService({ contextMenuVisibleList }) {
   const [isToastVisible, setIsToastVisible] = useState(false);
@@ -20,7 +21,6 @@ function HeaderService({ contextMenuVisibleList }) {
     if (!response) return;
   };
   const handleShareUrlClick = () => {
-    console.log(window.location.href);
     copy(window.location.href);
     setIsToastVisible(!isToastVisible);
   };
@@ -29,7 +29,7 @@ function HeaderService({ contextMenuVisibleList }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isToastVisible) setIsToastVisible(false);
-    }, 1500);
+    }, 3000);
     return () => {
       clearTimeout(timer);
     };
@@ -121,9 +121,9 @@ function HeaderService({ contextMenuVisibleList }) {
                     </div>
                   )}
                 </div>
-                {isToastVisible && <Toast onClick={handleToastCloseClick} />}
-                {/* <ModalPortal>
-                </ModalPortal> */}
+                <ModalPortal>
+                  {isToastVisible && <Toast onClick={handleToastCloseClick} />}
+                </ModalPortal>
               </div>
             </div>
           </div>
