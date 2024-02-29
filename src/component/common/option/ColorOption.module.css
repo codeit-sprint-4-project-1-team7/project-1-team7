@@ -5,52 +5,31 @@
   max-width: 1200px;
 }
 
-.backgroundOrange {
+.option {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  width: 100%;
+  padding: 50% 0;
+}
+
+.colorBeige {
   background-color: var(--orange-200);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  width: 100%;
-  padding: 50% 0;
 }
 
-.backgroundPurple {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.colorPurple {
   background-color: var(--purple-200);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  width: 100%;
-  padding: 50% 0;
 }
 
-.backgroundBlue {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.colorBlue {
   background-color: var(--blue-200);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  width: 100%;
-  padding: 50% 0;
 }
 
-.backgroundGreen {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.colorGreen {
   background-color: var(--green-200);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  width: 100%;
-  padding: 50% 0;
 }
 
 
