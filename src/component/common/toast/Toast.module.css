@@ -29,10 +29,9 @@
   height: 24px;
 }
 .toastMessage {
-  color: #fff;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
+  color: var(--white);
+  font-size: var(--m);
+  font-weight: var(--regular);
   line-height: 26px;
   letter-spacing: -0.16px;
   padding-right: 241px;
