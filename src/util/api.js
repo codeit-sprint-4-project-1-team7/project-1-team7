@@ -3,7 +3,7 @@ const API_URL = "https://rolling-api.vercel.app";
 const BACKGROUND_IMAGES_API_URL = `${API_URL}/background-images/`;
 const PROFILE_IMAGES_API_URL = `${API_URL}/profile-images/`;
 const RECIPIENT_API_URL = `${API_URL}/4-7/recipients/`;
-const MESSAGE_API_URL = `${API_URL}/messages/`;
+const MESSAGE_API_URL = `${API_URL}/4-7/messages/`;
 const ERROR_MESSAGE = "데이터를 불러오는데 실패했습니다.";
 
 async function getApi(url) {
@@ -21,7 +21,7 @@ async function getApi(url) {
 async function postApi(url, obj) {
   const response = await fetch(url, {
     method: "POST",
-    headers: { "content-type": "appliction/json" },
+    headers: { "content-type": "application/json" },
     body: JSON.stringify(obj),
   });
 
@@ -37,16 +37,11 @@ async function postApi(url, obj) {
 async function deleteApi(url) {
   const response = await fetch(url, {
     method: "DELETE",
-    headers: { "content-type": "appliction/json" },
   });
 
   if (!response?.ok) {
-    return new Error(ERROR_MESSAGE);
+    throw new Error(ERROR_MESSAGE);
   }
-
-  const body = response.json();
-
-  return body;
 }
 
 /* background-images
