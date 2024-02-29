@@ -10,6 +10,7 @@ function PostDetail({ contextMenuVisibleList }) {
   const { postId } = useParams(); //추후 postId 값을 api 요청으로 사용 예정
   const [topEmojiList, setTopEmojiList] = useState([]);
   const [recentMessages, setRecentMessages] = useState([]);
+  const [name, setName] = useState("");
   const [messageCount, setMessageCount] = useState(0);
   const [isAddMessageCardVisible, setIsAddMessageCardVisible] = useState(0);
 
@@ -20,10 +21,12 @@ function PostDetail({ contextMenuVisibleList }) {
     const messageCountResponse = response.messageCount;
     const topReactionResponse = response.topReactions;
     const recentMessagesResponse = response.recentMessages;
+    const nameResponse = response.name;
+
     setMessageCount(messageCountResponse);
     setTopEmojiList(topReactionResponse);
-    console.log(topReactionResponse);
     setRecentMessages(recentMessagesResponse);
+    setName(nameResponse);
   };
 
   useEffect(() => {
@@ -36,6 +39,7 @@ function PostDetail({ contextMenuVisibleList }) {
         contextMenuVisibleList={contextMenuVisibleList}
         messageCount={messageCount}
         topEmojiList={topEmojiList}
+        name={name}
       />
       <Card
         isAddMessageCardVisible={isAddMessageCardVisible}

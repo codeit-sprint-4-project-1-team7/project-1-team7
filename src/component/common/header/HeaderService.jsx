@@ -14,7 +14,12 @@ import copy from "copy-to-clipboard";
 import { Toast } from "../toast/Toast";
 import ModalPortal from "../modal/ModalPortal";
 
-function HeaderService({ contextMenuVisibleList, topEmojiList, messageCount }) {
+function HeaderService({
+  contextMenuVisibleList,
+  topEmojiList,
+  messageCount,
+  name,
+}) {
   const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
 
   const [isToastVisible, setIsToastVisible] = useState(false);
@@ -65,7 +70,7 @@ function HeaderService({ contextMenuVisibleList, topEmojiList, messageCount }) {
       <div className={commonStyles.header}>
         <div className={styles.headerContainer}>
           <div className={styles.toNameContainer}>
-            <span className={styles.toName}>To. Ashley Kim</span>
+            <span className={styles.toName}>To. {name}</span>
           </div>
           <div className={styles.line} />
           <div className={styles.imojiContainer}>
