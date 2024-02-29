@@ -3,27 +3,11 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/button/Button";
 import styles from "./PostDetailEdit.module.css";
-
-// sampleAPI
-const getSampleMessages = async (id) => {
-  const response = await fetch(
-    `https://rolling-api.vercel.app/7/recipients/${id}/messages/`
-  );
-
-  return response.json();
-};
-
-const deleteSampleMessage = async (id) => {
-  await fetch(`https://rolling-api.vercel.app/7/messages/${id}/`, {
-    method: "DELETE",
-  });
-};
-
-const deleteSampleRollingPaper = async (id) => {
-  await fetch(`https://rolling-api.vercel.app/7/recipients/${id}/`, {
-    method: "DELETE",
-  });
-};
+import {
+  deleteMessageApiResponse,
+  deleteRecipientApiResponse,
+  getMessagesApiResponse,
+} from "../../util/api";
 
 // sampleCard
 function Card({ sender, relationship, content, createdAt, onButtonClick }) {
@@ -67,27 +51,27 @@ function PostDetailEdit() {
   const [messages, setMessages] = useState([]);
   const navigate = useNavigate();
 
-  const fetchSampleMessages = async () => {
+  const fetchMessages = async () => {
     const { results } = await getSampleMessages(postId);
-
+      const { results } = await getMessagesApiResponse(postId);
     setMessages(results);
   };
 
   const onCardDeleteBtnClick = async (id) => {
-    await deleteSampleMessage(id);
+    await deleteMessageApiResponse(id);
     setMessages((prevMessage) =>
       prevMessage.filter((message) => message.id !== id)
     );
   };
 
   const onPaperDeleteBtnClick = async () => {
-    await deleteSampleRollingPaper(postId);
+    await deleteRecipientApiResponse(postId);
 
     navigate("/list");
   };
 
   useEffect(() => {
-    fetchSampleMessages();
+    fetchMessages();
   }, []);
 
   return (
