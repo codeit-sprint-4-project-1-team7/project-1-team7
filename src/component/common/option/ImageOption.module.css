@@ -1,3 +1,11 @@
+.imageAddButton {
+  background-color: var(--gray-100);
+}
+
+.imageAddButton:hover {
+  background-color: var(--gray-200);
+}
+
 .imgOptions {
   display: grid;
   grid-template-columns: repeat(4, minmax(200px, 288px));

@@ -1,58 +1,65 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getBackgroundImagesApiResponse } from "../../../util/api";
+import Button from "../button/Button";
 import styles from "./ImageOption.module.css";
 import checkIcon from "../../../asset/img/optionIcon/check_Icon.png";
-import sample01 from "../../../asset/img/optionIcon/sample_Image_01.jpg";
-import sample02 from "../../../asset/img/optionIcon/sample_Image_02.jpg";
 
 function ImageOption() {
-  const [clickImage, setClickImage] = useState('baseImg1');
+  const CHECKED_BACKGROUND = 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
+  const [clickImage, setClickImage] = useState("0");
+  const [baseImages, setBaseImages] = useState([]);
+  const fileInput = useRef(null);
 
-  const handleClick = (e) => {
-    setClickImage(e.target.value === clickImage ? '' : e.target.value);
+  const getBaseImages = async () => {
+    const { imageUrls } = await getBackgroundImagesApiResponse();
+    
+    if (!imageUrls) return;
+
+    setBaseImages(imageUrls);
   }
 
-  const CHECKED_BACKGROUND = 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
+  const handleClick = (e) => {
+    setClickImage(e.target.value === clickImage ? "" : e.target.value);
+  }
 
+  const handleAddImageDataChange = (e) => {
+    const { files } = e.target;
+    const uploadFile = files[0];
+
+    if (!uploadFile) return;
+    
+    const newUrl = URL.createObjectURL(uploadFile);
+    setBaseImages([newUrl, ...baseImages]);
+  }
+
+  useEffect(() => {
+    getBaseImages();
+  }, [])
 
   return (
     <div className={styles.imgOptions}>
-      <button
-        style={'baseImg1' === clickImage ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${sample01})`} : {backgroundImage: `url(${sample01})`}}
-        className={styles.option}
-        type='button' value='baseImg1'
-        onClick={handleClick}>
-        {'baseImg1' === clickImage
-          && <img className={styles.ImgChecked} src={checkIcon} alt="check" />}
+      <button className={`${styles.option} ${styles.imageAddButton}`} type="button" onClick={() => fileInput.current.click()}>
+        <div className={styles.ImgChecked}><Button type='circle' icon='plus' /></div>
+        <input
+          type="file"
+          style={{display: 'none'}}
+          accept="image/png, image/jpg, image/jpeg"
+          ref={fileInput}
+          onChange={handleAddImageDataChange}/>
       </button>
-
-      <button
-        style={'baseImg2' === clickImage ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${sample02})`} : {backgroundImage: `url(${sample02})`}}
-        className={styles.option}
-        type='button'
-        value='baseImg2'
-        onClick={handleClick}>
-        {'baseImg2' === clickImage
-          && <img className={styles.ImgChecked} src={checkIcon} alt="check" />}
-      </button>
-
-      <button
-        style={'baseImg3' === clickImage ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${sample01})`} : {backgroundImage: `url(${sample01})`}}
-        className={styles.option}
-        type='button'
-        value='baseImg3'
-        onClick={handleClick}>
-        {'baseImg3' === clickImage
-          && <img className={styles.ImgChecked} src={checkIcon} alt="check" />}
-      </button>
-
-      <button
-        style={'baseImg4' === clickImage ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${sample02})`} : {backgroundImage: `url(${sample02})`}}
-        className={styles.option}
-        type='button' value='baseImg4'
-        onClick={handleClick}>
-        {'baseImg4' === clickImage
-          && <img className={styles.ImgChecked} src={checkIcon} alt="check" />}
-      </button>
+      {baseImages.map((item) => {
+        return (
+          <button
+            style={clickImage === String(baseImages.indexOf(item)) ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${item})`} : {backgroundImage: `url(${item})`}}
+            className={styles.option}
+            type='button'
+            value= {baseImages.indexOf(item)}
+            onClick={handleClick}>
+            { clickImage === String(baseImages.indexOf(item))
+              && <img className={styles.ImgChecked} src={checkIcon} alt="check" />}
+          </button>
+        )
+      })}
     </div>
   );
 
