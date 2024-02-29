@@ -1,97 +1,120 @@
 import { useEffect, useState } from "react";
-import Button from "../common/button/Button";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+// import Card from "../common/card/Card";
+import Button from "../common/button/Button";
 import styles from "./PostDetailEdit.module.css";
-
-// sampleAPI
-const getSampleMessages = async (id) => {
-  const response = await fetch(
-    `https://rolling-api.vercel.app/7/recipients/${id}/messages/`
-  );
-
-  return response.json();
-};
-
-const deleteSampleMessage = async (id) => {
-  await fetch(`https://rolling-api.vercel.app/7/messages/${id}/`, {
-    method: "DELETE",
-  });
-};
+import {
+  deleteMessageApiResponse,
+  deleteRecipientApiResponse,
+  getMessagesApiResponse,
+} from "../../util/api";
 
 // sampleCard
-function Card({ sender, relationship, content, createdAt, onButtonClick }) {
+function Card({
+  sender,
+  profileImageURL,
+  relationship,
+  content,
+  createdAt,
+  onButtonClick,
+}) {
   return (
-    <div className={styles.cardContainer}>
-      <div className={styles.profileContainer}>
+    <li className={styles.cardContainer}>
+      <header className={styles.profileContainer}>
         <div className={styles.profile}>
-          <div className={styles.img} />
+          <img src={profileImageURL} alt="프로필 사진" className={styles.img} />
           <div className={styles.nameAndBadgeContainer}>
             <div className={styles.nameContainer}>
               <span>From.</span>
-              <span>{sender}</span>
+              <span className={styles.name}>{sender}</span>
             </div>
-            <div className={styles.badge}>
-              <div className={styles.badgeText}>{relationship}</div>
-            </div>
-          </div>
-          <div className={styles.trashButton}>
-            <Button
-              type="outlined"
-              height="standard"
-              icon="delete"
-              onClick={onButtonClick}
-            />
+            <span className={styles.badge}>{relationship}</span>
           </div>
         </div>
-        <div className={styles.line} />
-      </div>
+        <Button
+          type="outlined"
+          height="standard"
+          icon="delete"
+          onClick={onButtonClick}
+        />
+      </header>
       <div className={styles.textAreaContainer}>
         <div className={styles.textBox}>{content}</div>
         <span className={styles.date}>{createdAt}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
 function PostDetailEdit() {
-  // sampleId: 2819
-  // http://localhost:3000/post/2819/edit
+  // sampleId: 2968
   const { postId } = useParams();
   const [messages, setMessages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-  const fetchSampleMessages = async () => {
-    const { results } = await getSampleMessages(postId);
-
-    setMessages(results);
+  const fetchMessages = async () => {
+    try {
+      const { results } = await getMessagesApiResponse(postId);
+      setMessages(results);
+    } catch (error) {
+      setErrorMessage(error?.message);
+    }
   };
 
-  const onDeleteButtonClick = async (id) => {
-    await deleteSampleMessage(id);
+  const onCardDeleteBtnClick = async (id) => {
+    await deleteMessageApiResponse(id);
     setMessages((prevMessage) =>
       prevMessage.filter((message) => message.id !== id)
     );
   };
 
+  const onPaperDeleteBtnClick = async () => {
+    await deleteRecipientApiResponse(postId);
+
+    navigate("/list");
+  };
+
   useEffect(() => {
-    fetchSampleMessages();
+    fetchMessages();
   }, []);
 
-  return (
+  return errorMessage ? (
+    <div>{errorMessage}</div>
+  ) : (
     <div>
-      <h1>PostDetailEdit</h1>
       <div className={styles.cardListContainer}>
-        <div className={styles.cardList}>
-          {messages.map(({ id, sender, relationship, content, createdAt }) => (
-            <Card
-              key={id}
-              sender={sender}
-              relationship={relationship}
-              content={content}
-              createdAt={createdAt}
-              onButtonClick={() => onDeleteButtonClick(id)}
-            />
-          ))}
-        </div>
+        <Button
+          type="primary"
+          width="92"
+          height="standard"
+          onClick={onPaperDeleteBtnClick}
+        >
+          삭제하기
+        </Button>
+        <ul className={styles.cardList}>
+          {messages?.map(
+            ({
+              id,
+              sender,
+              profileImageURL,
+              relationship,
+              content,
+              createdAt,
+            }) => (
+              <Card
+                key={id}
+                sender={sender}
+                profileImageURL={profileImageURL}
+                relationship={relationship}
+                content={content}
+                createdAt={createdAt}
+                onButtonClick={() => onCardDeleteBtnClick(id)}
+              />
+            )
+          )}
+        </ul>
       </div>
     </div>
   );

@@ -1,19 +1,31 @@
+ul li {
+  list-style: none;
+}
+
 .cardListContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 11px;
+  margin: 63px auto 113px;
+  max-width: 1200px;
 }
 
 .cardList {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 384px);
   gap: 28px 24px;
-  width: 1200px;
 }
 
 @media (max-width: 1248px) {
   .cardListContainer {
     padding: 0 24px;
+  }
+
+  .cardList {
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
   }
 }
 
@@ -31,20 +43,19 @@
 
 /* 임시 CSS */
 .cardContainer {
-  /* width: 384px; */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 24px 24px 24px;
   height: 280px;
-  flex-shrink: 0;
   border-radius: 16px;
   background: var(--white, #fff);
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
-  padding: 28px 24px 0 24px;
-  position: relative;
 }
 
 .profileContainer {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  justify-content: space-between;
 }
 
 .profile {
@@ -53,9 +64,6 @@
 }
 
 .img {
-  background-image: url("../../asset/img/cardImg/sample-profile.png");
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 56px;
   height: 56px;
   border-radius: 100px;
@@ -71,27 +79,22 @@
 .nameContainer {
   display: flex;
   gap: 6px;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.name {
+  font-weight: 700;
 }
 
 .badge {
-  display: flex;
   padding: 0px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
   border-radius: 4px;
   background: var(--Purple-100, #f8f0ff);
   width: 41px;
-}
-
-.badgeText {
   color: var(--Purple-600, #9935ff);
-  /* Font/14 Regular */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px; /* 142.857% */
+  font-size: var(--xs);
+  line-height: 20px;
   letter-spacing: -0.07px;
 }
 
@@ -101,48 +104,27 @@
 }
 
 .textAreaContainer {
-  padding: 16px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 16px;
+  box-shadow: inset 0 1px var(--gray-200);
 }
 
 .textBox {
-  position: absolute;
-  top: 116px;
-  left: 24px;
-  right: 24px;
-  width: 336px;
-
+  height: 106px;
   overflow: hidden;
   color: var(--gray-600, #4a4a4a);
   text-overflow: ellipsis;
-
-  /* Font/18 Regular */
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 28px; /* 155.556% */
+  font-size: var(--l);
+  line-height: 28px;
   letter-spacing: -0.18px;
-  border: none;
-  outline: none;
 }
 
 .date {
-  position: absolute;
-  left: 24px;
-  bottom: 24px;
-
-  color: var(--gray-400, #999);
-  /* Font/12 Regular */
-  font-family: Pretendard;
   font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px; /* 150% */
+  line-height: 18px;
   letter-spacing: -0.06px;
-}
-
-.trashButton {
-  position: absolute;
-  top: 24px;
-  right: 24px;
+  color: var(--gray-400, #999);
 }
