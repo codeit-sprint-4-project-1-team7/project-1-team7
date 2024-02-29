@@ -38,7 +38,10 @@ function ImageOption() {
 
   return (
     <div className={styles.imgOptions}>
-      <button className={`${styles.option} ${styles.imageAddButton}`} type="button" onClick={() => fileInput.current.click()}>
+      <button
+        className={`${styles.option} ${styles.imageAddButton}`}
+        type="button"
+        onClick={() => fileInput.current.click()}>
         <div className={styles.ImgChecked}><Button type='circle' icon='plus' /></div>
         <input
           type="file"
@@ -50,7 +53,9 @@ function ImageOption() {
       {baseImages.map((item) => {
         return (
           <button
-            style={clickImage === String(baseImages.indexOf(item)) ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${item})`} : {backgroundImage: `url(${item})`}}
+            style={clickImage === String(baseImages.indexOf(item)) 
+                    ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${item})`}
+                    : {backgroundImage: `url(${item})`}}
             className={styles.option}
             type='button'
             value= {baseImages.indexOf(item)}

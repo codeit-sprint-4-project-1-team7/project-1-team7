@@ -33,14 +33,14 @@
 
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-  .ImgOptions {
+  .imgOptions {
     grid-template-columns: repeat(4, minmax(168px, 200px));
     max-width: 720px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .ImgOptions {
+  .imgOptions {
     grid-template-columns: repeat(2, 168px);
     max-width: 320px;
   }
