@@ -4,6 +4,7 @@ import SelectBox from "../common/textField/selectBox/SelectBox";
 import TextArea from "../common/textField/textArea/TextArea";
 import { SELECT_TYPE } from "../common/textField/selectBox/selectType";
 import DOMPurify from "dompurify";
+import UserProfileOption from "../common/option/UserProfileOption";
 
 export function Choi() {
   const [inputValue, setInputValue] = useState("");
@@ -56,6 +57,7 @@ export function Choi() {
         <li>2adfasf</li>
         <li>3asfddasf</li>
       </ul>
+      <UserProfileOption />
     </div>
   );
 }
