@@ -9,6 +9,7 @@ import Button from "../common/button/Button";
 import DOMPurify from "dompurify";
 import { fontMappings } from "../common/textField/selectBox/fontMappings";
 import UserProfileOption from "../common/option/UserProfileOption";
+import baseProfile from "../../asset/img/optionIcon/base_profile_icon.png";
 
 function PostMessage() {
   const [inputValue, setInputValue] = useState("");
@@ -16,6 +17,7 @@ function PostMessage() {
   const [currentFont, setCurrentFont] = useState("");
   const [quillValue, setQuillValue] = useState("");
   const [profileImgList, setProfileImgList] = useState([]);
+  const [currentProfileImg, setCurrentProfileImg] = useState(baseProfile);
 
   const textAreaRef = useRef(null);
   const textContainerRef = useRef(null);
@@ -31,6 +33,12 @@ function PostMessage() {
   };
   const handleQuillValue = (value) => {
     setQuillValue(value);
+  };
+  const handleClickProfileImgList = (idx) => {
+    setCurrentProfileImg(profileImgList[idx]);
+  };
+  const handleChangeProfileImg = (value) => {
+    setCurrentProfileImg(value);
   };
 
   const getImgProfileList = async () => {
@@ -63,7 +71,10 @@ function PostMessage() {
 
       <div className={styles.profileImgTitle}>프로필 이미지</div>
       <div className={styles.allProfileImgContainer}>
-        <UserProfileOption />
+        <UserProfileOption
+          currentProfileImg={currentProfileImg}
+          onChangeProfileImg={handleChangeProfileImg}
+        />
         <div>
           <div className={styles.porfileImgText}>
             프로필 이미지를 선택해주세요!
@@ -73,6 +84,7 @@ function PostMessage() {
               <img
                 className={styles.img}
                 key={i}
+                onClick={() => handleClickProfileImgList(i)}
                 src={profileImg}
                 alt="profileImg"
               />
