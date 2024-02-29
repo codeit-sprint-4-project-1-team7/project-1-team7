@@ -29,14 +29,12 @@
 .textPoint {
   padding: 6px 12px;
   border-radius: 50px;
-  background: var(--purple-600, #9935ff);
-  color: var(--white, #fff);
+  background: var(--purple-600);
+  color: var(--white);
   margin-bottom: 16px;
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
+  font-size: var(--xs);
+  font-weight: var(--bold);
   line-height: 20px;
   letter-spacing: -0.07px;
 }
@@ -58,21 +56,15 @@
 .textH1 {
   color: var(--gray-900);
   margin-bottom: 8px;
-
-  font-family: Pretendard;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
+  font-size: var(--xxl);
+  font-weight: var(--bold);
   line-height: 36px;
   letter-spacing: -0.24px;
 }
 .textSpan {
-  color: var(--gray-500, #555);
-
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
+  color: var(--gray-500);
+  font-size: var(--l);
+  font-weight: var(--regular);
   line-height: 28px;
   letter-spacing: -0.18px;
 }
@@ -124,12 +116,12 @@
     height: 89.722px;
   }
   .textH1 {
-    font-size: 18px;
+    font-size: var(--l);
     line-height: 28px;
     letter-spacing: -0.18px;
   }
   .textSpan {
-    font-size: 15px;
+    font-size: var(--s);
     line-height: 22px;
     letter-spacing: -0.15px;
   }

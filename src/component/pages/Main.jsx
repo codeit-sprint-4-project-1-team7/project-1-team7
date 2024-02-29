@@ -2,7 +2,11 @@ import styles from './Main.module.css';
 import mainImg1 from '../../asset/img/mainImg/mainImg_01.png';
 import mainImg2 from '../../asset/img/mainImg/mainImg_02.png';
 import Button from '../common/button/Button';
+import { useNavigate } from 'react-router-dom';
+
 function Main() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.mainBackground}>
       <div className={styles.mainContents01}>
@@ -32,7 +36,14 @@ function Main() {
         <img src={mainImg2} alt="메인 이미지2"></img>
       </div>
       <div className={styles.mainBottom}>
-        <Button type="primary">구경해보기</Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            navigate('/list');
+          }}
+        >
+          구경해보기
+        </Button>
       </div>
     </div>
   );
