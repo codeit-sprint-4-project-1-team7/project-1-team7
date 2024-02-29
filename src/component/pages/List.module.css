@@ -21,3 +21,17 @@
   line-height: 36px;
   letter-spacing: -0.24px;
 }
+
+.listBottom {
+  display: flex;
+  width: 280px;
+  padding: 24px 0px 24px 0px;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 1024px) {
+  .listBottom {
+    width: 100%;
+    min-width: 300px;
+  }
+}
