@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
+// import Card from "../common/card/Card";
 import Button from "../common/button/Button";
 import styles from "./PostDetailEdit.module.css";
 import {
@@ -47,7 +48,7 @@ function Card({
 }
 
 function PostDetailEdit() {
-  // sampleId: 2951
+  // sampleId: 2968
   const { postId } = useParams();
   const [messages, setMessages] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
