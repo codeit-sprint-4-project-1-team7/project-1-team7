@@ -10,12 +10,19 @@ import {
 } from "../../util/api";
 
 // sampleCard
-function Card({ sender, relationship, content, createdAt, onButtonClick }) {
+function Card({
+  sender,
+  profileImageURL,
+  relationship,
+  content,
+  createdAt,
+  onButtonClick,
+}) {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.profileContainer}>
         <div className={styles.profile}>
-          <div className={styles.img} />
+          <img src={profileImageURL} alt="프로필 사진" className={styles.img} />
           <div className={styles.nameAndBadgeContainer}>
             <div className={styles.nameContainer}>
               <span>From.</span>
@@ -90,18 +97,26 @@ function PostDetailEdit() {
         >
           삭제하기
         </Button>
-        <div className={styles.cardList}>
-          {messages?.map(({ id, sender, relationship, content, createdAt }) => (
-            <Card
-              key={id}
-              sender={sender}
-              relationship={relationship}
-              content={content}
-              createdAt={createdAt}
-              onButtonClick={() => onCardDeleteBtnClick(id)}
-            />
-          ))}
-        </div>
+          {messages?.map(
+            ({
+              id,
+              sender,
+              profileImageURL,
+              relationship,
+              content,
+              createdAt,
+            }) => (
+              <Card
+                key={id}
+                sender={sender}
+                profileImageURL={profileImageURL}
+                relationship={relationship}
+                content={content}
+                createdAt={createdAt}
+                onButtonClick={() => onCardDeleteBtnClick(id)}
+              />
+            )
+          )}
       </div>
     </div>
   );
