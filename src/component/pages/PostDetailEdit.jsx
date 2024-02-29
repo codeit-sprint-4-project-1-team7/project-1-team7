@@ -19,35 +19,30 @@ function Card({
   onButtonClick,
 }) {
   return (
-    <div className={styles.cardContainer}>
-      <div className={styles.profileContainer}>
+    <li className={styles.cardContainer}>
+      <header className={styles.profileContainer}>
         <div className={styles.profile}>
           <img src={profileImageURL} alt="프로필 사진" className={styles.img} />
           <div className={styles.nameAndBadgeContainer}>
             <div className={styles.nameContainer}>
               <span>From.</span>
-              <span>{sender}</span>
+              <span className={styles.name}>{sender}</span>
             </div>
-            <div className={styles.badge}>
-              <div className={styles.badgeText}>{relationship}</div>
-            </div>
-          </div>
-          <div className={styles.trashButton}>
-            <Button
-              type="outlined"
-              height="standard"
-              icon="delete"
-              onClick={onButtonClick}
-            />
+            <span className={styles.badge}>{relationship}</span>
           </div>
         </div>
-        <div className={styles.line} />
-      </div>
+        <Button
+          type="outlined"
+          height="standard"
+          icon="delete"
+          onClick={onButtonClick}
+        />
+      </header>
       <div className={styles.textAreaContainer}>
         <div className={styles.textBox}>{content}</div>
         <span className={styles.date}>{createdAt}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
