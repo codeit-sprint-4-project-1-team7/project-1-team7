@@ -54,7 +54,7 @@ function PostDetailEdit() {
   const fetchMessages = async () => {
     try {
       const { results } = await getMessagesApiResponse(postId);
-    setMessages(results);
+      setMessages(results);
     } catch (error) {
       setErrorMessage(error?.message);
     }
