@@ -1,6 +1,6 @@
 import Button from "../button/Button";
 import styles from "./Card.module.css";
-function Card({ recentMessages, isAddMessageCardVisible }) {
+function Card({ messages, isAddMessageCardVisible }) {
   return (
     <>
       <div className={styles.cardBox}>
@@ -11,7 +11,7 @@ function Card({ recentMessages, isAddMessageCardVisible }) {
             </div>
           </div>
         )}
-        {recentMessages?.map((item) => (
+        {messages?.map((item) => (
           <div key={item.id} className={styles.cardContainer}>
             <div className={styles.profileContainer}>
               <div className={styles.profile}>

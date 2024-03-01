@@ -18,6 +18,7 @@ function HeaderService({
   contextMenuVisibleList,
   topEmojiList,
   messageCount,
+  recentMessages,
   name,
 }) {
   const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
@@ -80,6 +81,8 @@ function HeaderService({
                 imageStyle={styles.image}
                 imageTextStyle={styles.imageText}
                 direction="right"
+                messageCount={messageCount}
+                recentMessages={recentMessages}
               />
               <div className={styles.writed}>
                 <span className={styles.numOfWrited}>{messageCount}</span>
