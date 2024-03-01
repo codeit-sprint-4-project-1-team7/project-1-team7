@@ -1,33 +1,17 @@
 import { useEffect, useState } from "react";
-import exampleImg from "../../../asset/img/headerIcon/rolling-icon.png";
-import exampleImg2 from "../../../asset/img/optionIcon/base_profile_icon.png";
-import exampleImg3 from "../../../asset/img/optionIcon/sample_Image_01.jpg";
 function ProfileImages({
   imageContainerStyle,
   imageStyle,
   imageTextStyle,
   direction,
+  messageCount,
+  recentMessages,
 }) {
   const [textLength, setTextLength] = useState(0);
   let plusNum = 0;
   if (direction === "right") {
-    plusNum = (textLength - 2) * 6;
+    plusNum = (String(messageCount).length - 1) * 6;
   }
-  const itemNum = 4; //넘어온 임시 list 개수
-  const mockList = [
-    {
-      order: 1,
-      backgroundImage: exampleImg,
-    },
-    {
-      order: 2,
-      backgroundImage: exampleImg2,
-    },
-    {
-      order: 3,
-      backgroundImage: exampleImg3,
-    },
-  ];
 
   useEffect(() => {
     const imageTextElement = document.getElementById("imageText");
@@ -46,37 +30,37 @@ function ProfileImages({
         }
       >
         {direction === "left"
-          ? mockList.map((item) => (
+          ? recentMessages.map((item, i) => (
               <div
-                key={item.order}
+                key={item.id}
                 className={imageStyle}
                 style={{
-                  backgroundImage: `url(${item.backgroundImage})`,
-                  [direction]: `${16 * (item.order - 1)}px`,
+                  backgroundImage: `url(${item.profileImageURL})`,
+                  [direction]: `${16 * i}px`,
                   zIndex: -1,
                 }}
               ></div>
             ))
-          : mockList.reverse().map((item) => (
+          : recentMessages.map((item, i) => (
               <div
-                key={item.order}
+                key={item.id}
                 className={imageStyle}
                 style={{
-                  backgroundImage: `url(${item.backgroundImage})`,
+                  backgroundImage: `url(${item.profileImageURL})`,
                   [direction]: `${
                     16 *
-                      (itemNum > 3
-                        ? mockList.length + 1 - item.order
-                        : mockList.length - item.order) +
+                      (messageCount > 3
+                        ? recentMessages.length - i
+                        : recentMessages.length - i) +
                     plusNum
                   }px`,
-                  zIndex: `${-4 + item.order}`,
+                  zIndex: `${-3 + i}`,
                 }}
               ></div>
             ))}
-        {itemNum > 3 && (
+        {messageCount > 3 && (
           <div id="imageText" className={imageTextStyle}>
-            +{itemNum}
+            +{messageCount}
           </div>
         )}
       </div>
