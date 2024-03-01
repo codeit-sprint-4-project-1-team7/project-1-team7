@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Post.module.css";
-import Input from "../common/textField/Input/Input";
+import Input from "../common/textField/input/Input";
 import ColorOption from "../common/option/ColorOption";
 import ToggleButton from "../common/button/ToggleButton";
 import ImageOption from "../common/option/ImageOption";
