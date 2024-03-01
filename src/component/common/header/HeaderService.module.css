@@ -52,11 +52,11 @@
   position: absolute;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: black;
+  background-color: white;
   width: 28px;
   height: 28px;
   flex-shrink: 0;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   border-radius: 50%;
 }
 
@@ -67,7 +67,7 @@
   min-width: 28px;
   height: 28px;
   flex-shrink: 0;
-  border: 2px solid #e3e3e3;
+  border: 1px solid #e3e3e3;
   border-radius: 14px;
   background-color: #fff;
   color: #484848;
