@@ -6,7 +6,7 @@ import ToggleButton from "./ToggleButton";
  *
  * @param {string} children
  * @param {string} type (primary, secondary, outlined, circle, toggle)
- * @param {string} width (280)
+ * @param {string} width (width120, width280, widthAuto)
  * @param {string} height (tall, standard, short)
  * @param {string} icon (add, share, plus, delete, check)
  *
@@ -33,14 +33,12 @@ function Button({
 
   const className = `${styles.btn} ${styles[height]} ${styles[type]} ${
     icon ? styles[icon] : ""
-  }`;
-  const style = width ? { width: `${width}px` } : {};
+  } ${width ? styles[width] : ''}`;
 
   return (
     <button
       id={id}
       type="button"
-      style={style}
       className={className}
       disabled={disabled}
       onClick={onClick}

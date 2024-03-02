@@ -9,6 +9,8 @@
   padding: 7px 16px;
   width: 50%;
   height: 40px;
+  cursor: pointer;
+  outline: none;
 }
 
 .active {
