@@ -10,6 +10,8 @@ import DOMPurify from "dompurify";
 import { fontMappings } from "../common/textField/selectBox/fontMappings";
 import UserProfileOption from "../common/option/UserProfileOption";
 import baseProfile from "../../asset/img/optionIcon/base_profile_icon.png";
+import { useParams, useNavigate } from "react-router-dom";
+import { postMessageApiResponse } from "../../util/api";
 
 function PostMessage() {
   const [inputValue, setInputValue] = useState("");
@@ -18,6 +20,9 @@ function PostMessage() {
   const [quillValue, setQuillValue] = useState("");
   const [profileImgList, setProfileImgList] = useState([]);
   const [currentProfileImg, setCurrentProfileImg] = useState(baseProfile);
+
+  const navigate = useNavigate();
+  const { postId } = useParams();
 
   const textAreaRef = useRef(null);
   const textContainerRef = useRef(null);
@@ -51,6 +56,24 @@ function PostMessage() {
     const textContainer = textContainerRef.current.getEditor().root;
     textContainer.style.fontFamily = fontStyle;
     textAreaRef.current.style.fontFamily = fontStyle;
+  };
+
+  const postData = () => {
+    //test recipientId: 2889
+    const data = {
+      recipientId: 2889,
+      sender: inputValue,
+      profileImageURL: currentProfileImg,
+      relationship: currentRelation,
+      content: quillValue,
+      font: currentFont,
+      createdAt: new Date().getTime(),
+    };
+
+    postMessageApiResponse(data, 2889).then(() => {
+      navigate(`/post/${postId}`);
+    });
+    // console.log(data);
   };
 
   //TODO: 컴포넌트 최적화 하기
@@ -101,7 +124,7 @@ function PostMessage() {
           selectType={SELECT_TYPE.relation}
         />
       </div>
-
+      {/* ↓ 이런 식으로 처리 해주셔야 합니다. */}
       <div
         ref={textAreaRef}
         dangerouslySetInnerHTML={{
@@ -109,6 +132,7 @@ function PostMessage() {
         }}
         className="dompurifyBox"
       />
+
       <br />
       <div>{quillValue}</div>
       <br />
@@ -129,7 +153,7 @@ function PostMessage() {
           selectType={SELECT_TYPE.font}
         />
       </div>
-      <Button type={"primary"} width={"100%"}>
+      <Button type={"primary"} width={"100%"} onClick={postData}>
         생성하기
       </Button>
     </div>
