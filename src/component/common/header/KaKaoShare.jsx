@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 const { Kakao } = window;
 
-function KaKaoShare({ className, name, description, imageUrl }) {
+function KaKaoShare({ className, name, description, image }) {
   const url = window.location.href;
   useEffect(() => {
     Kakao.cleanup();
@@ -14,8 +14,7 @@ function KaKaoShare({ className, name, description, imageUrl }) {
       content: {
         title: `롤링 페이퍼 | `,
         description: `${name}님의 롤링 페이퍼를 확인해보세요!`,
-        imageUrl:
-          "https://i0.wp.com/library.re.kr/wp-content/uploads/2022/05/996907.jpg?resize=1080%2C675&ssl=1",
+        imageUrl: `${image}`,
         link: {
           // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
           mobileWebUrl: url,
