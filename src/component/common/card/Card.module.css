@@ -1,18 +1,25 @@
+.backGround {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
+}
+
 .cardBox {
-  position: absolute;
-  top: 246px;
-  left: 360px;
   display: grid;
   max-width: 1200px;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(384px, 1fr));
-  grid-template-rows: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, 384px);
+  grid-template-rows: repeat(auto-fill, 280px);
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardContainer {
-  width: 384px;
-  height: 280px;
+  height: 100%;
   flex-shrink: 0;
   border-radius: 16px;
   background: var(--white, #fff);
@@ -147,4 +154,18 @@
   position: absolute;
   top: 24px;
   right: 24px;
+}
+
+@media (max-width: 1200px) {
+  .cardBox {
+    grid-template-columns: repeat(auto-fill, 352px);
+    grid-template-rows: repeat(auto-fill, 284px);
+  }
+}
+
+@media (max-width: 360px) {
+  .cardBox {
+    grid-template-columns: repeat(auto-fill, 320px);
+    grid-template-rows: repeat(auto-fill, 230px);
+  }
 }
