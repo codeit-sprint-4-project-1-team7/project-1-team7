@@ -22,9 +22,7 @@ function PostDetail({ contextMenuVisibleList }) {
 
   useEffect(() => {
     const getRollinginformation = async () => {
-      //test recipientId: 2889
-      const response = await getRecipientsApiResponse("2889");
-      console.log(response);
+      const response = await getRecipientsApiResponse(postId);
       const {
         messageCount,
         recentMessages,
@@ -44,7 +42,7 @@ function PostDetail({ contextMenuVisibleList }) {
     };
 
     const getMessagesOfRecipient = async (messageCount) => {
-      const response = await getMessagesApiResponse("2889", messageCount);
+      const response = await getMessagesApiResponse(postId, messageCount);
       setMessages(response.results);
     };
     getRollinginformation();
@@ -56,7 +54,7 @@ function PostDetail({ contextMenuVisibleList }) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [location.pathname]);
+  }, [location.pathname, postId]);
   return (
     <>
       <HeaderService
@@ -66,6 +64,7 @@ function PostDetail({ contextMenuVisibleList }) {
         name={name}
         image={image}
         isImojiContainerSmall={isImojiContainerSmall}
+        postId={postId}
       />
 
       <Card
