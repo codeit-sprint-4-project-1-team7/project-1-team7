@@ -1,49 +1,47 @@
-import { useState } from 'react';
 import checkIcon from '../../../asset/img/optionIcon/check_Icon.png';
 import styles from './ColorOption.module.css';
 
-function ColorOption() {
-  const [clickItem, setClickItem] = useState('beige');
-
-  const handleClick = (e) => {
-    setClickItem(e.target.value === clickItem ? '' : e.target.value);
-  }
+function ColorOption({ clickItem, onClick }) {
 
   return (
     <div className={styles.backgroundOptions}>
       <button
+        id='option'
         type='button'
         value='beige'
         className={`${styles.option} ${styles.colorBeige}`}
-        onClick={handleClick}>
+        onClick={onClick}>
         {'beige' === clickItem
           && <img className={styles.backgroundChecked} src={checkIcon} alt="check" />}
       </button>
 
       <button
+        id='option'
         type='button'
         value='purple'
         className={`${styles.option}
         ${styles.colorPurple}`}
-        onClick={handleClick}>
+        onClick={onClick}>
         {'purple' === clickItem
           && <img className={styles.backgroundChecked} src={checkIcon} alt="check" />}
       </button>
 
       <button
+        id='option'
         type='button'
         value='blue'
         className={`${styles.option} ${styles.colorBlue}`}
-        onClick={handleClick}>
+        onClick={onClick}>
         {'blue' === clickItem
           && <img className={styles.backgroundChecked} src={checkIcon} alt="check" />}
       </button>
 
       <button
+        id='option'
         type='button'
         value='green'
         className={`${styles.option} ${styles.colorGreen}`}
-        onClick={handleClick}>
+        onClick={onClick}>
         {'green' === clickItem
           && <img className={styles.backgroundChecked} src={checkIcon} alt="check" />}
       </button>

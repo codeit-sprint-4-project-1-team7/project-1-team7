@@ -4,9 +4,8 @@ import Button from "../button/Button";
 import styles from "./ImageOption.module.css";
 import checkIcon from "../../../asset/img/optionIcon/check_Icon.png";
 
-function ImageOption() {
+function ImageOption({ clickItem, onClick }) {
   const CHECKED_BACKGROUND = 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
-  const [clickImage, setClickImage] = useState("0");
   const [baseImages, setBaseImages] = useState([]);
   const fileInput = useRef(null);
 
@@ -18,9 +17,6 @@ function ImageOption() {
     setBaseImages(imageUrls);
   }
 
-  const handleClick = (e) => {
-    setClickImage(e.target.value === clickImage ? "" : e.target.value);
-  }
 
   const handleAddImageDataChange = (e) => {
     const { files } = e.target;
@@ -53,14 +49,14 @@ function ImageOption() {
       {baseImages.map((item) => {
         return (
           <button
-            style={clickImage === String(baseImages.indexOf(item)) 
+            style={clickItem === item 
                     ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${item})`}
                     : {backgroundImage: `url(${item})`}}
             className={styles.option}
             type='button'
-            value= {baseImages.indexOf(item)}
-            onClick={handleClick}>
-            { clickImage === String(baseImages.indexOf(item))
+            value= {item}
+            onClick={onClick}>
+            { clickItem === item
               && <img className={styles.ImgChecked} src={checkIcon} alt="check" />}
           </button>
         )
