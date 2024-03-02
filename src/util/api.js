@@ -71,10 +71,11 @@ export function postRecipientApiResponse(obj) {
   return postApi(RECIPIENT_API_URL, obj);
 }
 
-export function getRecipientsApiResponse(recipientId) {
+export function getRecipientsApiResponse(recipientId, limit) {
+  const queryString = limit ? `?limit=${limit}&offset=0` : ``;
   const conditionalRecipientUrl = recipientId
-    ? RECIPIENT_API_URL + recipientId + "/"
-    : RECIPIENT_API_URL;
+    ? RECIPIENT_API_URL + recipientId + "/" + queryString
+    : RECIPIENT_API_URL + queryString;
   return getApi(conditionalRecipientUrl);
 }
 

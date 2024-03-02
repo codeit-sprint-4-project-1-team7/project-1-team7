@@ -37,7 +37,6 @@ function ProfileImages({
                 style={{
                   backgroundImage: `url(${item.profileImageURL})`,
                   [direction]: `${16 * i}px`,
-                  zIndex: -1,
                 }}
               ></div>
             ))
@@ -59,7 +58,11 @@ function ProfileImages({
               ></div>
             ))}
         {messageCount > 3 && (
-          <div id="imageText" className={imageTextStyle}>
+          <div
+            id="imageText"
+            className={imageTextStyle}
+            style={{ zIndex: `1` }}
+          >
             +{messageCount}
           </div>
         )}
