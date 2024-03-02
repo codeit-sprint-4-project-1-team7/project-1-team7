@@ -10,7 +10,6 @@ import {
 } from "../../util/api";
 
 export function Kim({ contextMenuVisibleList }) {
-  const navigation = useNavigate();
   const location = useLocation();
   const { postId } = useParams(); //추후 postId 값을 api 요청으로 사용 예정
   const [topEmojiList, setTopEmojiList] = useState([]);
@@ -18,7 +17,8 @@ export function Kim({ contextMenuVisibleList }) {
   const [messages, setMessages] = useState([]);
   const [name, setName] = useState("");
   const [messageCount, setMessageCount] = useState(0);
-  const [rollingPaperList, setRollingPaperList] = useState();
+  const [rollingPaperListOrder, setRollingPaperListOrder] = useState([]);
+  const [rollingPaperListPopular, setRollingPaperListPopular] = useState([]);
 
   const getRollinginformation = async () => {
     //test recipientId: 2889
@@ -36,9 +36,12 @@ export function Kim({ contextMenuVisibleList }) {
   };
 
   const getRollingPaperList = async () => {
-    const response = await getRecipientsApiResponse();
-    console.log(response.results);
-    setRollingPaperList(response.results);
+    const response = await getRecipientsApiResponse("", 100);
+    console.log(response);
+    setRollingPaperListOrder(response.results);
+    setRollingPaperListPopular(
+      [...response.results].sort((a, b) => b.messageCount - a.messageCount)
+    );
   };
 
   const getMessagesOfRecipient = async () => {
@@ -62,12 +65,9 @@ export function Kim({ contextMenuVisibleList }) {
         recentMessages={recentMessages}
         name={name}
       />
-      <CardList
-        rollingPaperList={rollingPaperList}
-        messageCount={messageCount}
-        recentMessages={recentMessages}
-      />
-      {/* <Card /> */}
+      <CardList rollingPaperList={rollingPaperListPopular.slice(0, 8)} />
+      <Header />
+      <CardList rollingPaperList={rollingPaperListOrder.slice(0, 8)} />
     </>
   );
 }
