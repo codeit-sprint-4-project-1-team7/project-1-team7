@@ -28,6 +28,7 @@
   overflow-y: scroll;
   white-space: nowrap;
   animation-duration: 900ms;
+  scrollbar-width: none;
 }
 .cardButton {
   position: absolute;
