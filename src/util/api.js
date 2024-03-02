@@ -92,8 +92,9 @@ export function postMessageApiResponse(obj, recipientId) {
   return postApi(RECIPIENT_API_URL + recipientId + "/messages/", obj);
 }
 
-export function getMessagesApiResponse(recipientId) {
-  return getApi(RECIPIENT_API_URL + recipientId + "/messages/");
+export function getMessagesApiResponse(recipientId, limit) {
+  const queryString = `?limit=${limit}&offset=0`;
+  return getApi(RECIPIENT_API_URL + recipientId + "/messages/" + queryString);
 }
 
 export function deleteMessageApiResponse(messageId) {
