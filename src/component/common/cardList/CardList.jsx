@@ -4,10 +4,9 @@ import headerServiceStyles from "../header/HeaderService.module.css";
 import { EmojiBadge } from "../badge/EmojiBadge";
 import { useNavigate } from "react-router-dom";
 
-function CardList({ rollingPaperList, onClick }) {
+function CardList({ rollingPaperList }) {
   const navigation = useNavigate();
   const handleCardListClick = (id) => {
-    console.log(`Card clicked: ${id}`);
     navigation(`/post/${id}`);
   };
   return (
