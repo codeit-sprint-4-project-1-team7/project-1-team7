@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 import styles from "./Card.module.css";
+import DOMPurify from "dompurify";
+import { fontMappings } from "../textField/selectBox/fontMappings";
 function Card({ messages, isAddMessageCardVisible, image }) {
   const navigate = useNavigate();
   const handleAddMessageButtonClick = () => {
@@ -60,10 +62,11 @@ function Card({ messages, isAddMessageCardVisible, image }) {
             <div className={styles.textAreaContainer}>
               <div
                 className={styles.textBox}
-                style={{ fontFamily: `${item.font}` }}
-              >
-                {item.content}
-              </div>
+                style={{ fontFamily: `${fontMappings[item.font]}` }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(item.content),
+                }}
+              />
               <span className={styles.date}>{item.createdAt.slice(0, 10)}</span>
             </div>
           </div>

@@ -157,4 +157,14 @@ a:hover {
   font-family: "Nanum Myeongjo", serif;
 }
 
+.ql-align-justify {
+  text-align: justify;
+}
 
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}

@@ -4,12 +4,14 @@
   align-items: center;
   gap: 4px;
   outline: none;
+  cursor: pointer;
 }
 
 .btn:disabled:not(:enabled) {
   border: 1px solid var(--gray-300);
   background-color: var(--gray-300);
   color: var(--white);
+  cursor: not-allowed;
 }
 
 .tall {
@@ -96,6 +98,18 @@
   background-color: var(--white);
 }
 
+.width120 {
+  width: 120px;
+}
+
+.widthAuto {
+  width: auto;
+}
+
+.width280 {
+  width: 280px;
+}
+
 .delete {
   padding: 6px;
   width: 36px;
@@ -123,6 +137,21 @@
     center/contain;
 }
 
+@media (max-width: 1024px) {
+  .widthAuto,
+  .width280 {
+    position: fixed;
+    bottom: 24px;
+    padding: 14px 16px;
+    width: 100%;
+    min-height: 56px;
+    border-radius: 12px;
+    font-size: var(--l);
+    font-weight: var(--bold);
+    letter-spacing: -0.18px;
+  }
+}
+
 @media (max-width: 767px) {
   .short {
     padding: 2px 8px;
@@ -140,8 +169,6 @@
     display: block;
     width: 20px;
     height: 20px;
-    background: url("../../../asset/img/buttonIcon/share-24.svg") no-repeat
-      center/contain;
   }
 
   .add::before {
@@ -149,7 +176,5 @@
     display: block;
     width: 20px;
     height: 20px;
-    background: url("../../../asset/img/buttonIcon/add-24.svg") no-repeat
-      center/contain;
   }
 }

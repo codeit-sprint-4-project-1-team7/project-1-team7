@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getMessagesApiResponse,
   getRecipientsApiResponse,
@@ -18,12 +18,11 @@ function PostDetail({ contextMenuVisibleList }) {
   const [messageCount, setMessageCount] = useState(0);
   const [isAddMessageCardVisible, setIsAddMessageCardVisible] = useState(0);
   const [image, setImage] = useState("");
+  const [isImojiContainerSmall, setIsImojiContainerSmall] = useState(false);
 
   useEffect(() => {
     const getRollinginformation = async () => {
-      //test recipientId: 2889
-      const response = await getRecipientsApiResponse("2889");
-      console.log(response);
+      const response = await getRecipientsApiResponse(postId);
       const {
         messageCount,
         recentMessages,
@@ -43,12 +42,19 @@ function PostDetail({ contextMenuVisibleList }) {
     };
 
     const getMessagesOfRecipient = async (messageCount) => {
-      const response = await getMessagesApiResponse("2889", messageCount);
+      const response = await getMessagesApiResponse(postId, messageCount);
       setMessages(response.results);
     };
     getRollinginformation();
     setIsAddMessageCardVisible(!location.pathname.includes("edit"));
-  }, [location.pathname]);
+    const handleResize = () => {
+      setIsImojiContainerSmall(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [location.pathname, postId]);
   return (
     <>
       <HeaderService
@@ -57,6 +63,8 @@ function PostDetail({ contextMenuVisibleList }) {
         recentMessages={recentMessages}
         name={name}
         image={image}
+        isImojiContainerSmall={isImojiContainerSmall}
+        postId={postId}
       />
 
       <Card
