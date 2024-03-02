@@ -53,7 +53,7 @@ function CardList({ rollingPaperList }) {
               </div>
               <div className={styles.badgeContainer}>
                 <div className={styles.line} />
-                <div className={headerServiceStyles.badgeContainer}>
+                <div className={styles.badge}>
                   {item.topReactions?.map(({ id, emoji, count }) => (
                     <EmojiBadge key={id} emoji={emoji} count={count} />
                   ))}
