@@ -4,10 +4,10 @@ import headerServiceStyles from "../header/HeaderService.module.css";
 import { EmojiBadge } from "../badge/EmojiBadge";
 import { useNavigate } from "react-router-dom";
 
-function CardList({ rollingPaperList, onClick }) {
+function CardList({ rollingPaperList }) {
+  console.log(rollingPaperList.topReactions);
   const navigation = useNavigate();
   const handleCardListClick = (id) => {
-    console.log(`Card clicked: ${id}`);
     navigation(`/post/${id}`);
   };
   return (
@@ -53,9 +53,11 @@ function CardList({ rollingPaperList, onClick }) {
               </div>
               <div className={styles.badgeContainer}>
                 <div className={styles.line} />
-                {rollingPaperList.topReactions?.map(({ id, emoji, count }) => (
-                  <EmojiBadge key={id} emoji={emoji} count={count} />
-                ))}
+                <div className={headerServiceStyles.badgeContainer}>
+                  {item.topReactions?.map(({ id, emoji, count }) => (
+                    <EmojiBadge key={id} emoji={emoji} count={count} />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
