@@ -167,8 +167,6 @@
     display: block;
     width: 20px;
     height: 20px;
-    background: url("../../../asset/img/buttonIcon/share-24.svg") no-repeat
-      center/contain;
   }
 
   .add::before {
@@ -176,7 +174,5 @@
     display: block;
     width: 20px;
     height: 20px;
-    background: url("../../../asset/img/buttonIcon/add-24.svg") no-repeat
-      center/contain;
   }
 }
