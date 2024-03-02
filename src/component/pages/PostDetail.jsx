@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getMessagesApiResponse,
   getRecipientsApiResponse,
@@ -18,6 +18,7 @@ function PostDetail({ contextMenuVisibleList }) {
   const [messageCount, setMessageCount] = useState(0);
   const [isAddMessageCardVisible, setIsAddMessageCardVisible] = useState(0);
   const [image, setImage] = useState("");
+  const [isImojiContainerSmall, setIsImojiContainerSmall] = useState(false);
 
   useEffect(() => {
     const getRollinginformation = async () => {
@@ -48,6 +49,13 @@ function PostDetail({ contextMenuVisibleList }) {
     };
     getRollinginformation();
     setIsAddMessageCardVisible(!location.pathname.includes("edit"));
+    const handleResize = () => {
+      setIsImojiContainerSmall(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [location.pathname]);
   return (
     <>
@@ -57,6 +65,7 @@ function PostDetail({ contextMenuVisibleList }) {
         recentMessages={recentMessages}
         name={name}
         image={image}
+        isImojiContainerSmall={isImojiContainerSmall}
       />
 
       <Card
