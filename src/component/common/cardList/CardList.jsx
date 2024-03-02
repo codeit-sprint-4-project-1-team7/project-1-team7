@@ -5,6 +5,7 @@ import { EmojiBadge } from "../badge/EmojiBadge";
 import { useNavigate } from "react-router-dom";
 
 function CardList({ rollingPaperList }) {
+  console.log(rollingPaperList.topReactions);
   const navigation = useNavigate();
   const handleCardListClick = (id) => {
     navigation(`/post/${id}`);
@@ -52,9 +53,11 @@ function CardList({ rollingPaperList }) {
               </div>
               <div className={styles.badgeContainer}>
                 <div className={styles.line} />
-                {rollingPaperList.topReactions?.map(({ id, emoji, count }) => (
-                  <EmojiBadge key={id} emoji={emoji} count={count} />
-                ))}
+                <div className={headerServiceStyles.badgeContainer}>
+                  {item.topReactions?.map(({ id, emoji, count }) => (
+                    <EmojiBadge key={id} emoji={emoji} count={count} />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
