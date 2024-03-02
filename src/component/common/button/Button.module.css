@@ -4,12 +4,14 @@
   align-items: center;
   gap: 4px;
   outline: none;
+  cursor: pointer;
 }
 
 .btn:disabled:not(:enabled) {
   border: 1px solid var(--gray-300);
   background-color: var(--gray-300);
   color: var(--white);
+  cursor: not-allowed;
 }
 
 .tall {
