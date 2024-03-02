@@ -1,13 +1,34 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 import styles from "./Card.module.css";
-function Card({ messages, isAddMessageCardVisible }) {
+function Card({ messages, isAddMessageCardVisible, image }) {
+  const navigate = useNavigate();
+  const handleAddMessageButtonClick = () => {
+    navigate("message");
+  };
   return (
-    <>
+    <div
+      className={styles.backGround}
+      style={
+        image?.includes("http")
+          ? {
+              backgroundImage: `url(${image})`,
+              backgroundRepeat: `no-repeat`,
+              backgroundSize: `cover`,
+              backgroundPosition: `center`,
+            }
+          : { backgroundColor: `${image}` }
+      }
+    >
       <div className={styles.cardBox}>
         {isAddMessageCardVisible && (
           <div className={styles.cardContainer}>
             <div className={styles.cardPlus}>
-              <div className={styles.cardImg} />
+              <Button
+                type="circle"
+                icon="plus"
+                onClick={handleAddMessageButtonClick}
+              />
             </div>
           </div>
         )}
@@ -28,9 +49,11 @@ function Card({ messages, isAddMessageCardVisible }) {
                     <div className={styles.badgeText}>{item.relationship}</div>
                   </div>
                 </div>
-                <div className={styles.trashButton}>
-                  <Button type="outlined" height="standard" icon="delete" />
-                </div>
+                {!isAddMessageCardVisible && (
+                  <div className={styles.trashButton}>
+                    <Button type="outlined" height="standard" icon="delete" />
+                  </div>
+                )}
               </div>
               <div className={styles.line} />
             </div>
@@ -46,7 +69,7 @@ function Card({ messages, isAddMessageCardVisible }) {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
