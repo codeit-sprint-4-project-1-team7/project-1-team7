@@ -13,7 +13,7 @@ function KaKaoShare({ className, name, description, imageUrl }) {
       objectType: "feed",
       content: {
         title: `롤링 페이퍼 | `,
-        description: `${name}님에게 롤링 페이퍼를 작성하고 확인해보세요!`,
+        description: `${name}님의 롤링 페이퍼를 확인해보세요!`,
         imageUrl:
           "https://i0.wp.com/library.re.kr/wp-content/uploads/2022/05/996907.jpg?resize=1080%2C675&ssl=1",
         link: {
