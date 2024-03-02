@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Input from "../common/textField/input/Input";
 import SelectBox from "../common/textField/selectBox/SelectBox";
 import TextArea from "../common/textField/textArea/TextArea";
@@ -6,7 +6,6 @@ import { SELECT_TYPE } from "../common/textField/selectBox/selectType";
 import { getProfileImagesApiResponse } from "../../util/api";
 import styles from "./PostMessage.module.css";
 import Button from "../common/button/Button";
-import DOMPurify from "dompurify";
 import { fontMappings } from "../common/textField/selectBox/fontMappings";
 import UserProfileOption from "../common/option/UserProfileOption";
 import baseProfile from "../../asset/img/optionIcon/base_profile_icon.png";
@@ -14,7 +13,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { postMessageApiResponse } from "../../util/api";
 
 function PostMessage() {
-  const [inputValue, setInputValue] = useState("");
+  const [nameValue, setNameValue] = useState("");
   const [currentRelation, setCurrentRelation] = useState("");
   const [currentFont, setCurrentFont] = useState("");
   const [quillValue, setQuillValue] = useState("");
@@ -24,11 +23,10 @@ function PostMessage() {
   const navigate = useNavigate();
   const { postId } = useParams();
 
-  const textAreaRef = useRef(null);
   const textContainerRef = useRef(null);
 
   const handleInputValue = (value) => {
-    setInputValue(value);
+    setNameValue(value);
   };
   const handleCurrentRelation = (value) => {
     setCurrentRelation(value);
@@ -39,30 +37,32 @@ function PostMessage() {
   const handleQuillValue = (value) => {
     setQuillValue(value);
   };
-  const handleClickProfileImgList = (idx) => {
-    setCurrentProfileImg(profileImgList[idx]);
-  };
+  const handleClickProfileImgList = useCallback(
+    (idx) => {
+      setCurrentProfileImg(profileImgList[idx]);
+    },
+    [profileImgList]
+  );
   const handleChangeProfileImg = (value) => {
     setCurrentProfileImg(value);
   };
 
-  const getImgProfileList = async () => {
+  const getImgProfileList = useCallback(async () => {
     const res = await getProfileImagesApiResponse();
     setProfileImgList(res.imageUrls);
-  };
+  }, []);
 
-  const changeFontFamily = (type) => {
+  const changeFontFamily = useCallback((type) => {
     const fontStyle = fontMappings[type];
     const textContainer = textContainerRef.current.getEditor().root;
     textContainer.style.fontFamily = fontStyle;
-    textAreaRef.current.style.fontFamily = fontStyle;
-  };
+  }, []);
 
-  const postData = () => {
+  const postData = useCallback(() => {
     //test recipientId: 2889
     const data = {
       recipientId: 2889,
-      sender: inputValue,
+      sender: nameValue,
       profileImageURL: currentProfileImg,
       relationship: currentRelation,
       content: quillValue,
@@ -74,7 +74,15 @@ function PostMessage() {
       navigate(`/post/${postId}`);
     });
     // console.log(data);
-  };
+  }, [
+    postId,
+    nameValue,
+    currentProfileImg,
+    currentRelation,
+    quillValue,
+    currentFont,
+    navigate,
+  ]);
 
   //TODO: 컴포넌트 최적화 하기
   // console.log(currentFont);
@@ -82,14 +90,17 @@ function PostMessage() {
 
   useEffect(() => {
     getImgProfileList();
+  }, [getImgProfileList]);
+
+  useEffect(() => {
     changeFontFamily(currentFont);
-  }, [currentFont]);
+  }, [changeFontFamily, currentFont]);
 
   return (
     <div className={styles.container}>
       <div className={styles.inputTitle}>From.</div>
       <div className={styles.inputContainer}>
-        <Input inputValue={inputValue} onInputValueChange={handleInputValue} />
+        <Input inputValue={nameValue} onInputValueChange={handleInputValue} />
       </div>
 
       <div className={styles.profileImgTitle}>프로필 이미지</div>
@@ -124,18 +135,6 @@ function PostMessage() {
           selectType={SELECT_TYPE.relation}
         />
       </div>
-      {/* ↓ 이런 식으로 처리 해주셔야 합니다. */}
-      <div
-        ref={textAreaRef}
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(quillValue),
-        }}
-        className="dompurifyBox"
-      />
-
-      <br />
-      <div>{quillValue}</div>
-      <br />
 
       <div className={styles.textAreaTitle}>내용을 입력해주세요</div>
       <div className={styles.textAreaContainer}>
