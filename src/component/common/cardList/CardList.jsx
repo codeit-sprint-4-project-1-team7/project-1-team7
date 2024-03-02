@@ -2,16 +2,20 @@ import ProfileImages from "../header/ProfileImages";
 import styles from "./CardList.module.css";
 import headerServiceStyles from "../header/HeaderService.module.css";
 import { EmojiBadge } from "../badge/EmojiBadge";
+import { useNavigate } from "react-router-dom";
 
-function CardList({ rollingPaperList, messageCount, recentMessages }) {
-  const tempEmoji = "😍";
-  const tempCount = 24;
-
+function CardList({ rollingPaperList, onClick }) {
+  const navigation = useNavigate();
+  const handleCardListClick = (id) => {
+    console.log(`Card clicked: ${id}`);
+    navigation(`/post/${id}`);
+  };
   return (
     <div className={styles.cardListContainer}>
       {rollingPaperList ? (
         rollingPaperList.map((item) => (
           <div
+            onClick={() => handleCardListClick(item.id)}
             key={item.id}
             className={styles.cardContainer}
             style={
@@ -28,8 +32,8 @@ function CardList({ rollingPaperList, messageCount, recentMessages }) {
                   imageStyle={headerServiceStyles.image}
                   imageTextStyle={styles.imageText}
                   direction="left"
-                  messageCount={messageCount}
-                  recentMessages={recentMessages}
+                  messageCount={item.messageCount}
+                  recentMessages={item.recentMessages}
                 />
                 <div
                   className={headerServiceStyles.writed}
@@ -39,7 +43,9 @@ function CardList({ rollingPaperList, messageCount, recentMessages }) {
                     letterSpacing: `-0.16px`,
                   }}
                 >
-                  <span className={headerServiceStyles.numOfWrited}>23</span>
+                  <span className={headerServiceStyles.numOfWrited}>
+                    {item.messageCount}
+                  </span>
                   <span className={headerServiceStyles.writedText}>
                     명이 작성했어요!
                   </span>
@@ -47,7 +53,9 @@ function CardList({ rollingPaperList, messageCount, recentMessages }) {
               </div>
               <div className={styles.badgeContainer}>
                 <div className={styles.line} />
-                <EmojiBadge emoji={tempEmoji} count={tempCount} />
+                {rollingPaperList.topReactions?.map(({ id, emoji, count }) => (
+                  <EmojiBadge key={id} emoji={emoji} count={count} />
+                ))}
               </div>
             </div>
           </div>

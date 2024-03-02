@@ -21,7 +21,7 @@
   letter-spacing: -0.28px;
 }
 
-.imojiContainer {
+.emojiBadgeContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -140,7 +140,7 @@
 }
 .emojiContainer {
   position: absolute;
-  width: 350px;
+  width: 315px;
   border-radius: 8px;
   border: 1px solid #b6b6b6;
   background: #fff;
@@ -150,7 +150,7 @@
   z-index: 10;
   padding: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 69px);
+  grid-template-columns: repeat(auto-fill, 60px);
   grid-template-rows: 1fr 1fr;
   gap: 8px;
 }
@@ -202,6 +202,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  .emojiContainer {
+    width: 248px;
+  }
+}
+
 @media (max-width: 600px) {
   .headerContainer {
     flex-direction: column;
@@ -209,7 +215,7 @@
     padding: 0;
   }
 
-  .imojiContainer {
+  .emojiBadgeContainer {
     gap: 0;
     justify-content: left;
   }
@@ -230,5 +236,13 @@
 
   .badgeAndShareContainer {
     padding: 8px 0;
+  }
+
+  .emojiContainer {
+    right: -30px;
+  }
+
+  .emojiApiContainer {
+    right: -70px;
   }
 }

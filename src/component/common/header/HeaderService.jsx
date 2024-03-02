@@ -20,7 +20,9 @@ function HeaderService({
   recentMessages,
   name,
   image,
+  isImojiContainerSmall,
 }) {
+  console.log(isImojiContainerSmall);
   const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
 
   const [isToastVisible, setIsToastVisible] = useState(false);
@@ -44,10 +46,6 @@ function HeaderService({
     const emojiLists = await postEmoji(e);
     setContextMenuEmojiList(emojiLists);
   };
-
-  // const handleEmojiContextItemClick = (e) => {
-  //   console.log(e.target.innerHTML);
-  // };
 
   const handleShareUrlClick = () => {
     copy(window.location.href);
@@ -74,7 +72,7 @@ function HeaderService({
             <span className={styles.toName}>To. {name}</span>
           </div>
           <div className={styles.line} />
-          <div className={styles.imojiContainer}>
+          <div className={styles.emojiBadgeContainer}>
             <div className={styles.writedContainer}>
               <ProfileImages
                 imageContainerStyle={styles.imageContainer}
@@ -104,13 +102,24 @@ function HeaderService({
                 <div id="emojiListButton" className={styles.dropDownContainer}>
                   {contextMenuVisibleList.isEmojiContextMenuVisible && (
                     <div className={styles.emojiContainer}>
-                      {contextMenuEmojiList?.map((item) => (
-                        <EmojiBadge
-                          key={item.id}
-                          emoji={item.emoji}
-                          count={item.count}
-                        />
-                      ))}
+                      {isImojiContainerSmall
+                        ? contextMenuEmojiList
+                            ?.slice(0, 6)
+                            .map((item) => (
+                              <EmojiBadge
+                                key={item.id}
+                                emoji={item.emoji}
+                                count={item.count}
+                              />
+                            ))
+                        : contextMenuEmojiList?.map((item) => (
+                            <EmojiBadge
+                              key={item.id}
+                              emoji={item.emoji}
+                              count={item.count}
+                            />
+                          ))}
+                      {}
                     </div>
                   )}
                 </div>
