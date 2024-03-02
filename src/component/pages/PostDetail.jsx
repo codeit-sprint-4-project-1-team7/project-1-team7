@@ -64,6 +64,7 @@ function PostDetail({ contextMenuVisibleList }) {
         name={name}
         image={image}
         isImojiContainerSmall={isImojiContainerSmall}
+        postId={postId}
       />
 
       <Card

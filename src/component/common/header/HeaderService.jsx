@@ -21,6 +21,7 @@ function HeaderService({
   name,
   image,
   isImojiContainerSmall,
+  postId,
 }) {
   console.log(isImojiContainerSmall);
   const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
@@ -29,7 +30,7 @@ function HeaderService({
 
   const getEmoji = async () => {
     //test recipientId: 2889
-    const response = await getReactionsApiResponse("2889");
+    const response = await getReactionsApiResponse(postId);
     if (!response) return;
     setContextMenuEmojiList(response.results);
     return response.results;
@@ -37,7 +38,7 @@ function HeaderService({
 
   const postEmoji = async (e) => {
     const obj = { emoji: e.emoji, type: "increase" };
-    const response = await postReactionApiResponse(obj, "2889");
+    const response = await postReactionApiResponse(obj, postId);
     if (!response) return;
     return getEmoji();
   };
