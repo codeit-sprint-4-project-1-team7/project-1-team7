@@ -16,10 +16,10 @@ import ModalPortal from "../modal/ModalPortal";
 
 function HeaderService({
   contextMenuVisibleList,
-  topEmojiList,
   messageCount,
   recentMessages,
   name,
+  image,
 }) {
   const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
 
@@ -93,7 +93,7 @@ function HeaderService({
             <div className={styles.badgeAndShareContainer}>
               <div className={styles.badgeAndDropdownContainer}>
                 <div className={styles.badgeContainer}>
-                  {topEmojiList?.map((item) => (
+                  {contextMenuEmojiList?.slice(0, 3).map((item) => (
                     <EmojiBadge
                       key={item.id}
                       emoji={item.emoji}
@@ -147,7 +147,8 @@ function HeaderService({
                     <div className={styles.shareButtonContainer}>
                       <KaKaoShare
                         className={styles.shareButtonElement}
-                        name="홍길동"
+                        name={name}
+                        image={image}
                       />
                       <div
                         onClick={handleShareUrlClick}
