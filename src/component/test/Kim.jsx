@@ -64,6 +64,7 @@ export function Kim({ contextMenuVisibleList }) {
         topEmojiList={topEmojiList}
         recentMessages={recentMessages}
         name={name}
+        postId={"2889"}
       />
       <CardList rollingPaperList={rollingPaperListPopular.slice(0, 8)} />
       <Header />
