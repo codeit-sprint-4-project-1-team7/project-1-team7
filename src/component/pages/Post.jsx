@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Post.module.css";
 import Input from "../common/textField/input/Input";
 import ColorOption from "../common/option/ColorOption";
@@ -7,7 +7,6 @@ import ToggleButton from "../common/button/ToggleButton";
 import ImageOption from "../common/option/ImageOption";
 import Button from "../common/button/Button";
 import { postRecipientApiResponse } from "../../util/api";
-import { click } from "@testing-library/user-event/dist/click";
 
 const BUTTON_NAME = ["컬러", "이미지"];
 const NEW_PAGE = {
@@ -16,10 +15,9 @@ const NEW_PAGE = {
   backgroundImageURL: null,
 }
 
-function Post({ newRollingPage = NEW_PAGE }) {
+function Post() {
   const [inputValue, setInputValue] = useState("");
   const [selectedButtonName, setSelectedButtonName] = useState(BUTTON_NAME[0]);
-  const [values, setValues] = useState(NEW_PAGE);
   const [clickItem, setClickItem] = useState('beige');
   const navigate = useNavigate();
 
@@ -29,27 +27,18 @@ function Post({ newRollingPage = NEW_PAGE }) {
   
   const handleInputValue = (value) => setInputValue(value);
   const handleButtonClick = (e) => setSelectedButtonName(e.target.innerText);
-  const handleCreateButtonClick = () => {
-    // navigate(`/post/${userId}`)
-  }
 
   const createRolling = async () => {
+    NEW_PAGE.name = inputValue;
+    clickItem.includes('http') ? NEW_PAGE.backgroundImageURL = clickItem
+    : NEW_PAGE.backgroundColor = clickItem;
     
-    values.name = inputValue;
-    clickItem.includes('http') ? values.backgroundImageURL = clickItem
-    : values.backgroundColor = clickItem;
-    
-    console.log(values);
-    const { id } = await postRecipientApiResponse(values);
+    const { id } = await postRecipientApiResponse(NEW_PAGE);
 
     if (!id) return;
 
-    console.log(id)
-
     navigate(`/post/${id}`)
   }
-  
-  console.log(clickItem);
 
   return (
     <div className={styles.container}>
