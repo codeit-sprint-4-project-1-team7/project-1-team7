@@ -6,6 +6,7 @@ import { fontMappings } from "../textField/selectBox/fontMappings";
 import { useState } from "react";
 import ModalPortal from "../modal/ModalPortal";
 import { Modal } from "../modal/Modal";
+import { Badge } from "../badge/Badge";
 function Card({ messages, isAddMessageCardVisible, image }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalItem, setModalItem] = useState(null);
@@ -65,11 +66,7 @@ function Card({ messages, isAddMessageCardVisible, image }) {
                       <span>From.</span>
                       <span>{item.sender}</span>
                     </div>
-                    <div className={styles.badge}>
-                      <div className={styles.badgeText}>
-                        {item.relationship}
-                      </div>
-                    </div>
+                    <Badge relation={item.relationship} />
                   </div>
                   {!isAddMessageCardVisible && (
                     <div className={styles.trashButton}>
