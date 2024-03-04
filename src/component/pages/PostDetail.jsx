@@ -9,7 +9,7 @@ import Card from "../common/card/Card";
 import { isImageValid } from "../../util/isImageValid";
 
 function PostDetail({ contextMenuVisibleList }) {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const { postId } = useParams(); //추후 postId 값을 api 요청으로 사용 예정
   const [recentMessages, setRecentMessages] = useState([]);
@@ -23,6 +23,9 @@ function PostDetail({ contextMenuVisibleList }) {
   useEffect(() => {
     const getRollinginformation = async () => {
       const response = await getRecipientsApiResponse(postId);
+      if (response.detail) {
+        navigate("/notFound");
+      }
       const {
         messageCount,
         recentMessages,
@@ -54,7 +57,7 @@ function PostDetail({ contextMenuVisibleList }) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [location.pathname, postId]);
+  }, [location.pathname, postId, navigate]);
   return (
     <>
       <HeaderService
