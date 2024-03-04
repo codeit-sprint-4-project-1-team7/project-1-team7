@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { Badge } from '../badge/Badge';
 import Button from '../button/Button';
 import styles from './Modal.module.css';
+import DOMPurify from 'dompurify';
+import { fontMappings } from '../textField/selectBox/fontMappings';
 
 const tempName = '홍성욱';
 const tempRelation = '동료';
@@ -36,16 +38,20 @@ export const Modal = ({ item, onClick }) => {
               alt="프로필 이미지"
             />
             <div className={styles.profileForm}>
-              <div className={styles.profileName}>
-                From. <span className={styles.name}>{profileName}</span>
-              </div>
+              <div className={styles.profileName}>{profileName}</div>
               <Badge relation={item.relationship}></Badge>
             </div>
           </div>
           <div className={styles.modalDate}>{item.createdAt.slice(0, 10)}</div>
         </div>
         <div className={styles.modalMessageForm}>
-          <div className={styles.modalMessage}>{item.content}</div>
+          <div
+            className={styles.modalMessage}
+            style={{ fontFamily: `${fontMappings[item.font]}` }}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(item.content),
+            }}
+          />
         </div>
 
         <Button type="primary" width="120px" onClick={onClick}>

@@ -33,13 +33,10 @@
   align-items: center;
   gap: 16px;
 }
-.name {
-  font-size: 20px;
-}
 .modalProfile .profileImg {
-  /* background-image: url('./profileImg.png'); */
   width: 56px;
   height: 56px;
+  border-radius: 100px;
 }
 .modalProfile .profileForm {
   display: flex;
