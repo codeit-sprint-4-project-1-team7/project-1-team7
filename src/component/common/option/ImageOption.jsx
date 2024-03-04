@@ -9,25 +9,43 @@ function ImageOption({ clickItem, onClick }) {
   const [baseImages, setBaseImages] = useState([]);
   const fileInput = useRef(null);
 
+  const upLoadImg = async (imgFile) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', imgFile);
+      const response = await fetch("https://api.imgbb.com/1/upload?key=d0683b0869118bab9113ca272a7d46b1", {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response?.ok) {
+        throw new Error('이미지를 업로드 하는 데 실패했습니다.')
+      }
+      const data = await response.json();
+      return data.data.url
+
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  }
+
+  const handleAddImageDataChange = async (e) => {
+    const { files } = e.target;
+    const uploadFile = files[0];
+
+    if (!uploadFile) return;
+
+      const newImageUrl = await upLoadImg(uploadFile);
+      setBaseImages((prev) => ([newImageUrl, ...prev]));
+    } 
+
+
   const getBaseImages = async () => {
     const { imageUrls } = await getBackgroundImagesApiResponse();
     
     if (!imageUrls) return;
 
     setBaseImages(imageUrls);
-  }
-
-
-  const handleAddImageDataChange = (e) => {
-    const { files } = e.target;
-    const uploadFile = files[0];
-
-    if (!uploadFile) return;
-
-    //URL.createObjectURL로 생성된 url은 해당 페이지에서만 유효. post 불가.
-    const newUrl = URL.createObjectURL(uploadFile);
-    setBaseImages((prev) => ([newUrl, ...prev]));
-    console.log(baseImages)//baseImages에 추가한 파일이 들어가지 않았음을 확인. 코드의 수정이 필요함.
   }
 
   useEffect(() => {

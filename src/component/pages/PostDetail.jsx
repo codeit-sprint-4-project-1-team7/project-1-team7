@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import {
+  deleteMessageApiResponse,
+  deleteRecipientApiResponse,
   getMessagesApiResponse,
   getRecipientsApiResponse,
 } from "../../util/api";
@@ -19,6 +21,21 @@ function PostDetail({ contextMenuVisibleList }) {
   const [isAddMessageCardVisible, setIsAddMessageCardVisible] = useState(0);
   const [image, setImage] = useState("");
   const [isImojiContainerSmall, setIsImojiContainerSmall] = useState(false);
+
+  const handleCardDeleteBtnClick = async (e, id) => {
+    e.stopPropagation();
+
+    await deleteMessageApiResponse(id);
+    setMessages((prevMessage) =>
+      prevMessage.filter((message) => message.id !== id)
+    );
+  };
+
+  const handlePaperDeleteBtnClick = async () => {
+    await deleteRecipientApiResponse(postId);
+
+    navigate("/list");
+  };
 
   useEffect(() => {
     const getRollinginformation = async () => {
@@ -74,6 +91,8 @@ function PostDetail({ contextMenuVisibleList }) {
         isAddMessageCardVisible={isAddMessageCardVisible}
         messages={messages}
         image={image}
+        onCardDeleteBtnClick={handleCardDeleteBtnClick}
+        onPaperDeleteBtnClick={handlePaperDeleteBtnClick}
       />
     </>
   );

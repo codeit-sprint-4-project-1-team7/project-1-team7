@@ -46,10 +46,11 @@ export const Modal = ({ item, onClick }) => {
             }}
           />
         </div>
-
-        <Button type="primary" width="width120" onClick={onClick}>
-          확인
-        </Button>
+        <div className={styles.modalButton}>
+          <Button type="primary" width="width120" onClick={onClick}>
+            확인
+          </Button>
+        </div>
       </div>
     </div>
   );
