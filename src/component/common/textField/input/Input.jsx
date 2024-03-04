@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Input.module.css";
 import { PLACEHOLDER } from "./placeholder";
 
@@ -46,7 +46,7 @@ function Input({ inputValue, onInputValueChange }) {
   );
 }
 
-export default Input;
+export default React.memo(Input);
 
 //  TODO: 추후에 disabled 상황 있을시 추가예정
 //  const [isDisabled, setIsDisabled] = useState(false);
