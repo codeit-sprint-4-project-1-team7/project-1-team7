@@ -10,10 +10,10 @@ import Main from "./component/pages/Main";
 import List from "./component/pages/List";
 import Post from "./component/pages/Post";
 import PostDetail from "./component/pages/PostDetail";
-import PostDetailEdit from "./component/pages/PostDetailEdit";
 import PostMessage from "./component/pages/PostMessage";
 import Layout from "./component/pages/Layout";
 import { useState } from "react";
+import { NotFound } from "./component/pages/NotFound";
 
 function App() {
   const [isShareContextMenuVisible, setIsShareContextMenuVisible] =
@@ -89,7 +89,7 @@ function App() {
                 <Route
                   path="edit"
                   element={
-                    <PostDetailEdit
+                    <PostDetail
                       contextMenuVisibleList={contextMenuVisibleList}
                     />
                   }
@@ -98,6 +98,8 @@ function App() {
               </Route>
             </Route>
           </Route>
+          <Route path="/notFound" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import {
+  deleteMessageApiResponse,
+  deleteRecipientApiResponse,
   getMessagesApiResponse,
   getRecipientsApiResponse,
 } from "../../util/api";
@@ -9,7 +11,7 @@ import Card from "../common/card/Card";
 import { isImageValid } from "../../util/isImageValid";
 
 function PostDetail({ contextMenuVisibleList }) {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const { postId } = useParams(); //추후 postId 값을 api 요청으로 사용 예정
   const [recentMessages, setRecentMessages] = useState([]);
@@ -20,9 +22,27 @@ function PostDetail({ contextMenuVisibleList }) {
   const [image, setImage] = useState("");
   const [isImojiContainerSmall, setIsImojiContainerSmall] = useState(false);
 
+  const handleCardDeleteBtnClick = async (e, id) => {
+    e.stopPropagation();
+
+    await deleteMessageApiResponse(id);
+    setMessages((prevMessage) =>
+      prevMessage.filter((message) => message.id !== id)
+    );
+  };
+
+  const handlePaperDeleteBtnClick = async () => {
+    await deleteRecipientApiResponse(postId);
+
+    navigate("/list");
+  };
+
   useEffect(() => {
     const getRollinginformation = async () => {
       const response = await getRecipientsApiResponse(postId);
+      if (response.detail) {
+        navigate("/notFound");
+      }
       const {
         messageCount,
         recentMessages,
@@ -54,7 +74,7 @@ function PostDetail({ contextMenuVisibleList }) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [location.pathname, postId]);
+  }, [location.pathname, postId, navigate]);
   return (
     <>
       <HeaderService
@@ -71,6 +91,8 @@ function PostDetail({ contextMenuVisibleList }) {
         isAddMessageCardVisible={isAddMessageCardVisible}
         messages={messages}
         image={image}
+        onCardDeleteBtnClick={handleCardDeleteBtnClick}
+        onPaperDeleteBtnClick={handlePaperDeleteBtnClick}
       />
     </>
   );

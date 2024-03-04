@@ -21,7 +21,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   width: 100%;
   padding: 50% 0;
@@ -32,7 +31,7 @@
 }
 
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 769px) and (max-width: 1248px) {
   .imgOptions {
     grid-template-columns: repeat(4, minmax(168px, 200px));
     max-width: 720px;

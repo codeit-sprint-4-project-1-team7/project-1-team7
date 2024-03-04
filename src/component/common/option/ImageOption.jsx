@@ -4,11 +4,41 @@ import Button from "../button/Button";
 import styles from "./ImageOption.module.css";
 import checkIcon from "../../../asset/img/optionIcon/check_Icon.png";
 
-function ImageOption() {
+function ImageOption({ clickItem, onClick }) {
   const CHECKED_BACKGROUND = 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))';
-  const [clickImage, setClickImage] = useState("0");
   const [baseImages, setBaseImages] = useState([]);
   const fileInput = useRef(null);
+
+  const upLoadImg = async (imgFile) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', imgFile);
+      const response = await fetch("https://api.imgbb.com/1/upload?key=d0683b0869118bab9113ca272a7d46b1", {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response?.ok) {
+        throw new Error('이미지를 업로드 하는 데 실패했습니다.')
+      }
+      const data = await response.json();
+      return data.data.url
+
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  }
+
+  const handleAddImageDataChange = async (e) => {
+    const { files } = e.target;
+    const uploadFile = files[0];
+
+    if (!uploadFile) return;
+
+      const newImageUrl = await upLoadImg(uploadFile);
+      setBaseImages((prev) => ([newImageUrl, ...prev]));
+    } 
+
 
   const getBaseImages = async () => {
     const { imageUrls } = await getBackgroundImagesApiResponse();
@@ -16,20 +46,6 @@ function ImageOption() {
     if (!imageUrls) return;
 
     setBaseImages(imageUrls);
-  }
-
-  const handleClick = (e) => {
-    setClickImage(e.target.value === clickImage ? "" : e.target.value);
-  }
-
-  const handleAddImageDataChange = (e) => {
-    const { files } = e.target;
-    const uploadFile = files[0];
-
-    if (!uploadFile) return;
-    
-    const newUrl = URL.createObjectURL(uploadFile);
-    setBaseImages([newUrl, ...baseImages]);
   }
 
   useEffect(() => {
@@ -53,14 +69,14 @@ function ImageOption() {
       {baseImages.map((item) => {
         return (
           <button
-            style={clickImage === String(baseImages.indexOf(item)) 
+            style={clickItem === item 
                     ? {backgroundImage: `${CHECKED_BACKGROUND}, url(${item})`}
                     : {backgroundImage: `url(${item})`}}
             className={styles.option}
             type='button'
-            value= {baseImages.indexOf(item)}
-            onClick={handleClick}>
-            { clickImage === String(baseImages.indexOf(item))
+            value= {item}
+            onClick={onClick}>
+            { clickItem === item
               && <img className={styles.ImgChecked} src={checkIcon} alt="check" />}
           </button>
         )

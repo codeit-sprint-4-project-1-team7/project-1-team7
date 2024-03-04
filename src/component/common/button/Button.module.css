@@ -149,6 +149,7 @@
     font-size: var(--l);
     font-weight: var(--bold);
     letter-spacing: -0.18px;
+    z-index: 10;
   }
 }
 

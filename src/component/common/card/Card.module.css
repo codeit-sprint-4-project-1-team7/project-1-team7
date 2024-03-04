@@ -3,16 +3,25 @@
   min-height: 100vh;
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 100px 0;
+}
+
+.buttonArea {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1194px;
+  margin-bottom: 11px;
 }
 
 .cardBox {
   display: grid;
-  max-width: 1200px;
+  max-width: 1194px;
   width: 100%;
   grid-template-columns: repeat(auto-fill, 384px);
-  grid-template-rows: repeat(auto-fill, 280px);
+  grid-template-rows: repeat(auto-fill, 284px);
   gap: 20px;
   align-items: center;
   justify-content: center;
@@ -123,7 +132,6 @@
   top: 116px;
   left: 24px;
   right: 24px;
-  width: 336px;
 
   overflow: hidden;
   color: var(--gray-600, #4a4a4a);
@@ -133,6 +141,10 @@
 
   border: none;
   outline: none;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
 }
 
 .date {
@@ -140,6 +152,22 @@
   left: 24px;
   bottom: 24px;
 
+  color: var(--gray-400, #383535);
+  /* Font/12 Regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.06px;
+}
+
+.overFlowed {
+  position: absolute;
+  right: 24px;
+  bottom: 30px;
+
+  width: 10px;
   color: var(--gray-400, #383535);
   /* Font/12 Regular */
   font-family: Pretendard;

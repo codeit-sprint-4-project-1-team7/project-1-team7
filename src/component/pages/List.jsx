@@ -20,68 +20,101 @@ function List() {
     );
   };
 
-  // scroll-button
+  // scroll-button-popular
   const navigate = useNavigate();
-  const containerRef = useRef(null);
-  const [isAtStart, setIsAtStart] = useState(true);
-  const [isAtEnd, setIsAtEnd] = useState(false);
+  const containerPopularRef = useRef(null);
+  const [isAtStartPopular, setIsAtStartPopular] = useState(true);
+  const [isAtEndPopular, setIsAtEndPopular] = useState(false);
+  // scroll-button-latest
+  const containerLatestRef = useRef(null);
+  const [isAtStartLatest, setIsAtStartLatest] = useState(true);
+  const [isAtEndLatest, setIsAtEndLatest] = useState(false);
 
-  const handleScroll = (direction) => {
-    const container = containerRef.current;
+  const handleScroll = (direction, category) => {
+    let container;
+    if (category === 'popular') container = containerPopularRef.current;
+    else container = containerLatestRef.current;
+
     if (container) {
       const scrollAmount = 295;
       container.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
       });
-      checkScrollPosition();
+      checkScrollPosition(category);
     }
   };
-  const checkScrollPosition = () => {
-    const container = containerRef.current;
+  const checkScrollPosition = (category) => {
+    let container;
+    if (category === 'popular') container = containerPopularRef.current;
+    else container = containerLatestRef.current;
+
     if (container) {
       const maxScrollLeft = container.scrollWidth - container.clientWidth;
-      setIsAtStart(container.scrollLeft === 0);
-      setIsAtEnd(container.scrollLeft >= maxScrollLeft);
+      if (category === 'popular') {
+        setIsAtStartPopular(container.scrollLeft === 0);
+        setIsAtEndPopular(container.scrollLeft >= maxScrollLeft);
+      } else {
+        setIsAtStartLatest(container.scrollLeft === 0);
+        setIsAtEndLatest(container.scrollLeft >= maxScrollLeft);
+      }
     }
   };
 
   useEffect(() => {
     getRollingPaperList();
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('scroll', checkScrollPosition);
-      checkScrollPosition();
+
+    const containerPopular = containerPopularRef.current;
+    const containerLatest = containerLatestRef.current;
+    if (containerPopular) {
+      containerPopular.addEventListener(
+        'scroll',
+        checkScrollPosition('popular')
+      );
+      checkScrollPosition('popular');
+    }
+    if (containerLatest) {
+      containerLatest.addEventListener('scroll', checkScrollPosition('latest'));
+      checkScrollPosition('latest');
     }
     return () => {
-      if (container) {
-        container.removeEventListener('scroll', checkScrollPosition);
+      if (containerPopular) {
+        containerPopular.removeEventListener(
+          'scroll',
+          checkScrollPosition('popular')
+        );
+      }
+      if (containerLatest) {
+        containerLatest.removeEventListener(
+          'scroll',
+          checkScrollPosition('latest')
+        );
       }
     };
-  }, []);
+  }, [rollingPaperListPopular, rollingPaperListOrder]);
 
   return (
     <div className={styles.listBackground}>
       <div className={styles.cardListForm}>
         <h1>인기 롤링 페이퍼 🔥</h1>
-        <div ref={containerRef} className={styles.cardListItem}>
+        <div ref={containerPopularRef} className={styles.cardListItem}>
           <CardList rollingPaperList={rollingPaperListPopular.slice(0, 8)} />
         </div>
-        {!isAtStart && (
+        {!isAtStartPopular && (
           <span className={`${styles.cardButton} ${styles.left}`}>
             <Button
               type="circle"
               icon="leftArrow"
-              onClick={() => handleScroll('left')}
+              onClick={() => handleScroll('left', 'popular')}
             />
           </span>
         )}
-        {!isAtEnd && (
+        {!isAtEndPopular && (
           <span className={`${styles.cardButton} ${styles.right}`}>
             <Button
               type="circle"
               icon="rightArrow"
-              onClick={() => handleScroll('right')}
+              onClick={() => handleScroll('right', 'popular')}
             />
           </span>
         )}
@@ -89,13 +122,32 @@ function List() {
 
       <div className={styles.cardListForm}>
         <h1>최근에 만든 롤링 페이퍼 ⭐️️</h1>
-        <div className={styles.cardListItem}>
+        <div ref={containerLatestRef} className={styles.cardListItem}>
           <CardList rollingPaperList={rollingPaperListOrder.slice(0, 8)} />
         </div>
+        {!isAtStartLatest && (
+          <span className={`${styles.cardButton} ${styles.left}`}>
+            <Button
+              type="circle"
+              icon="leftArrow"
+              onClick={() => handleScroll('left', 'latest')}
+            />
+          </span>
+        )}
+        {!isAtEndLatest && (
+          <span className={`${styles.cardButton} ${styles.right}`}>
+            <Button
+              type="circle"
+              icon="rightArrow"
+              onClick={() => handleScroll('right', 'latest')}
+            />
+          </span>
+        )}
       </div>
       <div className={styles.listBottom}>
         <Button
           type="primary"
+          width="width280"
           onClick={() => {
             navigate('/post');
           }}

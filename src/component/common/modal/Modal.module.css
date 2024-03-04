@@ -8,19 +8,25 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
 }
 .modalContents {
-  position: absolute;
-  /* top: 50%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 40px;
+  width: 600px;
+  height: 475px;
+  padding: 30px;
   border-radius: 16px;
   background: var(--white);
   flex-shrink: 0;
-  gap: 24px;
+  gap: 20px;
+  @media (max-width: 650px) {
+    width: 370px;
+    height: 320px;
+    padding: 15px;
+    gap: 10px;
+  }
 }
 .modalHeader {
   display: flex;
@@ -34,9 +40,13 @@
   gap: 16px;
 }
 .modalProfile .profileImg {
-  background-image: url('./profileImg.png');
   width: 56px;
   height: 56px;
+  border-radius: 100px;
+  @media (max-width: 650px) {
+    width: 40px;
+    height: 40px;
+  }
 }
 .modalProfile .profileForm {
   display: flex;
@@ -60,14 +70,14 @@
 .modalMessageForm {
   padding-top: 16px;
   border-top: 1px solid var(--gray-200);
+  height: 240px;
+  @media (max-width: 650px) {
+    height: 150px;
+  }
 }
 .modalMessage {
-  display: flex;
-  width: 520px;
-  height: 240px;
-  justify-content: center;
-  align-items: flex-start;
   overflow: auto;
+  height: 100%;
 }
 .modalMessage::-webkit-scrollbar {
   width: 20px;
@@ -78,4 +88,9 @@
   background-color: var(--gray-300);
   background-clip: padding-box;
   border-left: 16px solid var(--white);
+}
+.modalButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
