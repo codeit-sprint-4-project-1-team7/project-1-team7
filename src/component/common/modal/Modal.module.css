@@ -13,7 +13,7 @@
 .modalContents {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   width: 600px;
   height: 475px;
   padding: 30px;
@@ -25,6 +25,7 @@
     width: 370px;
     height: 320px;
     padding: 15px;
+    gap: 10px;
   }
 }
 .modalHeader {
@@ -71,7 +72,7 @@
   border-top: 1px solid var(--gray-200);
   height: 240px;
   @media (max-width: 650px) {
-    height: 120px;
+    height: 150px;
   }
 }
 .modalMessage {
