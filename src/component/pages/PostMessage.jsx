@@ -61,7 +61,7 @@ function PostMessage() {
   const postData = useCallback(() => {
     //test recipientId: 2889
     const data = {
-      recipientId: 2889,
+      recipientId: postId,
       sender: nameValue,
       profileImageURL: currentProfileImg,
       relationship: currentRelation,
@@ -70,7 +70,7 @@ function PostMessage() {
       createdAt: new Date().getTime(),
     };
 
-    postMessageApiResponse(data, 2889).then(() => {
+    postMessageApiResponse(data, postId).then(() => {
       navigate(`/post/${postId}`);
     });
     // console.log(data);
