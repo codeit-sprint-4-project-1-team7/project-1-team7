@@ -23,51 +23,41 @@ function List() {
   // scroll-button-popular
   const navigate = useNavigate();
   const containerPopularRef = useRef(null);
-  const containerLatestRef = useRef(null);
   const [isAtStartPopular, setIsAtStartPopular] = useState(true);
   const [isAtEndPopular, setIsAtEndPopular] = useState(false);
-  //
+  // scroll-button-latest
+  const containerLatestRef = useRef(null);
   const [isAtStartLatest, setIsAtStartLatest] = useState(true);
   const [isAtEndLatest, setIsAtEndLatest] = useState(false);
 
-  const handleScrollPopular = (direction) => {
-    const containerPopular = containerPopularRef.current;
-    if (containerPopular) {
+  const handleScroll = (direction, category) => {
+    let container;
+    if (category === 'popular') container = containerPopularRef.current;
+    else container = containerLatestRef.current;
+
+    if (container) {
       const scrollAmount = 295;
-      containerPopular.scrollBy({
+      container.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
       });
-      checkScrollPositionPopular();
+      checkScrollPosition(category);
     }
   };
-  const checkScrollPositionPopular = () => {
-    const containerPopular = containerPopularRef.current;
-    if (containerPopular) {
-      const maxScrollLeft =
-        containerPopular.scrollWidth - containerPopular.clientWidth;
-      setIsAtStartPopular(containerPopular.scrollLeft === 0);
-      setIsAtEndPopular(containerPopular.scrollLeft >= maxScrollLeft);
-    }
-  };
-  const handleScrollLatest = (direction) => {
-    const containerLatest = containerLatestRef.current;
-    if (containerLatest) {
-      const scrollAmount = 295;
-      containerLatest.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      });
-      checkScrollPositionLatest();
-    }
-  };
-  const checkScrollPositionLatest = () => {
-    const containerLatest = containerLatestRef.current;
-    if (containerLatest) {
-      const maxScrollLeft =
-        containerLatest.scrollWidth - containerLatest.clientWidth;
-      setIsAtStartLatest(containerLatest.scrollLeft === 0);
-      setIsAtEndLatest(containerLatest.scrollLeft >= maxScrollLeft);
+  const checkScrollPosition = (category) => {
+    let container;
+    if (category === 'popular') container = containerPopularRef.current;
+    else container = containerLatestRef.current;
+
+    if (container) {
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+      if (category === 'popular') {
+        setIsAtStartPopular(container.scrollLeft === 0);
+        setIsAtEndPopular(container.scrollLeft >= maxScrollLeft);
+      } else {
+        setIsAtStartLatest(container.scrollLeft === 0);
+        setIsAtEndLatest(container.scrollLeft >= maxScrollLeft);
+      }
     }
   };
 
@@ -77,24 +67,27 @@ function List() {
     const containerPopular = containerPopularRef.current;
     const containerLatest = containerLatestRef.current;
     if (containerPopular) {
-      containerPopular.addEventListener('scroll', checkScrollPositionPopular);
-      checkScrollPositionPopular();
+      containerPopular.addEventListener(
+        'scroll',
+        checkScrollPosition('popular')
+      );
+      checkScrollPosition('popular');
     }
     if (containerLatest) {
-      containerLatest.addEventListener('scroll', checkScrollPositionLatest);
-      checkScrollPositionLatest();
+      containerLatest.addEventListener('scroll', checkScrollPosition('latest'));
+      checkScrollPosition('latest');
     }
     return () => {
       if (containerPopular) {
         containerPopular.removeEventListener(
           'scroll',
-          checkScrollPositionPopular
+          checkScrollPosition('popular')
         );
       }
       if (containerLatest) {
         containerLatest.removeEventListener(
           'scroll',
-          checkScrollPositionLatest
+          checkScrollPosition('latest')
         );
       }
     };
@@ -112,7 +105,7 @@ function List() {
             <Button
               type="circle"
               icon="leftArrow"
-              onClick={() => handleScrollPopular('left')}
+              onClick={() => handleScroll('left', 'popular')}
             />
           </span>
         )}
@@ -121,7 +114,7 @@ function List() {
             <Button
               type="circle"
               icon="rightArrow"
-              onClick={() => handleScrollPopular('right')}
+              onClick={() => handleScroll('right', 'popular')}
             />
           </span>
         )}
@@ -137,7 +130,7 @@ function List() {
             <Button
               type="circle"
               icon="leftArrow"
-              onClick={() => handleScrollLatest('left')}
+              onClick={() => handleScroll('left', 'latest')}
             />
           </span>
         )}
@@ -146,7 +139,7 @@ function List() {
             <Button
               type="circle"
               icon="rightArrow"
-              onClick={() => handleScrollLatest('right')}
+              onClick={() => handleScroll('right', 'latest')}
             />
           </span>
         )}
@@ -154,6 +147,7 @@ function List() {
       <div className={styles.listBottom}>
         <Button
           type="primary"
+          width="width280"
           onClick={() => {
             navigate('/post');
           }}
