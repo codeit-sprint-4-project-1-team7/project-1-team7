@@ -23,9 +23,11 @@ function ImageOption({ clickItem, onClick }) {
     const uploadFile = files[0];
 
     if (!uploadFile) return;
-    
+
+    //URL.createObjectURL로 생성된 url은 해당 페이지에서만 유효. post 불가.
     const newUrl = URL.createObjectURL(uploadFile);
-    setBaseImages([newUrl, ...baseImages]);
+    setBaseImages((prev) => ([newUrl, ...prev]));
+    console.log(baseImages)//baseImages에 추가한 파일이 들어가지 않았음을 확인. 코드의 수정이 필요함.
   }
 
   useEffect(() => {
