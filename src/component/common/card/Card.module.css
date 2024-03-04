@@ -12,7 +12,7 @@
   max-width: 1200px;
   width: 100%;
   grid-template-columns: repeat(auto-fill, 384px);
-  grid-template-rows: repeat(auto-fill, 280px);
+  grid-template-rows: repeat(auto-fill, 284px);
   gap: 20px;
   align-items: center;
   justify-content: center;
@@ -133,6 +133,10 @@
 
   border: none;
   outline: none;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
 }
 
 .date {
@@ -140,6 +144,22 @@
   left: 24px;
   bottom: 24px;
 
+  color: var(--gray-400, #383535);
+  /* Font/12 Regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.06px;
+}
+
+.overFlowed {
+  position: absolute;
+  right: 24px;
+  bottom: 30px;
+
+  width: 10px;
   color: var(--gray-400, #383535);
   /* Font/12 Regular */
   font-family: Pretendard;
