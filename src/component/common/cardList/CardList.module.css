@@ -32,9 +32,6 @@
 }
 
 .toName {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
   align-self: stretch;
   overflow: hidden;
 
