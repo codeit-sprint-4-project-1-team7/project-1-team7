@@ -7,8 +7,11 @@ const tempName = '홍성욱';
 const tempRelation = '동료';
 const tempDate = '임시 날짜';
 
-export const Modal = ({ onClick }) => {
-  const profileName = `From. ${tempName}`;
+//이름, 날짜, 프로필 이미지, 관계, 텍스트
+//item.sender, item.createdAt.slice(0, 10), item.profileImageURL
+//item.relationship, item.content
+export const Modal = ({ item, onClick }) => {
+  const profileName = `From. ${item.sender}`;
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -27,37 +30,22 @@ export const Modal = ({ onClick }) => {
       >
         <div className={styles.modalHeader}>
           <div className={styles.modalProfile}>
-            <div className={styles.profileImg} alt="임시 프로필 이미지"></div>
+            <img
+              className={styles.profileImg}
+              src={item.profileImageURL}
+              alt="프로필 이미지"
+            />
             <div className={styles.profileForm}>
-              <div className={styles.profileName}>{profileName}</div>
-              <Badge relation={tempRelation}></Badge>
+              <div className={styles.profileName}>
+                From. <span className={styles.name}>{profileName}</span>
+              </div>
+              <Badge relation={item.relationship}></Badge>
             </div>
           </div>
-          <div className={styles.modalDate}>{tempDate}</div>
+          <div className={styles.modalDate}>{item.createdAt.slice(0, 10)}</div>
         </div>
         <div className={styles.modalMessageForm}>
-          <div className={styles.modalMessage}>
-            임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
-            메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지
-            입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다.
-            임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
-            메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지
-            입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다.
-            임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
-            메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지
-            입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다.
-            임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
-            메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지
-            입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다.
-            임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
-            메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지
-            입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다.
-            임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
-            메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지
-            입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다.
-            임시 메시지 입니다. 임시 메시지 입니다. 임시 메시지 입니다. 임시
-            메시지 입니다.
-          </div>
+          <div className={styles.modalMessage}>{item.content}</div>
         </div>
 
         <Button type="primary" width="120px" onClick={onClick}>
