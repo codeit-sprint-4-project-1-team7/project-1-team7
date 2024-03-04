@@ -7,20 +7,34 @@ import { useState } from "react";
 import ModalPortal from "../modal/ModalPortal";
 import { Modal } from "../modal/Modal";
 import { Badge } from "../badge/Badge";
-function Card({ messages, isAddMessageCardVisible, image }) {
+function Card({
+  messages,
+  isAddMessageCardVisible,
+  image,
+  onCardDeleteBtnClick,
+  onPaperDeleteBtnClick,
+}) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const navigate = useNavigate();
+
   const handleCardModalClick = (item) => {
     setModalItem(item);
     setIsModalVisible(!isModalVisible);
   };
+
   const handleAddMessageButtonClick = () => {
     navigate("message");
   };
+
   const handlePreventRightClick = (e) => {
     e.preventDefault();
   };
+
+  const handleEditButtonClick = () => {
+    navigate("edit");
+  };
+
   return (
     <div
       onContextMenu={handlePreventRightClick}
@@ -36,6 +50,27 @@ function Card({ messages, isAddMessageCardVisible, image }) {
           : { backgroundColor: `${image}` }
       }
     >
+      <div className={styles.buttonArea}>
+        {isAddMessageCardVisible ? (
+          <Button
+            type="primary"
+            width="widthAuto"
+            height="standard"
+            onClick={handleEditButtonClick}
+          >
+            수정하기
+          </Button>
+        ) : (
+          <Button
+            type="primary"
+            width="widthAuto"
+            height="standard"
+            onClick={onPaperDeleteBtnClick}
+          >
+            삭제하기
+          </Button>
+        )}
+      </div>
       <div className={styles.cardBox}>
         {isAddMessageCardVisible && (
           <div className={styles.cardContainer}>
@@ -70,7 +105,12 @@ function Card({ messages, isAddMessageCardVisible, image }) {
                   </div>
                   {!isAddMessageCardVisible && (
                     <div className={styles.trashButton}>
-                      <Button type="outlined" height="standard" icon="delete" />
+                      <Button
+                        type="outlined"
+                        height="standard"
+                        icon="delete"
+                        onClick={(e) => onCardDeleteBtnClick(e, item.id)}
+                      />
                     </div>
                   )}
                 </div>

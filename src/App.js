@@ -90,7 +90,7 @@ function App() {
                 <Route
                   path="edit"
                   element={
-                    <PostDetailEdit
+                    <PostDetail
                       contextMenuVisibleList={contextMenuVisibleList}
                     />
                   }
