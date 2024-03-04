@@ -62,4 +62,4 @@ function UserProfileOption({ currentProfileImg, onChangeProfileImg }) {
   );
 }
 
-export default UserProfileOption;
+export default React.memo(UserProfileOption);

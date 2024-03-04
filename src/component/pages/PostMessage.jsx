@@ -44,9 +44,9 @@ function PostMessage() {
     },
     [profileImgList]
   );
-  const handleChangeProfileImg = (value) => {
-    setCurrentProfileImg(value);
-  };
+  const handleChangeProfileImg = useCallback((value) => {
+    setCurrentProfileImg(() => value);
+  }, []);
 
   const getImgProfileList = useCallback(async () => {
     const res = await getProfileImagesApiResponse();
