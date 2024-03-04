@@ -10,6 +10,7 @@ import {
 } from "../../util/api";
 
 export function Kim({ contextMenuVisibleList }) {
+  const navigate = useNavigate();
   const location = useLocation();
   const { postId } = useParams(); //추후 postId 값을 api 요청으로 사용 예정
   const [topEmojiList, setTopEmojiList] = useState([]);
@@ -23,7 +24,10 @@ export function Kim({ contextMenuVisibleList }) {
   const getRollinginformation = async () => {
     //test recipientId: 2889
     const response = await getRecipientsApiResponse("2889");
-
+    if (!response) {
+      navigate(`/notFound`);
+      return;
+    }
     const messageCountResponse = response.messageCount;
     const topReactionResponse = response.topReactions;
     const recentMessagesResponse = response.recentMessages;
