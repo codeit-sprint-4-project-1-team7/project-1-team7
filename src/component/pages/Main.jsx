@@ -38,6 +38,7 @@ function Main() {
       <div className={styles.mainBottom}>
         <Button
           type="primary"
+          width="width280"
           onClick={() => {
             navigate('/list');
           }}

@@ -147,6 +147,7 @@ function List() {
       <div className={styles.listBottom}>
         <Button
           type="primary"
+          width="width280"
           onClick={() => {
             navigate('/post');
           }}

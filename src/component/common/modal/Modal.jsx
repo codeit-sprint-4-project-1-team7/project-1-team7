@@ -5,13 +5,6 @@ import styles from './Modal.module.css';
 import DOMPurify from 'dompurify';
 import { fontMappings } from '../textField/selectBox/fontMappings';
 
-const tempName = '홍성욱';
-const tempRelation = '동료';
-const tempDate = '임시 날짜';
-
-//이름, 날짜, 프로필 이미지, 관계, 텍스트
-//item.sender, item.createdAt.slice(0, 10), item.profileImageURL
-//item.relationship, item.content
 export const Modal = ({ item, onClick }) => {
   const profileName = `From. ${item.sender}`;
 
@@ -54,7 +47,7 @@ export const Modal = ({ item, onClick }) => {
           />
         </div>
 
-        <Button type="primary" width="120px" onClick={onClick}>
+        <Button type="primary" width="width120" onClick={onClick}>
           확인
         </Button>
       </div>
