@@ -42,16 +42,11 @@
 }
 .listBottom {
   display: flex;
-  width: 280px;
   padding: 24px 0px 24px 0px;
   justify-content: center;
   align-items: center;
 }
 @media (max-width: 1200px) {
-  .listBottom {
-    width: 100%;
-    min-width: 300px;
-  }
   .cardListForm h1 {
     padding: 0px 24px;
   }

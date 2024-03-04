@@ -47,7 +47,6 @@
 }
 .mainBottom {
   display: flex;
-  width: 280px;
   padding: 24px 0px 24px 0px;
   justify-content: center;
   align-items: center;
@@ -89,10 +88,6 @@
   .contentsText {
     width: 720px;
     padding: 40px;
-  }
-  .mainBottom {
-    width: 100%;
-    min-width: 300px;
   }
   .textBr {
     display: none;
