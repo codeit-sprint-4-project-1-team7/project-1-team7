@@ -71,11 +71,9 @@ h5,
 h6,
 input,
 li,
-ol,
 p,
 select,
-textarea,
-ul {
+textarea {
   margin: 0;
   padding: 0;
 }
@@ -155,16 +153,4 @@ a:hover {
 
 .nanummyeongjo * {
   font-family: "Nanum Myeongjo", serif;
-}
-
-.ql-align-justify {
-  text-align: justify;
-}
-
-.ql-align-center {
-  text-align: center;
-}
-
-.ql-align-right {
-  text-align: right;
 }

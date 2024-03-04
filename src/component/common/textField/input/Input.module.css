@@ -16,15 +16,18 @@
 }
 
 .input:focus {
+  outline: none;
   /*input 부분 */
-  border: 2px solid var(--gray-500);
+  border: 1px solid var(--gray-500);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   /*폰트 부분 */
   color: var(--gray-900);
 }
 
 .input:active {
+  outline: none;
   /*input 부분 */
-  border: 2px solid var(--gray-700);
+  border: 1px solid var(--gray-500);
   /*폰트 부분 */
   color: var(--gray-900);
 }
