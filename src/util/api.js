@@ -8,13 +8,7 @@ const ERROR_MESSAGE = "데이터를 불러오는데 실패했습니다.";
 
 async function getApi(url) {
   const response = await fetch(url);
-
-  if (!response?.ok) {
-    throw new Error(ERROR_MESSAGE);
-  }
-
-  const body = response.json();
-
+  const body = await response.json();
   return body;
 }
 
@@ -29,7 +23,7 @@ async function postApi(url, obj) {
     throw new Error(ERROR_MESSAGE);
   }
 
-  const body = response.json();
+  const body = await response.json();
 
   return body;
 }

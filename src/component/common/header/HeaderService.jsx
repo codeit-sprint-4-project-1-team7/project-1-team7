@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import commonStyles from "./Header.module.css";
 import styles from "./HeaderService.module.css";
 import KaKaoShare from "./KaKaoShare";
@@ -23,18 +23,17 @@ function HeaderService({
   isImojiContainerSmall,
   postId,
 }) {
-  console.log(isImojiContainerSmall);
   const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
 
   const [isToastVisible, setIsToastVisible] = useState(false);
 
-  const getEmoji = async () => {
+  const getEmoji = useCallback(async () => {
     //test recipientId: 2889
     const response = await getReactionsApiResponse(postId);
     if (!response) return;
     setContextMenuEmojiList(response.results);
     return response.results;
-  };
+  }, [postId]);
 
   const postEmoji = async (e) => {
     const obj = { emoji: e.emoji, type: "increase" };
@@ -63,7 +62,7 @@ function HeaderService({
     return () => {
       clearTimeout(timer);
     };
-  }, [isToastVisible]);
+  }, [isToastVisible, getEmoji]);
 
   return (
     <>
