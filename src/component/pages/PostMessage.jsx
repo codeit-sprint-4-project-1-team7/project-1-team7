@@ -11,6 +11,7 @@ import UserProfileOption from "../common/option/UserProfileOption";
 import baseProfile from "../../asset/img/optionIcon/base_profile_icon.png";
 import { useParams, useNavigate } from "react-router-dom";
 import { postMessageApiResponse } from "../../util/api";
+import ProfileImgSelectList from "../common/option/ProfileImgSelectList";
 
 function PostMessage() {
   const [nameValue, setNameValue] = useState("");
@@ -115,12 +116,11 @@ function PostMessage() {
             </div>
             <div className={styles.profileImgContainer}>
               {profileImgList?.map((profileImg, i) => (
-                <img
-                  className={styles.img}
+                <ProfileImgSelectList
                   key={i}
-                  onClick={() => handleClickProfileImgList(i)}
-                  src={profileImg}
-                  alt="profileImg"
+                  idx={i}
+                  profileImg={profileImg}
+                  onClickImg={handleClickProfileImgList}
                 />
               ))}
             </div>
