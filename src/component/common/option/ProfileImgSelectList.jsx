@@ -14,10 +14,7 @@ function ProfileImgSelectList({ idx, profileImg, onClickImg }) {
       onClick={() => onClickImg(idx)}
       src={isLoad ? profileImg : spinner}
       alt="profileImg"
-      onLoad={() => {
-        handleLoad();
-        console.log(`${idx} 번째 로드 성공`);
-      }}
+      onLoad={handleLoad}
     />
   );
 }
