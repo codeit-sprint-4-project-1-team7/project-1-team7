@@ -195,7 +195,7 @@
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .imageContainer,
   .writed,
   .writedBar {
@@ -233,6 +233,7 @@
 
   .line {
     display: block;
+    margin: 0 -24px;
   }
 
   .badgeAndShareContainer {
@@ -240,10 +241,10 @@
   }
 
   .emojiContainer {
-    right: -30px;
+    left: -30px;
   }
 
   .emojiApiContainer {
-    right: -70px;
+    left: -30px;
   }
 }

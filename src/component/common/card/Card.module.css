@@ -14,6 +14,8 @@
   width: 100%;
   max-width: 1194px;
   margin-bottom: 11px;
+  padding: 0 24px;
+  min-width: 364px;
 }
 
 .cardBox {
@@ -235,6 +237,20 @@
     grid-template-columns: repeat(auto-fill, 352px);
     grid-template-rows: repeat(auto-fill, 284px);
   }
+  .buttonArea {
+    max-width: 1100px;
+  }
+}
+
+@media (max-width: 1096px) {
+  .buttonArea {
+    max-width: 760px;
+  }
+}
+@media (max-width: 723px) {
+  .buttonArea {
+    max-width: 384px;
+  }
 }
 
 @media (max-width: 360px) {
@@ -244,5 +260,8 @@
   }
   .cardContainer {
     height: 230px;
+  }
+  .textBox {
+    -webkit-line-clamp: 3;
   }
 }
