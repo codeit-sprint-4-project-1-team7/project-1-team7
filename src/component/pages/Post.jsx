@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getBackgroundImagesApiResponse, postRecipientApiResponse } from "../../util/api";
 import styles from "./Post.module.css";
 import Input from "../common/textField/input/Input";
-import ColorOption from "../common/option/ColorOption";
-import ToggleButton from "../common/button/ToggleButton";
-import ImageOption from "../common/option/ImageOption";
 import Button from "../common/button/Button";
-import { postRecipientApiResponse } from "../../util/api";
+import ToggleButton from "../common/button/ToggleButton";
+import ColorOption from "../common/option/ColorOption";
+import ImageOption from "../common/option/ImageOption";
+
 
 const BUTTON_NAME = ["컬러", "이미지"];
 const NEW_PAGE = {
@@ -19,6 +20,7 @@ function Post() {
   const [inputValue, setInputValue] = useState("");
   const [selectedButtonName, setSelectedButtonName] = useState(BUTTON_NAME[0]);
   const [clickItem, setClickItem] = useState('beige');
+  const [baseImages, setBaseImages] = useState([]);
   const navigate = useNavigate();
 
   const handleClick = (e) => {
@@ -27,6 +29,49 @@ function Post() {
   
   const handleInputValue = (value) => setInputValue(value);
   const handleButtonClick = (e) => setSelectedButtonName(e.target.innerText);
+
+  const upLoadImg = async (imgFile) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', imgFile);
+      const response = await fetch("https://api.imgbb.com/1/upload?key=d0683b0869118bab9113ca272a7d46b1", {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response?.ok) {
+        throw new Error('이미지를 업로드 하는 데 실패했습니다.')
+      }
+      const data = await response.json();
+      return data.data.url
+
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  }
+
+  const handleAddImageDataChange = async (e) => {
+    const { files } = e.target;
+    const uploadFile = files[0];
+
+    if (!uploadFile) return;
+
+      const newImageUrl = await upLoadImg(uploadFile);
+      setBaseImages((prev) => ([newImageUrl, ...prev]));
+    } 
+
+
+  const getBaseImages = async () => {
+    const { imageUrls } = await getBackgroundImagesApiResponse();
+    
+    if (!imageUrls) return;
+
+    setBaseImages(imageUrls);
+  }
+
+  useEffect(() => {
+    getBaseImages();
+  }, [])
 
   const createRolling = async () => {
     NEW_PAGE.name = inputValue;
@@ -63,7 +108,7 @@ function Post() {
           </div>
         </div>
         {selectedButtonName === BUTTON_NAME[0] && <ColorOption clickItem={clickItem} onClick={handleClick} />}
-        {selectedButtonName === BUTTON_NAME[1] && <ImageOption clickItem={clickItem} onClick={handleClick} />}
+        {selectedButtonName === BUTTON_NAME[1] && <ImageOption clickItem={clickItem} imageData={baseImages} onChange={handleAddImageDataChange} onClick={handleClick} />}
 
         <div className={styles.createButton}>
           <div style={{ textDecoration: "none" }}>
