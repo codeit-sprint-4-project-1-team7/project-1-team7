@@ -12,12 +12,10 @@ function List() {
   const [rollingPaperListOrder, setRollingPaperListOrder] = useState([]);
   const [rollingPaperListPopular, setRollingPaperListPopular] = useState([]);
   const getRollingPaperList = async () => {
-    const response = await getRecipientsApiResponse('', 100);
-    console.log(response);
-    setRollingPaperListOrder(response.results);
-    setRollingPaperListPopular(
-      [...response.results].sort((a, b) => b.messageCount - a.messageCount)
-    );
+    const responsePopular = await getRecipientsApiResponse('', 'like');
+    const responseLatest = await getRecipientsApiResponse();
+    setRollingPaperListOrder(responseLatest.results);
+    setRollingPaperListPopular(responsePopular.results);
   };
 
   // scroll-button-popular
@@ -37,11 +35,14 @@ function List() {
 
     if (container) {
       const scrollAmount = 295;
+      console.log(container.scrollLeft);
       container.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
       });
-      checkScrollPosition(category);
+      setTimeout(() => {
+        checkScrollPosition(category);
+      }, 500);
     }
   };
   const checkScrollPosition = (category) => {
@@ -54,6 +55,7 @@ function List() {
       if (category === 'popular') {
         setIsAtStartPopular(container.scrollLeft === 0);
         setIsAtEndPopular(container.scrollLeft >= maxScrollLeft);
+        console.log(container.scrollLeft);
       } else {
         setIsAtStartLatest(container.scrollLeft === 0);
         setIsAtEndLatest(container.scrollLeft >= maxScrollLeft);
@@ -63,7 +65,8 @@ function List() {
 
   useEffect(() => {
     getRollingPaperList();
-
+  }, []);
+  useEffect(() => {
     const containerPopular = containerPopularRef.current;
     const containerLatest = containerLatestRef.current;
     if (containerPopular) {
@@ -77,20 +80,6 @@ function List() {
       containerLatest.addEventListener('scroll', checkScrollPosition('latest'));
       checkScrollPosition('latest');
     }
-    return () => {
-      if (containerPopular) {
-        containerPopular.removeEventListener(
-          'scroll',
-          checkScrollPosition('popular')
-        );
-      }
-      if (containerLatest) {
-        containerLatest.removeEventListener(
-          'scroll',
-          checkScrollPosition('latest')
-        );
-      }
-    };
   }, [rollingPaperListPopular, rollingPaperListOrder]);
 
   return (

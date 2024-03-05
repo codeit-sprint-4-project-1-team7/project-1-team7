@@ -3,17 +3,24 @@ import Button from "../button/Button";
 import styles from "./Card.module.css";
 import DOMPurify from "dompurify";
 import { fontMappings } from "../textField/selectBox/fontMappings";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ModalPortal from "../modal/ModalPortal";
 import { Modal } from "../modal/Modal";
 import { Badge } from "../badge/Badge";
+
 function Card({
+  messagesLoading,
+  next,
   messages,
+  messageNextOffset,
+  getMessagesOfRecipient,
   isAddMessageCardVisible,
   image,
   onCardDeleteBtnClick,
   onPaperDeleteBtnClick,
 }) {
+  const target = useRef(null);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const navigate = useNavigate();
@@ -35,56 +42,97 @@ function Card({
     navigate("edit");
   };
 
+  const handleGoBackClick = () => {
+    navigate(-1);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && next) {
+          console.log("함수 실행 진입");
+          getMessagesOfRecipient(messageNextOffset);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (target.current) {
+      observer.observe(target.current);
+    }
+    return () => observer.disconnect();
+  }, [
+    messageNextOffset,
+    getMessagesOfRecipient,
+    next,
+    isAddMessageCardVisible,
+  ]);
   return (
-    <div
-      onContextMenu={handlePreventRightClick}
-      className={styles.backGround}
-      style={
-        image?.includes("http")
-          ? {
-              backgroundImage: `url(${image})`,
-              backgroundRepeat: `no-repeat`,
-              backgroundSize: `cover`,
-              backgroundPosition: `center`,
-            }
-          : { backgroundColor: `${image}` }
-      }
-    >
-      <div className={styles.buttonArea}>
+    <>
+      <div
+        onContextMenu={handlePreventRightClick}
+        className={`${styles.backGround} ${
+          !image?.includes("http") && styles[image]
+        }`}
+        style={
+          image?.includes("http")
+            ? {
+                backgroundImage: `url(${image})`,
+                backgroundRepeat: `repeat`,
+                height: `100%`,
+                backgroundSize: `cover`,
+                backgroundPosition: `center`,
+              }
+            : {}
+        }
+      >
         {isAddMessageCardVisible ? (
-          <Button
-            type="primary"
-            width="widthAuto"
-            height="standard"
-            onClick={handleEditButtonClick}
-          >
-            수정하기
-          </Button>
+          <div className={styles.buttonArea}>
+            <Button
+              type="primary"
+              width="widthAuto"
+              height="standard"
+              onClick={handleEditButtonClick}
+            >
+              수정하기
+            </Button>
+          </div>
         ) : (
-          <Button
-            type="primary"
-            width="widthAuto"
-            height="standard"
-            onClick={onPaperDeleteBtnClick}
+          <div
+            style={{ justifyContent: `space-between` }}
+            className={styles.buttonArea}
           >
-            삭제하기
-          </Button>
-        )}
-      </div>
-      <div className={styles.cardBox}>
-        {isAddMessageCardVisible && (
-          <div className={styles.cardContainer}>
-            <div className={styles.cardPlus}>
-              <Button
-                type="circle"
-                icon="plus"
-                onClick={handleAddMessageButtonClick}
-              />
-            </div>
+            <Button
+              type="primary"
+              width="widthAuto"
+              height="standard"
+              onClick={handleGoBackClick}
+            >
+              뒤로가기
+            </Button>
+            <Button
+              type="primary"
+              width="widthAuto"
+              height="standard"
+              onClick={onPaperDeleteBtnClick}
+            >
+              삭제하기
+            </Button>
           </div>
         )}
-        {messages?.map((item) => (
-          <>
+        <div className={styles.cardBox}>
+          {isAddMessageCardVisible && (
+            <div className={styles.cardContainer}>
+              <div className={styles.cardPlus}>
+                <Button
+                  type="circle"
+                  icon="plus"
+                  onClick={handleAddMessageButtonClick}
+                />
+              </div>
+            </div>
+          )}
+          {messages?.map((item) => (
             <div
               onClick={() => handleCardModalClick(item)}
               key={item.id}
@@ -129,16 +177,27 @@ function Card({
                 </span>
               </div>
             </div>
-          </>
-        ))}
-        <ModalPortal>
-          {isModalVisible && (
-            <Modal item={modalItem} onClick={handleCardModalClick} />
-          )}
-        </ModalPortal>
+          ))}
+
+          <ModalPortal>
+            {isModalVisible && (
+              <Modal item={modalItem} onClick={handleCardModalClick} />
+            )}
+          </ModalPortal>
+        </div>
+        {messagesLoading && <Spinner />}
       </div>
-    </div>
+      <div ref={target} className={styles.intersectionTarget} />
+    </>
   );
 }
+
+const Spinner = () => {
+  return (
+    <div className={styles.spinnerContainer}>
+      <div className={styles.spinner} />
+    </div>
+  );
+};
 
 export default Card;

@@ -1,70 +1,21 @@
-import { useEffect, useState } from "react";
-function ProfileImages({
-  imageContainerStyle,
-  imageStyle,
-  imageTextStyle,
-  direction,
-  messageCount,
-  recentMessages,
-}) {
-  const [textLength, setTextLength] = useState(0);
-  let plusNum = 0;
-  if (direction === "right") {
-    plusNum = (String(messageCount).length - 1) * 6;
-  }
+import styles from "./ProfileImages.module.css";
 
-  useEffect(() => {
-    const imageTextElement = document.getElementById("imageText");
-    if (imageTextElement) {
-      setTextLength(imageTextElement.innerHTML.length);
-    }
-  }, [textLength]);
+function ProfileImages({ direction, messageCount, recentMessages }) {
   return (
     <>
-      <div
-        className={imageContainerStyle}
-        style={
-          direction === "left"
-            ? { paddingLeft: `48px` }
-            : { justifyContent: `right` }
-        }
-      >
-        {direction === "left"
-          ? recentMessages.map((item, i) => (
-              <div
-                key={item.id}
-                className={imageStyle}
-                style={{
-                  backgroundImage: `url(${item.profileImageURL})`,
-                  [direction]: `${16 * i}px`,
-                }}
-              ></div>
-            ))
-          : recentMessages.map((item, i) => (
-              <div
-                key={item.id}
-                className={imageStyle}
-                style={{
-                  backgroundImage: `url(${item.profileImageURL})`,
-                  [direction]: `${
-                    16 *
-                      (messageCount > 3
-                        ? recentMessages.length - i
-                        : recentMessages.length - i) +
-                    plusNum
-                  }px`,
-                  zIndex: `${-3 + i}`,
-                }}
-              ></div>
-            ))}
+      <div className={`${styles.profileGroup} ${styles[direction]}`}>
+        {recentMessages.map(({ id, profileImageURL }) => (
+          <img
+            key={id}
+            className={styles.profileImg}
+            src={profileImageURL}
+            alt="프로필 사진"
+          />
+        ))}
         {messageCount > 3 && (
-          <div
-            id="imageText"
-            className={imageTextStyle}
-            style={{ zIndex: `1` }}
-          >
-            +{messageCount}
-          </div>
+          <span id="imageText" className={styles.profileCount}>
+            +{+messageCount - 3}
+          </span>
         )}
       </div>
     </>
