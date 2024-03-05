@@ -150,7 +150,7 @@ function PostMessage() {
         </div>
 
         <div className={styles.selectBoxTitle}>폰트선택</div>
-        <div className={styles.selectBoxContainer}>
+        <div className={styles.fontSelectBoxContainer}>
           <SelectBox
             selectValue={currentFont}
             onSelectValueChange={handleCurrentFont}
