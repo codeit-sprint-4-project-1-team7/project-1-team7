@@ -132,7 +132,7 @@
   top: 116px;
   left: 24px;
   right: 24px;
-
+  line-height: normal;
   overflow: hidden;
   color: var(--gray-600, #4a4a4a);
   text-overflow: ellipsis;
@@ -144,7 +144,7 @@
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 7;
+  -webkit-line-clamp: 5;
 }
 
 .date {
