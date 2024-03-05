@@ -21,6 +21,8 @@ function Input({ inputValue, onInputValueChange }) {
         !inputRef.current.contains(e.target)
       ) {
         setIsError(true);
+      } else {
+        setIsError(false);
       }
     };
 
