@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   deleteMessageApiResponse,
   deleteRecipientApiResponse,
@@ -13,7 +13,7 @@ import { isImageValid } from "../../util/isImageValid";
 function PostDetail({ contextMenuVisibleList }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { postId } = useParams(); //추후 postId 값을 api 요청으로 사용 예정
+  const { postId } = useParams();
   const [recentMessages, setRecentMessages] = useState([]);
   const [messages, setMessages] = useState([]);
   const [name, setName] = useState("");
@@ -21,7 +21,9 @@ function PostDetail({ contextMenuVisibleList }) {
   const [isAddMessageCardVisible, setIsAddMessageCardVisible] = useState(0);
   const [image, setImage] = useState("");
   const [isImojiContainerSmall, setIsImojiContainerSmall] = useState(false);
-
+  const [messageNextOffset, setMessageNextOffset] = useState(0);
+  const [next, setNext] = useState("");
+  const [messagesLoading, setMessagesLoading] = useState(false);
   const handleCardDeleteBtnClick = async (e, id) => {
     e.stopPropagation();
 
@@ -37,44 +39,67 @@ function PostDetail({ contextMenuVisibleList }) {
     navigate("/list");
   };
 
-  useEffect(() => {
-    const getRollinginformation = async () => {
-      const response = await getRecipientsApiResponse(postId);
+  const getRollinginformation = useCallback(async () => {
+    const response = await getRecipientsApiResponse(postId);
+    if (response.detail) {
+      navigate("/notFound");
+    }
+    const {
+      messageCount,
+      recentMessages,
+      name,
+      backgroundColor,
+      backgroundImageURL,
+    } = response;
+
+    isImageValid(backgroundImageURL, function (isValid) {
+      setImage(isValid ? backgroundImageURL : backgroundColor);
+    });
+
+    setMessageCount(messageCount);
+    setRecentMessages(recentMessages);
+    setName(name);
+  }, [postId, navigate]);
+
+  const handleResize = () => {
+    setIsImojiContainerSmall(window.innerWidth < 768);
+  };
+
+  const getMessagesOfRecipient = useCallback(
+    async (offset) => {
+      setMessagesLoading(true);
+      const response = await getMessagesApiResponse(postId, offset);
       if (response.detail) {
         navigate("/notFound");
       }
-      const {
-        messageCount,
-        recentMessages,
-        name,
-        backgroundColor,
-        backgroundImageURL,
-      } = response;
 
-      isImageValid(backgroundImageURL, function (isValid) {
-        setImage(isValid ? backgroundImageURL : backgroundColor);
-      });
+      setMessages((prev) => [...prev, ...response.results]);
 
-      setMessageCount(messageCount);
-      setRecentMessages(recentMessages);
-      setName(name);
-      getMessagesOfRecipient(messageCount);
-    };
+      if (response.next) {
+        setMessageNextOffset(response.next.match(/offset=(\d+)/)[1]);
+      }
 
-    const getMessagesOfRecipient = async (messageCount) => {
-      const response = await getMessagesApiResponse(postId, messageCount);
-      setMessages(response.results);
-    };
+      setMessagesLoading(false);
+      setNext(response.next);
+    },
+    [postId, setMessagesLoading, navigate]
+  );
+
+  useEffect(() => {
     getRollinginformation();
+    getMessagesOfRecipient();
     setIsAddMessageCardVisible(!location.pathname.includes("edit"));
-    const handleResize = () => {
-      setIsImojiContainerSmall(window.innerWidth < 768);
-    };
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [location.pathname, postId, navigate]);
+  }, [
+    location.pathname,
+    postId,
+    navigate,
+    getRollinginformation,
+    getMessagesOfRecipient,
+  ]);
   return (
     <>
       <HeaderService
@@ -88,8 +113,12 @@ function PostDetail({ contextMenuVisibleList }) {
       />
 
       <Card
+        messagesLoading={messagesLoading}
+        getMessagesOfRecipient={getMessagesOfRecipient}
         isAddMessageCardVisible={isAddMessageCardVisible}
+        next={next}
         messages={messages}
+        messageNextOffset={messageNextOffset}
         image={image}
         onCardDeleteBtnClick={handleCardDeleteBtnClick}
         onPaperDeleteBtnClick={handlePaperDeleteBtnClick}
