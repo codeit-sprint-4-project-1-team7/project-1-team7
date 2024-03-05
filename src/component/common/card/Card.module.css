@@ -201,6 +201,22 @@
   animation: spin 1s linear infinite;
 }
 
+.beige {
+  background-color: var(--orange-200);
+}
+
+.green {
+  background-color: var(--green-200);
+}
+
+.blue {
+  background-color: var(--blue-200);
+}
+
+.purple {
+  background-color: var(--purple-200);
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
