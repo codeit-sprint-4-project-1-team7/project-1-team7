@@ -12,11 +12,10 @@ function List() {
   const [rollingPaperListOrder, setRollingPaperListOrder] = useState([]);
   const [rollingPaperListPopular, setRollingPaperListPopular] = useState([]);
   const getRollingPaperList = async () => {
-    const response = await getRecipientsApiResponse('', 100);
-    setRollingPaperListOrder(response.results);
-    setRollingPaperListPopular(
-      [...response.results].sort((a, b) => b.messageCount - a.messageCount)
-    );
+    const responsePopular = await getRecipientsApiResponse('', 'like');
+    const responseLatest = await getRecipientsApiResponse();
+    setRollingPaperListOrder(responseLatest.results);
+    setRollingPaperListPopular(responsePopular.results);
   };
 
   // scroll-button-popular
