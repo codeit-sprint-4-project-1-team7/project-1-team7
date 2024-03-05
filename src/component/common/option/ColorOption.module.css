@@ -46,7 +46,7 @@
 
 @media screen and (max-width: 768px) {
   .backgroundOptions {
-    grid-template-columns: repeat(2, 168px);
+    grid-template-columns: repeat(2,  minmax(150px, 168px));
     max-width: 320px;
   }
 }
