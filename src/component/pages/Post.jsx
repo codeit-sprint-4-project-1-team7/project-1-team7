@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBackgroundImagesApiResponse, postRecipientApiResponse } from "../../util/api";
+import { getBackgroundImagesApiResponse, postRecipientApiResponse, upLoadImg } from "../../util/api";
 import styles from "./Post.module.css";
 import Input from "../common/textField/input/Input";
 import Button from "../common/button/Button";
@@ -29,26 +29,6 @@ function Post() {
   
   const handleInputValue = (value) => setInputValue(value);
   const handleButtonClick = (e) => setSelectedButtonName(e.target.innerText);
-
-  const upLoadImg = async (imgFile) => {
-    try {
-      const formData = new FormData();
-      formData.append('image', imgFile);
-      const response = await fetch("https://api.imgbb.com/1/upload?key=d0683b0869118bab9113ca272a7d46b1", {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (!response?.ok) {
-        throw new Error('이미지를 업로드 하는 데 실패했습니다.')
-      }
-      const data = await response.json();
-      return data.data.url
-
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
-  }
 
   const handleAddImageDataChange = async (e) => {
     const { files } = e.target;
