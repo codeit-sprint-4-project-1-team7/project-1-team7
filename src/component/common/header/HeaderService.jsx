@@ -157,7 +157,17 @@ function HeaderService({
                       <KaKaoShare
                         className={styles.shareButtonElement}
                         name={name}
-                        image={image}
+                        image={
+                          image.includes("https")
+                            ? image
+                            : image === "beige"
+                            ? "https://i.ibb.co/YPzXQ4s/2024-03-05-170431.png"
+                            : image === "green"
+                            ? "https://i.ibb.co/8DdHnVT/2024-03-05-170616.png"
+                            : image === "blue"
+                            ? "https://i.ibb.co/phjpSB8/2024-03-05-170612.png"
+                            : "https://i.ibb.co/D8dZB0x/2024-03-05-170608.png"
+                        }
                       />
                       <div
                         onClick={handleShareUrlClick}

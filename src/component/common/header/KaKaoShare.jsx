@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 const { Kakao } = window;
 
-function KaKaoShare({ className, name, description, image }) {
+function KaKaoShare({ className, name, image }) {
   const url = window.location.href;
   useEffect(() => {
     Kakao.cleanup();
-    Kakao.init("e9dde7fd5c20bdfdf100d47b1f8da3d3");
+    Kakao.init("fe9739da7235c8aa3133ed61bb23d7a0");
   }, []);
 
   const handleKakaoClick = () => {
     Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
-        title: `롤링 페이퍼 | `,
+        title: `Rolling | `,
         description: `${name}님의 롤링 페이퍼를 확인해보세요!`,
         imageUrl: `${image}`,
         link: {
