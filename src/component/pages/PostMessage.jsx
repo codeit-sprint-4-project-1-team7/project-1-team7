@@ -26,17 +26,17 @@ function PostMessage() {
   const textContainerRef = useRef(null);
 
   const handleInputValue = useCallback((value) => {
-    setNameValue(() => value);
+    setNameValue(value);
   }, []);
   const handleCurrentRelation = useCallback((value) => {
-    setCurrentRelation(() => value);
+    setCurrentRelation(value);
   }, []);
   const handleCurrentFont = useCallback((font) => {
-    setCurrentFont(() => font);
+    setCurrentFont(font);
   }, []);
   const handleQuillValue = useCallback((value) => {
     const cleanedHtml = value.replace(/<p><br><\/p>/g, "");
-    setQuillValue(() => cleanedHtml);
+    setQuillValue(cleanedHtml);
   }, []);
   const handleClickProfileImgList = useCallback(
     (idx) => {
@@ -45,7 +45,7 @@ function PostMessage() {
     [profileImgList]
   );
   const handleChangeProfileImg = useCallback((value) => {
-    setCurrentProfileImg(() => value);
+    setCurrentProfileImg(value);
   }, []);
 
   const getImgProfileList = useCallback(async () => {
