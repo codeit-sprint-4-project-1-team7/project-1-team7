@@ -3,13 +3,22 @@
   min-height: 100vh;
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 100px 0;
+}
+
+.buttonArea {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1194px;
+  margin-bottom: 11px;
 }
 
 .cardBox {
   display: grid;
-  max-width: 1200px;
+  max-width: 1194px;
   width: 100%;
   grid-template-columns: repeat(auto-fill, 384px);
   grid-template-rows: repeat(auto-fill, 284px);
@@ -123,8 +132,7 @@
   top: 116px;
   left: 24px;
   right: 24px;
-  width: 336px;
-
+  line-height: normal;
   overflow: hidden;
   color: var(--gray-600, #4a4a4a);
   text-overflow: ellipsis;
@@ -136,7 +144,7 @@
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 7;
+  -webkit-line-clamp: 5;
 }
 
 .date {
@@ -174,6 +182,36 @@
   position: absolute;
   top: 24px;
   right: 24px;
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  padding-top: 50px;
+}
+
+.spinner {
+  border: 10px solid rgba(0, 0, 0, 0.1);
+  border-top: 10px solid #3498db;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.intersectionTarget {
+  width: 100%;
 }
 
 @media (max-width: 1240px) {

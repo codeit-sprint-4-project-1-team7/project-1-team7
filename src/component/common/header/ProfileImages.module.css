@@ -1,0 +1,40 @@
+.profileGroup {
+  display: flex;
+  min-height: 28px;
+}
+
+.profileImg {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--white);
+  border-radius: 50%;
+  background-color: var(--white);
+}
+
+.profileCount {
+  display: flex;
+  align-items: center;
+  padding: 5px 6px;
+  border: 1px solid #e3e3e3;
+  border-radius: 30px;
+  background-color: var(--white);
+  height: 28px;
+  font-size: var(--xxs);
+  line-height: 18px;
+  letter-spacing: -0.06px;
+  color: #484848;
+}
+
+.profileImg {
+  margin-right: -12px;
+}
+
+.profileGroup :last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 1024px) {
+  .right {
+    display: none;
+  }
+}

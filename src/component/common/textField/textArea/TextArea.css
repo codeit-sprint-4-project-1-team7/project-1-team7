@@ -21,3 +21,25 @@
 .dompurifyBox {
   font-size: 16px;
 }
+
+.ql-align-justify {
+  text-align: justify;
+}
+
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+  .ql-toolbar.ql-snow .ql-formats {
+    margin-right: 10px;
+  }
+
+  .ql-snow .ql-picker.ql-expanded .ql-picker-options {
+    left: -30px;
+  }
+}

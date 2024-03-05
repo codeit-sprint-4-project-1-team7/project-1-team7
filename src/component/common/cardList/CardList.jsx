@@ -1,70 +1,73 @@
 import ProfileImages from "../header/ProfileImages";
 import styles from "./CardList.module.css";
-import headerServiceStyles from "../header/HeaderService.module.css";
 import { EmojiBadge } from "../badge/EmojiBadge";
 import { useNavigate } from "react-router-dom";
 
 function CardList({ rollingPaperList }) {
-  console.log(rollingPaperList.topReactions);
   const navigation = useNavigate();
+
   const handleCardListClick = (id) => {
     navigation(`/post/${id}`);
   };
+
   return (
     <div className={styles.cardListContainer}>
-      {rollingPaperList ? (
-        rollingPaperList.map((item) => (
+      {rollingPaperList?.map(
+        ({
+          backgroundColor,
+          backgroundImageURL,
+          id,
+          messageCount,
+          name,
+          reactionCount,
+          recentMessages,
+          topReactions,
+        }) => (
           <div
-            onClick={() => handleCardListClick(item.id)}
-            key={item.id}
-            className={styles.cardContainer}
-            style={
-              item.backgroundImageURL === null
-                ? { backgroundColor: `${item.backgroundColor}` }
-                : { backgroundImage: `url(${item.backgroundImageURL})` }
-            }
+            key={id}
+            className={`${styles.cardContainer} ${
+              backgroundImageURL ? styles.fontWhite : ""
+            }`}
+            onClick={() => handleCardListClick(id)}
           >
-            <div className={styles.contentsContainer}>
-              <div className={styles.informationContainer}>
-                <div className={styles.toName}>To.{item.name}</div>
-                <ProfileImages
-                  imageContainerStyle={headerServiceStyles.imageContainer}
-                  imageStyle={headerServiceStyles.image}
-                  imageTextStyle={styles.imageText}
-                  direction="left"
-                  messageCount={item.messageCount}
-                  recentMessages={item.recentMessages}
+            <div className={styles.backgroundGroup}>
+              {backgroundImageURL ? (
+                <img
+                  src={backgroundImageURL}
+                  alt="배경 화면"
+                  className={`${styles.backgroundItem} ${styles.backgroundImage}`}
                 />
+              ) : (
                 <div
-                  className={headerServiceStyles.writed}
-                  style={{
-                    fontSize: `16px`,
-                    lineHeight: `26px`,
-                    letterSpacing: `-0.16px`,
-                  }}
-                >
-                  <span className={headerServiceStyles.numOfWrited}>
-                    {item.messageCount}
-                  </span>
-                  <span className={headerServiceStyles.writedText}>
-                    명이 작성했어요!
-                  </span>
-                </div>
-              </div>
-              <div className={styles.badgeContainer}>
-                <div className={styles.line} />
-                <div className={styles.badge}>
-                  {item.topReactions?.map(({ id, emoji, count }) => (
-                    <EmojiBadge key={id} emoji={emoji} count={count} />
-                  ))}
-                </div>
+                  className={`${styles.backgroundItem} ${styles[backgroundColor]}`}
+                />
+              )}
+            </div>
+
+            <div className={styles.informationContainer}>
+              <div className={styles.toName}>To. {name}</div>
+              <ProfileImages
+                messageCount={messageCount}
+                recentMessages={recentMessages}
+              />
+              <div className={styles.writed}>
+                <span>{messageCount}</span>
+                <span>명이 작성했어요!</span>
               </div>
             </div>
+
+            {reactionCount && (
+              <div className={styles.badge}>
+                {topReactions.map(({ id, emoji, count }) => (
+                  <EmojiBadge key={id} emoji={emoji} count={count} />
+                ))}
+              </div>
+            )}
           </div>
-        ))
-      ) : (
-        <div>롤링 페이퍼가 없어요!</div>
+        )
       )}
+
+      {!!rollingPaperList.length || <div>롤링 페이퍼가 없어요!</div>}
     </div>
   );
 }

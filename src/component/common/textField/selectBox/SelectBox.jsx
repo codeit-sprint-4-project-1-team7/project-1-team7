@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./SelectBox.module.css";
 import DropDown from "./DropDown";
 import arrowTop from "../../../../asset/img/textFieldIcon/arrow_top.png";
@@ -59,7 +59,7 @@ function SelectBox({ selectValue, onSelectValueChange, selectType }) {
   );
 }
 
-export default SelectBox;
+export default React.memo(SelectBox);
 
 // TODO: 추후에 error 상황이나 disabled 상황 있을시 추가 예정
 // const [isError, setIsError] = useState(false);
