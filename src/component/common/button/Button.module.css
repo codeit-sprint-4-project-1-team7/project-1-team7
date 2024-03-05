@@ -138,7 +138,6 @@
 }
 
 @media (max-width: 1024px) {
-  .widthAuto,
   .width280 {
     position: fixed;
     bottom: 24px;
