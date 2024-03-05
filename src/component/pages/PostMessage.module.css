@@ -75,7 +75,8 @@
   letter-spacing: -0.24px;
 }
 
-.selectBoxContainer {
+.selectBoxContainer,
+.fontSelectBoxContainer {
   margin-bottom: 50px;
 }
 
@@ -112,6 +113,10 @@
 
   .container {
     width: 320px;
+  }
+
+  .fontSelectBoxContainer {
+    margin-bottom: 180px;
   }
 
   .profileImgContainer {
