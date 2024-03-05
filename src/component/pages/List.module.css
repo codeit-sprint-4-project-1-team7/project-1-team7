@@ -28,8 +28,13 @@
   overflow-y: scroll;
   white-space: nowrap;
   animation-duration: 900ms;
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.cardListItem::-webkit-scrollbar {
+  display: none;
+}
+
 .cardButton {
   position: absolute;
   top: 160px;
