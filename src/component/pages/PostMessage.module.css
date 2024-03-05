@@ -1,5 +1,11 @@
+.outer {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0 300px;
+}
+
 .container {
-  padding: 47px 30% 36px 30%;
+  width: 1200px;
 }
 
 .inputTitle {
@@ -99,4 +105,35 @@
 
 .textAreaContainer {
   margin-bottom: 50px;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .outer {
+    padding: 40px 24px;
+  }
+
+  .container {
+    width: 720px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .outer {
+    padding: 40px 24px;
+  }
+
+  .container {
+    width: 320px;
+  }
+
+  .profileImgContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 2px;
+  }
+
+  .img {
+    width: 40px;
+    height: 40px;
+  }
 }

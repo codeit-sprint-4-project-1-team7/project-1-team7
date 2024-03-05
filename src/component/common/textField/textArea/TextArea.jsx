@@ -51,4 +51,4 @@ function TextArea({ onQuillValueChange, textContainerRef }) {
   );
 }
 
-export default TextArea;
+export default React.memo(TextArea);

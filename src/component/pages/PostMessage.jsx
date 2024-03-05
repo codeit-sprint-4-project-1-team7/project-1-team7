@@ -25,31 +25,33 @@ function PostMessage() {
 
   const textContainerRef = useRef(null);
 
-  const handleInputValue = (value) => {
-    setNameValue(value);
-  };
-  const handleCurrentRelation = (value) => {
-    setCurrentRelation(value);
-  };
-  const handleCurrentFont = (font) => {
-    setCurrentFont(font);
-  };
-  const handleQuillValue = (value) => {
-    setQuillValue(value);
-  };
+  const handleInputValue = useCallback((value) => {
+    setNameValue(() => value);
+  }, []);
+  const handleCurrentRelation = useCallback((value) => {
+    setCurrentRelation(() => value);
+  }, []);
+  const handleCurrentFont = useCallback((font) => {
+    setCurrentFont(() => font);
+  }, []);
+  const handleQuillValue = useCallback((value) => {
+    const cleanedHtml = value.replace(/<p><br><\/p>/g, "");
+    setQuillValue(() => cleanedHtml);
+  }, []);
   const handleClickProfileImgList = useCallback(
     (idx) => {
       setCurrentProfileImg(profileImgList[idx]);
     },
     [profileImgList]
   );
-  const handleChangeProfileImg = (value) => {
-    setCurrentProfileImg(value);
-  };
+  const handleChangeProfileImg = useCallback((value) => {
+    setCurrentProfileImg(() => value);
+  }, []);
 
   const getImgProfileList = useCallback(async () => {
     const res = await getProfileImagesApiResponse();
     setProfileImgList(res.imageUrls);
+    setCurrentProfileImg(res.imageUrls[0]);
   }, []);
 
   const changeFontFamily = useCallback((type) => {
@@ -61,7 +63,7 @@ function PostMessage() {
   const postData = useCallback(() => {
     //test recipientId: 2889
     const data = {
-      recipientId: 2889,
+      recipientId: postId,
       sender: nameValue,
       profileImageURL: currentProfileImg,
       relationship: currentRelation,
@@ -70,9 +72,10 @@ function PostMessage() {
       createdAt: new Date().getTime(),
     };
 
-    postMessageApiResponse(data, 2889).then(() => {
+    postMessageApiResponse(data, postId).then(() => {
       navigate(`/post/${postId}`);
     });
+
     // console.log(data);
   }, [
     postId,
@@ -84,10 +87,6 @@ function PostMessage() {
     navigate,
   ]);
 
-  //TODO: 컴포넌트 최적화 하기
-  // console.log(currentFont);
-  //console.log(textContainerRef.current.getEditor().root);
-
   useEffect(() => {
     getImgProfileList();
   }, [getImgProfileList]);
@@ -97,64 +96,71 @@ function PostMessage() {
   }, [changeFontFamily, currentFont]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.inputTitle}>From.</div>
-      <div className={styles.inputContainer}>
-        <Input inputValue={nameValue} onInputValueChange={handleInputValue} />
-      </div>
+    <div className={styles.outer}>
+      <div className={styles.container}>
+        <div className={styles.inputTitle}>From.</div>
+        <div className={styles.inputContainer}>
+          <Input inputValue={nameValue} onInputValueChange={handleInputValue} />
+        </div>
 
-      <div className={styles.profileImgTitle}>프로필 이미지</div>
-      <div className={styles.allProfileImgContainer}>
-        <UserProfileOption
-          currentProfileImg={currentProfileImg}
-          onChangeProfileImg={handleChangeProfileImg}
-        />
-        <div>
-          <div className={styles.porfileImgText}>
-            프로필 이미지를 선택해주세요!
-          </div>
-          <div className={styles.profileImgContainer}>
-            {profileImgList?.map((profileImg, i) => (
-              <img
-                className={styles.img}
-                key={i}
-                onClick={() => handleClickProfileImgList(i)}
-                src={profileImg}
-                alt="profileImg"
-              />
-            ))}
+        <div className={styles.profileImgTitle}>프로필 이미지</div>
+        <div className={styles.allProfileImgContainer}>
+          <UserProfileOption
+            currentProfileImg={currentProfileImg}
+            onChangeProfileImg={handleChangeProfileImg}
+          />
+          <div>
+            <div className={styles.porfileImgText}>
+              프로필 이미지를 선택해주세요!
+            </div>
+            <div className={styles.profileImgContainer}>
+              {profileImgList?.map((profileImg, i) => (
+                <img
+                  className={styles.img}
+                  key={i}
+                  onClick={() => handleClickProfileImgList(i)}
+                  src={profileImg}
+                  alt="profileImg"
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={styles.selectBoxTitle}>상대와의 관계</div>
-      <div className={styles.selectBoxContainer}>
-        <SelectBox
-          selectValue={currentRelation}
-          onSelectValueChange={handleCurrentRelation}
-          selectType={SELECT_TYPE.relation}
-        />
-      </div>
+        <div className={styles.selectBoxTitle}>상대와의 관계</div>
+        <div className={styles.selectBoxContainer}>
+          <SelectBox
+            selectValue={currentRelation}
+            onSelectValueChange={handleCurrentRelation}
+            selectType={SELECT_TYPE.relation}
+          />
+        </div>
 
-      <div className={styles.textAreaTitle}>내용을 입력해주세요</div>
-      <div className={styles.textAreaContainer}>
-        <TextArea
-          onQuillValueChange={handleQuillValue}
-          textContainerRef={textContainerRef}
-        />
-      </div>
+        <div className={styles.textAreaTitle}>내용을 입력해주세요</div>
+        <div className={styles.textAreaContainer}>
+          <TextArea
+            onQuillValueChange={handleQuillValue}
+            textContainerRef={textContainerRef}
+          />
+        </div>
 
-      <div className={styles.selectBoxTitle}>폰트선택</div>
-      <div className={styles.selectBoxContainer}>
-        <SelectBox
-          selectValue={currentFont}
-          onSelectValueChange={handleCurrentFont}
-          selectType={SELECT_TYPE.font}
-        />
+        <div className={styles.selectBoxTitle}>폰트선택</div>
+        <div className={styles.selectBoxContainer}>
+          <SelectBox
+            selectValue={currentFont}
+            onSelectValueChange={handleCurrentFont}
+            selectType={SELECT_TYPE.font}
+          />
+        </div>
+        <Button
+          type={"primary"}
+          width={"100%"}
+          onClick={postData}
+          disabled={nameValue && quillValue ? false : true}
+        >
+          생성하기
+        </Button>
       </div>
-      <Button type={"primary"} width={"100%"} onClick={postData}>
-        생성하기
-      </Button>
     </div>
   );
 }

@@ -1,24 +1,39 @@
-import { useRef } from "react";
-import baseProfile from "../../../asset/img/optionIcon/base_profile_icon.png";
+import React, { useRef } from "react";
 import styles from "./UserProfileOption.module.css";
 
 function UserProfileOption({ currentProfileImg, onChangeProfileImg }) {
   const fileInput = useRef(null);
 
-  const handleChange = (e) => {
-    if (e.target.files[0]) {
-      onChangeProfileImg(e.target.files[0]);
-    } else {
-      onChangeProfileImg(baseProfile);
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        onChangeProfileImg(reader.result);
+  const upLoadImg = async (imgFile) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", imgFile);
+      const response = await fetch(
+        "https://api.imgbb.com/1/upload?key=d0683b0869118bab9113ca272a7d46b1",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response?.ok) {
+        throw new Error("이미지를 업로드 하는 데 실패했습니다.");
       }
-    };
-    reader.readAsDataURL(e.target.files[0]);
+      const data = await response.json();
+      return data.data.url;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
+
+  const handleAddImageDataChange = async (e) => {
+    const { files } = e.target;
+    const uploadFile = files[0];
+
+    if (!uploadFile) return;
+
+    const newImageUrl = await upLoadImg(uploadFile);
+    onChangeProfileImg(newImageUrl);
   };
 
   return (
@@ -26,7 +41,9 @@ function UserProfileOption({ currentProfileImg, onChangeProfileImg }) {
       <button
         type="button"
         className={styles.profile}
-        onClick={() => fileInput.current.click()}
+        onClick={() => {
+          fileInput.current.click();
+        }}
       >
         <img
           className={styles.profileImg}
@@ -37,7 +54,7 @@ function UserProfileOption({ currentProfileImg, onChangeProfileImg }) {
           type="file"
           style={{ display: "none" }}
           accept="image/png, image/jpg, image/jpeg"
-          onChange={handleChange}
+          onChange={handleAddImageDataChange}
           ref={fileInput}
         />
       </button>
@@ -45,4 +62,4 @@ function UserProfileOption({ currentProfileImg, onChangeProfileImg }) {
   );
 }
 
-export default UserProfileOption;
+export default React.memo(UserProfileOption);
