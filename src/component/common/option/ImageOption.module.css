@@ -30,7 +30,7 @@
   position: absolute;
 }
 
-
+/* Tablet-size */
 @media screen and (min-width: 769px) and (max-width: 1248px) {
   .imgOptions {
     grid-template-columns: repeat(4, minmax(168px, 200px));
@@ -38,9 +38,10 @@
   }
 }
 
+/* Mobile-size */
 @media screen and (max-width: 768px) {
   .imgOptions {
-    grid-template-columns: repeat(2, 168px);
-    max-width: 320px;
+    grid-template-columns: repeat(2, minmax(150px, 168px));
+    max-width: 360px;
   }
 }

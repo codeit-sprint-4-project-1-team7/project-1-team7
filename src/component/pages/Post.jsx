@@ -91,11 +91,9 @@ function Post() {
         {selectedButtonName === BUTTON_NAME[1] && <ImageOption clickItem={clickItem} imageData={baseImages} onChange={handleAddImageDataChange} onClick={handleClick} />}
 
         <div className={styles.createButton}>
-          <div style={{ textDecoration: "none" }}>
-            <Button type="primary" height="tall" disabled={!inputValue} onClick={createRolling}>
-              생성하기
-            </Button>
-          </div>
+          <Button type="primary" height="tall" disabled={!inputValue} onClick={createRolling}>
+            생성하기
+          </Button>
         </div>
       </div>
     </div>

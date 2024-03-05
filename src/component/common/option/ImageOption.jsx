@@ -9,7 +9,7 @@ function ImageOption({ clickItem, imageData, onChange, onClick }) {
 
   return (
     <div className={styles.imgOptions}>
-      <button
+      <div
         className={`${styles.option} ${styles.imageAddButton}`}
         type="button"
         onClick={() => fileInput.current.click()}>
@@ -20,7 +20,7 @@ function ImageOption({ clickItem, imageData, onChange, onClick }) {
           accept="image/png, image/jpg, image/jpeg"
           ref={fileInput}
           onChange={onChange}/>
-      </button>
+      </div>
       {imageData.map((item) => {
         return (
           <button
@@ -29,6 +29,7 @@ function ImageOption({ clickItem, imageData, onChange, onClick }) {
                     : {backgroundImage: `url(${item})`}}
             className={styles.option}
             type='button'
+            key={imageData.indexOf(item)}
             value= {item}
             onClick={onClick}>
             { clickItem === item
