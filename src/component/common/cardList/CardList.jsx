@@ -1,17 +1,35 @@
 import ProfileImages from "../header/ProfileImages";
 import styles from "./CardList.module.css";
-import headerServiceStyles from "../header/HeaderService.module.css";
 import { EmojiBadge } from "../badge/EmojiBadge";
 import { useNavigate } from "react-router-dom";
 
 function CardList({ rollingPaperList }) {
-  console.log(rollingPaperList.topReactions);
   const navigation = useNavigate();
+
   const handleCardListClick = (id) => {
     navigation(`/post/${id}`);
   };
+
   return (
     <div className={styles.cardListContainer}>
+      {rollingPaperList?.map(
+        ({
+          backgroundColor,
+          backgroundImageURL,
+          id,
+          messageCount,
+          name,
+          reactionCount,
+          recentMessages,
+          topReactions,
+        }) => (
+          <div
+            key={id}
+            className={`${styles.cardContainer} ${
+              backgroundImageURL ? styles.fontWhite : ""
+            }`}
+            onClick={() => handleCardListClick(id)}
+          >
             <div className={styles.backgroundGroup}>
               {backgroundImageURL ? (
                 <img
@@ -25,21 +43,31 @@ function CardList({ rollingPaperList }) {
                 />
               )}
             </div>
-              </div>
-              <div className={styles.badgeContainer}>
-                <div className={styles.line} />
-                <div className={styles.badge}>
-                  {item.topReactions?.map(({ id, emoji, count }) => (
-                    <EmojiBadge key={id} emoji={emoji} count={count} />
-                  ))}
-                </div>
+
+            <div className={styles.informationContainer}>
+              <div className={styles.toName}>To. {name}</div>
+              <ProfileImages
+                messageCount={messageCount}
+                recentMessages={recentMessages}
+              />
+              <div className={styles.writed}>
+                <span>{messageCount}</span>
+                <span>명이 작성했어요!</span>
               </div>
             </div>
+
+            {reactionCount && (
+              <div className={styles.badge}>
+                {topReactions.map(({ id, emoji, count }) => (
+                  <EmojiBadge key={id} emoji={emoji} count={count} />
+                ))}
+              </div>
+            )}
           </div>
-        ))
-      ) : (
-        <div>롤링 페이퍼가 없어요!</div>
+        )
       )}
+
+      {!!rollingPaperList.length || <div>롤링 페이퍼가 없어요!</div>}
     </div>
   );
 }
