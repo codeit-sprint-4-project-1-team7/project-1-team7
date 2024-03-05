@@ -12,44 +12,19 @@ function CardList({ rollingPaperList }) {
   };
   return (
     <div className={styles.cardListContainer}>
-      {rollingPaperList ? (
-        rollingPaperList.map((item) => (
-          <div
-            onClick={() => handleCardListClick(item.id)}
-            key={item.id}
-            className={styles.cardContainer}
-            style={
-              item.backgroundImageURL === null
-                ? { backgroundColor: `${item.backgroundColor}` }
-                : { backgroundImage: `url(${item.backgroundImageURL})` }
-            }
-          >
-            <div className={styles.contentsContainer}>
-              <div className={styles.informationContainer}>
-                <div className={styles.toName}>To.{item.name}</div>
-                <ProfileImages
-                  imageContainerStyle={headerServiceStyles.imageContainer}
-                  imageStyle={headerServiceStyles.image}
-                  imageTextStyle={styles.imageText}
-                  direction="left"
-                  messageCount={item.messageCount}
-                  recentMessages={item.recentMessages}
+            <div className={styles.backgroundGroup}>
+              {backgroundImageURL ? (
+                <img
+                  src={backgroundImageURL}
+                  alt="배경 화면"
+                  className={`${styles.backgroundItem} ${styles.backgroundImage}`}
                 />
+              ) : (
                 <div
-                  className={headerServiceStyles.writed}
-                  style={{
-                    fontSize: `16px`,
-                    lineHeight: `26px`,
-                    letterSpacing: `-0.16px`,
-                  }}
-                >
-                  <span className={headerServiceStyles.numOfWrited}>
-                    {item.messageCount}
-                  </span>
-                  <span className={headerServiceStyles.writedText}>
-                    명이 작성했어요!
-                  </span>
-                </div>
+                  className={`${styles.backgroundItem} ${styles[backgroundColor]}`}
+                />
+              )}
+            </div>
               </div>
               <div className={styles.badgeContainer}>
                 <div className={styles.line} />
