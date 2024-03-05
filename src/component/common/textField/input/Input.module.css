@@ -106,6 +106,7 @@
 }
 
 .errorMessage {
+  position: absolute;
   margin-top: 4px;
   color: var(--error);
   /* Font/12 Regular */
