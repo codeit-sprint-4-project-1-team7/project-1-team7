@@ -42,10 +42,14 @@ function Card({
     navigate("edit");
   };
 
+  const handleGoBackClick = () => {
+    navigate(-1);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isAddMessageCardVisible && entries[0].isIntersecting && next) {
+        if (entries[0].isIntersecting && next) {
           console.log("함수 실행 진입");
           getMessagesOfRecipient(messageNextOffset);
         }
@@ -67,20 +71,23 @@ function Card({
     <>
       <div
         onContextMenu={handlePreventRightClick}
-        className={styles.backGround}
+        className={`${styles.backGround} ${
+          !image?.includes("http") && styles[image]
+        }`}
         style={
           image?.includes("http")
             ? {
                 backgroundImage: `url(${image})`,
-                backgroundRepeat: `no-repeat`,
+                backgroundRepeat: `repeat`,
+                height: `100%`,
                 backgroundSize: `cover`,
                 backgroundPosition: `center`,
               }
-            : { backgroundColor: `${image}` }
+            : {}
         }
       >
-        <div className={styles.buttonArea}>
-          {isAddMessageCardVisible ? (
+        {isAddMessageCardVisible ? (
+          <div className={styles.buttonArea}>
             <Button
               type="primary"
               width="widthAuto"
@@ -89,7 +96,20 @@ function Card({
             >
               수정하기
             </Button>
-          ) : (
+          </div>
+        ) : (
+          <div
+            style={{ justifyContent: `space-between` }}
+            className={styles.buttonArea}
+          >
+            <Button
+              type="primary"
+              width="widthAuto"
+              height="standard"
+              onClick={handleGoBackClick}
+            >
+              뒤로가기
+            </Button>
             <Button
               type="primary"
               width="widthAuto"
@@ -98,8 +118,8 @@ function Card({
             >
               삭제하기
             </Button>
-          )}
-        </div>
+          </div>
+        )}
         <div className={styles.cardBox}>
           {isAddMessageCardVisible && (
             <div className={styles.cardContainer}>
