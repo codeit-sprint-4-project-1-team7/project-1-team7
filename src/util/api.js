@@ -65,8 +65,8 @@ export function postRecipientApiResponse(obj) {
   return postApi(RECIPIENT_API_URL, obj);
 }
 
-export function getRecipientsApiResponse(recipientId, limit) {
-  const queryString = limit ? `?limit=${limit}&offset=0` : ``;
+export function getRecipientsApiResponse(recipientId, sort) {
+  const queryString = sort === "like" ? `?sort=like` : ``;
   const conditionalRecipientUrl = recipientId
     ? RECIPIENT_API_URL + recipientId + "/" + queryString
     : RECIPIENT_API_URL + queryString;
@@ -87,10 +87,13 @@ export function postMessageApiResponse(obj, recipientId) {
   return postApi(RECIPIENT_API_URL + recipientId + "/messages/", obj);
 }
 
-export function getMessagesApiResponse(recipientId, offset) {
-  const queryString = offset
-    ? `?limit=6&offset=${offset}`
-    : `?limit=5&offset=0`;
+export function getMessagesApiResponse(recipientId, offset, type) {
+  const queryString =
+    type === "edit"
+      ? `?limit=5&offset=0`
+      : offset
+      ? `?limit=6&offset=${offset}`
+      : `?limit=5&offset=0`;
   return getApi(RECIPIENT_API_URL + recipientId + "/messages/" + queryString);
 }
 
@@ -115,19 +118,21 @@ export function getReactionsApiResponse(recipientId) {
 export const upLoadImg = async (imgFile) => {
   try {
     const formData = new FormData();
-    formData.append('image', imgFile);
-    const response = await fetch("https://api.imgbb.com/1/upload?key=d0683b0869118bab9113ca272a7d46b1", {
-      method: 'POST',
-      body: formData,
-    })
+    formData.append("image", imgFile);
+    const response = await fetch(
+      "https://api.imgbb.com/1/upload?key=d0683b0869118bab9113ca272a7d46b1",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     if (!response?.ok) {
-      throw new Error('이미지를 업로드 하는 데 실패했습니다.')
+      throw new Error("이미지를 업로드 하는 데 실패했습니다.");
     }
     const data = await response.json();
-    return data.data.url
-
+    return data.data.url;
   } catch (error) {
-    console.error('Error uploading image:', error);
+    console.error("Error uploading image:", error);
   }
-}
+};
