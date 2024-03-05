@@ -12,6 +12,7 @@ import baseProfile from "../../asset/img/optionIcon/base_profile_icon.png";
 import { useParams, useNavigate } from "react-router-dom";
 import { postMessageApiResponse } from "../../util/api";
 import ProfileImgSelectList from "../common/option/ProfileImgSelectList";
+import { PLACEHOLDER } from "../common/textField/input/placeholder";
 
 function PostMessage() {
   const [nameValue, setNameValue] = useState("");
@@ -101,7 +102,11 @@ function PostMessage() {
       <div className={styles.container}>
         <div className={styles.inputTitle}>From.</div>
         <div className={styles.inputContainer}>
-          <Input inputValue={nameValue} onInputValueChange={handleInputValue} />
+          <Input
+            inputValue={nameValue}
+            onInputValueChange={handleInputValue}
+            placeHolderType={PLACEHOLDER.from}
+          />
         </div>
 
         <div className={styles.profileImgTitle}>프로필 이미지</div>
