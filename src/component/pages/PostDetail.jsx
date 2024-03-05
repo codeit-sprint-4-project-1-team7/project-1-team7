@@ -66,9 +66,9 @@ function PostDetail({ contextMenuVisibleList }) {
   };
 
   const getMessagesOfRecipient = useCallback(
-    async (offset) => {
+    async (offset, type) => {
       setMessagesLoading(true);
-      const response = await getMessagesApiResponse(postId, offset);
+      const response = await getMessagesApiResponse(postId, offset, type);
       if (response.detail) {
         navigate("/notFound");
       }
@@ -86,8 +86,15 @@ function PostDetail({ contextMenuVisibleList }) {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    setMessages([]);
     getRollinginformation();
-    getMessagesOfRecipient();
+    if (location.pathname.includes("edit")) {
+      getMessagesOfRecipient("edit");
+    } else {
+      getMessagesOfRecipient();
+    }
+
     setIsAddMessageCardVisible(!location.pathname.includes("edit"));
     window.addEventListener("resize", handleResize);
     return () => {
