@@ -59,7 +59,7 @@ function Card({
               {texts.goBack}
             </Button>
             <Button
-              type="primary"
+              type="remove"
               width="widthAuto"
               height="standard"
               onClick={onPaperDeleteBtnClick}

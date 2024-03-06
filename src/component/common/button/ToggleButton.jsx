@@ -1,32 +1,21 @@
-import { useState } from "react";
 import styles from "./ToggleButton.module.css";
 
-const toggleItems = ["컬러", "이미지"];
-
-const ToggleButton = () => {
-  const [activeItem, isActiveItem] = useState(toggleItems[0]);
-
-  const handleBtnClick = (e) => isActiveItem(e.target.innerText);
-
+function ToggleButton({ list, selectedButtonName, onClick }) {
   return (
     <div className={styles.toggleArea}>
-      {toggleItems.map((item) => {
-        return item === activeItem ? (
-          <button
-            key={item}
-            className={`${styles.button} ${styles.active}`}
-            onClick={handleBtnClick}
-          >
-            {item}
-          </button>
-        ) : (
-          <button key={item} className={styles.button} onClick={handleBtnClick}>
-            {item}
-          </button>
-        );
-      })}
+      {list.map((item) => (
+        <button
+          key={item}
+          className={`${styles.button} ${
+            item === selectedButtonName ? styles.active : ""
+          }`}
+          onClick={onClick}
+        >
+          {item}
+        </button>
+      ))}
     </div>
   );
-};
+}
 
 export default ToggleButton;
