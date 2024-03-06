@@ -98,6 +98,24 @@
   background-color: var(--white);
 }
 
+.remove {
+  background-color: var(--error);
+  color: var(--white);
+}
+
+.remove:hover {
+  background-color: #c32222;
+}
+
+.remove:active {
+  background-color: #981b1b;
+}
+
+.remove:focus-visible {
+  border: 2px solid #6c1313;
+  background-color: #981b1b;
+}
+
 .width120 {
   width: 120px;
 }
@@ -139,15 +157,7 @@
 
 @media (max-width: 1024px) {
   .width280 {
-    position: fixed;
-    bottom: 24px;
-    padding: 14px 16px;
     width: 100%;
-    min-height: 56px;
-    border-radius: 12px;
-    font-size: var(--l);
-    font-weight: var(--bold);
-    letter-spacing: -0.18px;
     z-index: 10;
   }
 }

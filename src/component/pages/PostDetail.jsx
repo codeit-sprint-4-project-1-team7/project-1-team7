@@ -15,7 +15,10 @@ import copy from "copy-to-clipboard";
 import ModalPortal from "../common/modal/ModalPortal";
 import { Toast } from "../common/toast/Toast";
 
-function PostDetail({ contextMenuVisibleList }) {
+function PostDetail({
+  contextMenuVisibleList,
+  setIsEmojiApiContextMenuVisible,
+}) {
   const navigate = useNavigate();
   const location = useLocation();
   const { postId } = useParams();
@@ -39,9 +42,8 @@ function PostDetail({ contextMenuVisibleList }) {
   const backgroundImageStyle = (imageUrl) => ({
     backgroundImage: `url(${imageUrl})`,
     backgroundRepeat: `repeat`,
-    height: `100%`,
-    backgroundSize: `cover`,
-    backgroundPosition: `center`,
+    backgroundSize: `100vw`,
+    backgroundPosition: `top`,
   });
 
   const getEmoji = useCallback(async () => {
@@ -61,6 +63,7 @@ function PostDetail({ contextMenuVisibleList }) {
   const handleEmojiClick = async (e) => {
     const emojiLists = await postEmoji(e);
     setContextMenuEmojiList(emojiLists);
+    setIsEmojiApiContextMenuVisible(false);
   };
 
   const handleShareUrlClick = () => {
@@ -70,19 +73,19 @@ function PostDetail({ contextMenuVisibleList }) {
 
   const handleToastCloseClick = () => setIsToastVisible(!isToastVisible);
 
-  const handleCardDeleteBtnClick = async (e, id) => {
+  const handleCardDeleteBtnClick = useCallback(async (e, id) => {
     e.stopPropagation();
 
     await deleteMessageApiResponse(id);
     setMessages((prevMessage) =>
       prevMessage.filter((message) => message.id !== id)
     );
-  };
+  }, []);
 
-  const handlePaperDeleteBtnClick = async () => {
+  const handlePaperDeleteBtnClick = useCallback(async () => {
     await deleteRecipientApiResponse(postId);
     navigate("/list");
-  };
+  }, [postId, navigate]);
 
   const getRollinginformation = useCallback(async () => {
     const response = await getRecipientsApiResponse(postId);
