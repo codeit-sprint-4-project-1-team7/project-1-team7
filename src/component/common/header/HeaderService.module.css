@@ -13,10 +13,9 @@
 }
 
 .toName {
-  color: var(--gray-800, #2b2b2b);
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
+  color: var(--gray-800);
+  font-size: var(--xxxl);
+  font-weight: var(--bold);
   line-height: 42px;
   letter-spacing: -0.28px;
 }
@@ -38,7 +37,7 @@
   display: none;
   height: 1px;
   flex-shrink: 0;
-  background: #ededed;
+  background-color: var(--gray-200);
 }
 
 .imageContainer {
@@ -52,30 +51,12 @@
   position: absolute;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: white;
+  background-color: var(--white);
   width: 28px;
   height: 28px;
   flex-shrink: 0;
-  border: 1px solid #fff;
+  border: 1px solid var(--white);
   border-radius: 50%;
-}
-
-.imageText {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  border: 1px solid #e3e3e3;
-  border-radius: 14px;
-  background-color: #fff;
-  color: #484848;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 18px;
-  padding: 0 5px;
 }
 
 .textPadding {
@@ -83,25 +64,24 @@
 }
 
 .writed {
-  color: var(--gray-900, #181818);
-  font-style: normal;
-  font-size: 18px;
+  color: var(--gray-900);
+  font-size: var(--l);
   line-height: 27px;
 }
 
 .numOfWrited {
-  font-weight: 700;
+  font-weight: var(--bold);
 }
 
 .writedText {
-  font-weight: 400;
+  font-weight: var(--regular);
 }
 
 .writedBar,
 .shareContainerBar {
   width: 1px;
   height: 28px;
-  background: var(--gray-200, #eee);
+  background: var(--gray-200);
 }
 .badgeContainer {
   display: flex;
@@ -143,8 +123,8 @@
   position: absolute;
   width: 315px;
   border-radius: 8px;
-  border: 1px solid #b6b6b6;
-  background: #fff;
+  border: 1px solid var(--gray-300);
+  background-color: var(--white);
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   top: 40px;
   right: 0px;
@@ -172,8 +152,8 @@
   width: 138px;
   border-radius: 8px;
   z-index: 10;
-  border: 1px solid var(--gray-300, #ccc);
-  background: var(--white, #fff);
+  border: 1px solid var(--gray-300);
+  background: var(--white);
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   top: 40px;
   padding: 10px 0;
@@ -184,7 +164,7 @@
 }
 
 .shareButtonElement:hover {
-  background: var(--gray-100, #f6f6f6);
+  background: var(--gray-100);
   border-radius: 8px;
   cursor: pointer;
 }
@@ -226,7 +206,7 @@
   }
 
   .toName {
-    font-size: 18px;
+    font-size: var(--l);
     line-height: 28px;
     letter-spacing: -0.18px;
   }
