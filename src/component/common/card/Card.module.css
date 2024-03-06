@@ -29,7 +29,8 @@
   justify-content: center;
 }
 
-.cardContainer {
+.cardContainer,
+.cardContainerLoading {
   height: 284px;
   flex-shrink: 0;
   border-radius: 16px;
@@ -37,6 +38,14 @@
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 28px 24px 0 24px;
   position: relative;
+}
+
+.cardContainerLoading {
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  background: var(--gray-200);
 }
 
 .cardPlus {
@@ -160,15 +169,6 @@
   align-items: center;
   height: 100px;
   padding-top: 50px;
-}
-
-.spinner {
-  border: 10px solid rgba(0, 0, 0, 0.1);
-  border-top: 10px solid #3498db;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 1s linear infinite;
 }
 
 .beige {
