@@ -1,11 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Kim } from "./component/test/Kim";
-import { Yang } from "./component/test/Yang";
-import { Yun } from "./component/test/Yun";
-import { Choi } from "./component/test/Choi";
-import { Hong } from "./component/test/Hong";
-import TestMain from "./component/testMain/TestMain";
 import Main from "./component/pages/Main";
 import List from "./component/pages/List";
 import Post from "./component/pages/Post";
@@ -62,17 +56,6 @@ function App() {
     <BrowserRouter>
       <div onClick={handleContextMenuVisibleClick}>
         <Routes>
-          <Route path="/test">
-            <Route index element={<TestMain />} />
-            <Route
-              path="kim"
-              element={<Kim contextMenuVisibleList={contextMenuVisibleList} />}
-            />
-            <Route path="yang" element={<Yang />} />
-            <Route path="yun" element={<Yun />} />
-            <Route path="choi" element={<Choi />} />
-            <Route path="hong" element={<Hong />} />
-          </Route>
           <Route path="/" element={<Layout />}>
             <Route index element={<Main />} />
             <Route path="list" element={<List />} />
