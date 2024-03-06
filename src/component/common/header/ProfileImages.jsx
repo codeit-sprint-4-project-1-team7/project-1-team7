@@ -1,4 +1,5 @@
 import styles from "./ProfileImages.module.css";
+import texts from "./headerCommonTexts";
 
 function ProfileImages({ direction, messageCount, recentMessages }) {
   return (
@@ -9,7 +10,7 @@ function ProfileImages({ direction, messageCount, recentMessages }) {
             key={id}
             className={styles.profileImg}
             src={profileImageURL}
-            alt="프로필 사진"
+            alt={texts.profileImageAlt}
           />
         ))}
         {messageCount > 3 && (
