@@ -33,7 +33,7 @@
   height: 284px;
   flex-shrink: 0;
   border-radius: 16px;
-  background: var(--white, #fff);
+  background: var(--white);
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   padding: 28px 24px 0 24px;
   position: relative;
@@ -49,7 +49,7 @@
   transform: translate(-50%, -50%);
   width: 56px;
   height: 56px;
-  background: var(--gray-500, #555);
+  background: var(--gray-500);
   border-radius: 100px;
 }
 
@@ -84,7 +84,7 @@
   width: 56px;
   height: 56px;
   border-radius: 100px;
-  border: 1px solid var(--gray-200, #eee);
+  border: 1px solid var(--gray-20);
 }
 
 .nameAndBadgeContainer {
@@ -105,24 +105,13 @@
   align-items: center;
   gap: 10px;
   border-radius: 4px;
-  background: var(--Purple-100, #f8f0ff);
+  background: var(--purple-100);
   width: 41px;
-}
-
-.badgeText {
-  color: var(--Purple-600, #9935ff);
-  /* Font/14 Regular */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.07px;
 }
 
 .line {
   height: 1px;
-  background: var(--gray-200, #eee);
+  background: var(--gray-200);
 }
 
 .textAreaContainer {
@@ -136,10 +125,8 @@
   right: 24px;
   line-height: normal;
   overflow: hidden;
-  color: var(--gray-600, #4a4a4a);
+  color: var(--gray-600);
   text-overflow: ellipsis;
-
-  /* Font/18 Regular */
 
   border: none;
   outline: none;
@@ -154,29 +141,10 @@
   left: 24px;
   bottom: 24px;
 
-  color: var(--gray-400, #383535);
-  /* Font/12 Regular */
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px; /* 150% */
-  letter-spacing: -0.06px;
-}
-
-.overFlowed {
-  position: absolute;
-  right: 24px;
-  bottom: 30px;
-
-  width: 10px;
-  color: var(--gray-400, #383535);
-  /* Font/12 Regular */
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px; /* 150% */
+  color: var(--gray-400);
+  font-size: var(--xxs);
+  font-weight: var(--regular);
+  line-height: 18px;
   letter-spacing: -0.06px;
 }
 
