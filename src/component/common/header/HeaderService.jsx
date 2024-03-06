@@ -86,7 +86,10 @@ function HeaderService({
                     {texts.add}
                   </Button>
                   {contextMenuVisibleList.isEmojiApiContextMenuVisible && (
-                    <div className={styles.emojiApiContainer}>
+                    <div
+                      id="emojiPickerContainer"
+                      className={styles.emojiApiContainer}
+                    >
                       <EmojiPicker
                         searchDisabled={true}
                         skinTonesDisabled={true}

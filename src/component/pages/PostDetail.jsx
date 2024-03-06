@@ -15,7 +15,10 @@ import copy from "copy-to-clipboard";
 import ModalPortal from "../common/modal/ModalPortal";
 import { Toast } from "../common/toast/Toast";
 
-function PostDetail({ contextMenuVisibleList }) {
+function PostDetail({
+  contextMenuVisibleList,
+  setIsEmojiApiContextMenuVisible,
+}) {
   const navigate = useNavigate();
   const location = useLocation();
   const { postId } = useParams();
@@ -29,7 +32,6 @@ function PostDetail({ contextMenuVisibleList }) {
   const [messageNextOffset, setMessageNextOffset] = useState(0);
   const [next, setNext] = useState("");
   const [messagesLoading, setMessagesLoading] = useState(false);
-
   const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
   const [isToastVisible, setIsToastVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -40,9 +42,8 @@ function PostDetail({ contextMenuVisibleList }) {
   const backgroundImageStyle = (imageUrl) => ({
     backgroundImage: `url(${imageUrl})`,
     backgroundRepeat: `repeat`,
-    height: `100%`,
-    backgroundSize: `cover`,
-    backgroundPosition: `center`,
+    backgroundSize: `100vw`,
+    backgroundPosition: `top`,
   });
 
   const getEmoji = useCallback(async () => {
@@ -62,6 +63,7 @@ function PostDetail({ contextMenuVisibleList }) {
   const handleEmojiClick = async (e) => {
     const emojiLists = await postEmoji(e);
     setContextMenuEmojiList(emojiLists);
+    setIsEmojiApiContextMenuVisible(false);
   };
 
   const handleShareUrlClick = () => {
