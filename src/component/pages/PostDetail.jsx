@@ -29,6 +29,7 @@ function PostDetail({ contextMenuVisibleList }) {
   const [messageNextOffset, setMessageNextOffset] = useState(0);
   const [next, setNext] = useState("");
   const [messagesLoading, setMessagesLoading] = useState(false);
+
   const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
   const [isToastVisible, setIsToastVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -70,19 +71,19 @@ function PostDetail({ contextMenuVisibleList }) {
 
   const handleToastCloseClick = () => setIsToastVisible(!isToastVisible);
 
-  const handleCardDeleteBtnClick = async (e, id) => {
+  const handleCardDeleteBtnClick = useCallback(async (e, id) => {
     e.stopPropagation();
 
     await deleteMessageApiResponse(id);
     setMessages((prevMessage) =>
       prevMessage.filter((message) => message.id !== id)
     );
-  };
+  }, []);
 
-  const handlePaperDeleteBtnClick = async () => {
+  const handlePaperDeleteBtnClick = useCallback(async () => {
     await deleteRecipientApiResponse(postId);
     navigate("/list");
-  };
+  }, [postId, navigate]);
 
   const getRollinginformation = useCallback(async () => {
     const response = await getRecipientsApiResponse(postId);
