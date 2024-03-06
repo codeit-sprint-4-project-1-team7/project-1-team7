@@ -5,7 +5,9 @@ import styles from "./ProfileImgSelectList.module.css";
 function ProfileImgSelectList({ idx, profileImg, onClickImg }) {
   const [isLoad, setIsLoad] = useState(false);
   const handleLoad = () => {
-    setIsLoad(true);
+    setTimeout(() => {
+      setIsLoad(true);
+    }, 200);
   };
 
   return (
