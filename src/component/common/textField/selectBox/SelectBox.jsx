@@ -60,13 +60,3 @@ function SelectBox({ selectValue, onSelectValueChange, selectType }) {
 }
 
 export default React.memo(SelectBox);
-
-// TODO: 추후에 error 상황이나 disabled 상황 있을시 추가 예정
-// const [isError, setIsError] = useState(false);
-// const [isDisabled, setIsDisabled] = useState(false);
-// const buttonClassName = isDisabled
-//   ? styles.disabled
-//   : isError
-//   ? styles.error
-//   : styles.button;
-//    {isError && <div className={styles.errorMessage}>선택해주세요</div>}
