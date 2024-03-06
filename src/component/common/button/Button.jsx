@@ -1,6 +1,5 @@
 import styles from "./Button.module.css";
 import CircleButton from "./CircleButton";
-import ToggleButton from "./ToggleButton";
 
 /**
  *
@@ -25,10 +24,6 @@ function Button({
 }) {
   if (type === "circle") {
     return <CircleButton icon={icon} onClick={onClick} />;
-  }
-
-  if (type === "toggle") {
-    return <ToggleButton />;
   }
 
   const className = `${styles.btn} ${styles[height]} ${styles[type]} ${
