@@ -63,7 +63,6 @@ function PostMessage() {
   }, []);
 
   const postData = useCallback(() => {
-    //test recipientId: 2889
     const data = {
       recipientId: postId,
       sender: nameValue,
@@ -77,8 +76,6 @@ function PostMessage() {
     postMessageApiResponse(data, postId).then(() => {
       navigate(`/post/${postId}`);
     });
-
-    // console.log(data);
   }, [
     postId,
     nameValue,
@@ -160,6 +157,7 @@ function PostMessage() {
         <Button
           type={"primary"}
           width={"100%"}
+          height="tall"
           onClick={postData}
           disabled={nameValue && quillValue ? false : true}
         >
