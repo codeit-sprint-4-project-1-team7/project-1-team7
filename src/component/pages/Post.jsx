@@ -88,9 +88,7 @@ function Post() {
           </p>
         </div>
         <div className={styles.selectButton}>
-          <div onClick={handleButtonClick}>
-            <ToggleButton />
-          </div>
+          <ToggleButton list={BUTTON_NAME} selectedButtonName={selectedButtonName} onClick={handleButtonClick}/>
         </div>
         <div>
           {selectedButtonName === BUTTON_NAME[0]
