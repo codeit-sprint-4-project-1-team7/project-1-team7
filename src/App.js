@@ -50,12 +50,15 @@ function App() {
     if (
       !e.target.closest("#emojiListButton") &&
       !e.target.closest("#shareButton") &&
-      !e.target.closest("#addEmojiButton")
+      !e.target.closest("#addEmojiButton") &&
+      !e.target.closest("#emojiPickerContainer")
     ) {
+      console.log(e);
       setIsShareContextMenuVisible(false);
       setIsEmojiApiContextMenuVisible(false);
       setIsEmojiContextMenuVisible(false);
     }
+    console.log(e.target.closest("#emojiPickerContainer"));
   };
   return (
     <BrowserRouter>
@@ -83,6 +86,9 @@ function App() {
                   element={
                     <PostDetail
                       contextMenuVisibleList={contextMenuVisibleList}
+                      setIsEmojiApiContextMenuVisible={
+                        setIsEmojiApiContextMenuVisible
+                      }
                     />
                   }
                 />

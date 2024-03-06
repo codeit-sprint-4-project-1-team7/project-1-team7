@@ -15,7 +15,10 @@ import copy from "copy-to-clipboard";
 import ModalPortal from "../common/modal/ModalPortal";
 import { Toast } from "../common/toast/Toast";
 
-function PostDetail({ contextMenuVisibleList }) {
+function PostDetail({
+  contextMenuVisibleList,
+  setIsEmojiApiContextMenuVisible,
+}) {
   const navigate = useNavigate();
   const location = useLocation();
   const { postId } = useParams();
@@ -60,6 +63,7 @@ function PostDetail({ contextMenuVisibleList }) {
   const handleEmojiClick = async (e) => {
     const emojiLists = await postEmoji(e);
     setContextMenuEmojiList(emojiLists);
+    setIsEmojiApiContextMenuVisible(false);
   };
 
   const handleShareUrlClick = () => {
