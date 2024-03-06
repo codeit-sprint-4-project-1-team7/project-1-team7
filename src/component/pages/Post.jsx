@@ -8,7 +8,6 @@ import ToggleButton from "../common/button/ToggleButton";
 import ColorOption from "../common/option/ColorOption";
 import ImageOption from "../common/option/ImageOption";
 
-
 const BUTTON_NAME = ["컬러", "이미지"];
 const NEW_PAGE = {
   name: '',
@@ -21,6 +20,7 @@ function Post() {
   const [selectedButtonName, setSelectedButtonName] = useState(BUTTON_NAME[0]);
   const [clickItem, setClickItem] = useState('beige');
   const [baseImages, setBaseImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = (e) => {
@@ -28,7 +28,12 @@ function Post() {
   }
   
   const handleInputValue = (value) => setInputValue(value);
-  const handleButtonClick = (e) => setSelectedButtonName(e.target.innerText);
+  const handleButtonClick = (e) => {
+    setSelectedButtonName(e.target.innerText);
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 200);
+  }
 
   const handleAddImageDataChange = async (e) => {
     const { files } = e.target;
@@ -83,15 +88,22 @@ function Post() {
           </p>
         </div>
         <div className={styles.selectButton}>
-          <div onClick={handleButtonClick}>
-            <ToggleButton />
-          </div>
+          <ToggleButton list={BUTTON_NAME} selectedButtonName={selectedButtonName} onClick={handleButtonClick}/>
         </div>
-        {selectedButtonName === BUTTON_NAME[0] && <ColorOption clickItem={clickItem} onClick={handleClick} />}
-        {selectedButtonName === BUTTON_NAME[1] && <ImageOption clickItem={clickItem} imageData={baseImages} onChange={handleAddImageDataChange} onClick={handleClick} />}
+        <div>
+          {selectedButtonName === BUTTON_NAME[0]
+            && <ColorOption clickItem={clickItem}
+                            onClick={handleClick} />}
+          {selectedButtonName === BUTTON_NAME[1]
+            && <ImageOption clickItem={clickItem}
+                            imageData={baseImages}
+                            onChange={handleAddImageDataChange}
+                            onClick={handleClick}
+                            isLoading={isLoading} />}
+        </div>
 
         <div className={styles.createButton}>
-          <Button type="primary" height="tall" disabled={!inputValue} onClick={createRolling}>
+          <Button type="primary" height="tall" disabled={!inputValue} onClick={createRolling} >
             생성하기
           </Button>
         </div>
