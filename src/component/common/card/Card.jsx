@@ -1,90 +1,38 @@
-import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 import styles from "./Card.module.css";
 import DOMPurify from "dompurify";
 import { fontMappings } from "../textField/selectBox/fontMappings";
-import { useEffect, useRef, useState } from "react";
+import { Badge } from "../badge/Badge";
 import ModalPortal from "../modal/ModalPortal";
 import { Modal } from "../modal/Modal";
-import { Badge } from "../badge/Badge";
+import { FadeLoader } from "react-spinners";
+import texts from "./cardCommonTexts";
 
 function Card({
   messagesLoading,
-  next,
   messages,
-  messageNextOffset,
-  getMessagesOfRecipient,
   isAddMessageCardVisible,
   image,
   onCardDeleteBtnClick,
   onPaperDeleteBtnClick,
+  onCardModalClick,
+  onAddMessageButtonClick,
+  onPreventRightClick,
+  onEditButtonClick,
+  onGoBackClick,
+  backgroundImageStyle,
+  modalItem,
+  isModalVisible,
+  target,
 }) {
-  const target = useRef(null);
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalItem, setModalItem] = useState(null);
-  const navigate = useNavigate();
-
-  const handleCardModalClick = (item) => {
-    setModalItem(item);
-    setIsModalVisible(!isModalVisible);
-  };
-
-  const handleAddMessageButtonClick = () => {
-    navigate("message");
-  };
-
-  const handlePreventRightClick = (e) => {
-    e.preventDefault();
-  };
-
-  const handleEditButtonClick = () => {
-    navigate("edit");
-  };
-
-  const handleGoBackClick = () => {
-    navigate(-1);
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && next) {
-          console.log("함수 실행 진입");
-          getMessagesOfRecipient(messageNextOffset);
-        }
-      },
-      { threshold: 1 }
-    );
-
-    if (target.current) {
-      observer.observe(target.current);
-    }
-    return () => observer.disconnect();
-  }, [
-    messageNextOffset,
-    getMessagesOfRecipient,
-    next,
-    isAddMessageCardVisible,
-  ]);
   return (
     <>
       <div
-        onContextMenu={handlePreventRightClick}
+        onContextMenu={onPreventRightClick}
         className={`${styles.backGround} ${
           !image?.includes("http") && styles[image]
         }`}
-        style={
-          image?.includes("http")
-            ? {
-                backgroundImage: `url(${image})`,
-                backgroundRepeat: `repeat`,
-                height: `100%`,
-                backgroundSize: `cover`,
-                backgroundPosition: `center`,
-              }
-            : {}
-        }
+        style={image?.includes("http") ? backgroundImageStyle(image) : {}}
       >
         {isAddMessageCardVisible ? (
           <div className={styles.buttonArea}>
@@ -92,9 +40,9 @@ function Card({
               type="primary"
               width="widthAuto"
               height="standard"
-              onClick={handleEditButtonClick}
+              onClick={onEditButtonClick}
             >
-              수정하기
+              {texts.edit}
             </Button>
           </div>
         ) : (
@@ -106,9 +54,9 @@ function Card({
               type="primary"
               width="widthAuto"
               height="standard"
-              onClick={handleGoBackClick}
+              onClick={onGoBackClick}
             >
-              뒤로가기
+              {texts.goBack}
             </Button>
             <Button
               type="primary"
@@ -116,88 +64,87 @@ function Card({
               height="standard"
               onClick={onPaperDeleteBtnClick}
             >
-              삭제하기
+              {texts.delete}
             </Button>
           </div>
         )}
         <div className={styles.cardBox}>
-          {isAddMessageCardVisible && (
-            <div className={styles.cardContainer}>
-              <div className={styles.cardPlus}>
-                <Button
-                  type="circle"
-                  icon="plus"
-                  onClick={handleAddMessageButtonClick}
-                />
-              </div>
-            </div>
-          )}
-          {messages?.map((item) => (
-            <div
-              onClick={() => handleCardModalClick(item)}
-              key={item.id}
-              className={styles.cardContainer}
-            >
-              <div className={styles.profileContainer}>
-                <div className={styles.profile}>
-                  <div
-                    className={styles.img}
-                    style={{ backgroundImage: `url(${item.profileImageURL})` }}
+          <>
+            {isAddMessageCardVisible && (
+              <div className={styles.cardContainer}>
+                <div className={styles.cardPlus}>
+                  <Button
+                    type="circle"
+                    icon="plus"
+                    onClick={onAddMessageButtonClick}
                   />
-                  <div className={styles.nameAndBadgeContainer}>
-                    <div className={styles.nameContainer}>
-                      <span>From.</span>
-                      <span>{item.sender}</span>
-                    </div>
-                    <Badge relation={item.relationship} />
-                  </div>
-                  {!isAddMessageCardVisible && (
-                    <div className={styles.trashButton}>
-                      <Button
-                        type="outlined"
-                        height="standard"
-                        icon="delete"
-                        onClick={(e) => onCardDeleteBtnClick(e, item.id)}
-                      />
-                    </div>
-                  )}
                 </div>
-                <div className={styles.line} />
               </div>
-              <div className={styles.textAreaContainer}>
-                <div
-                  className={styles.textBox}
-                  style={{ fontFamily: `${fontMappings[item.font]}` }}
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(item.content),
-                  }}
-                />
-                <span className={styles.date}>
-                  {item.createdAt.slice(0, 10)}
-                </span>
-              </div>
-            </div>
-          ))}
-
-          <ModalPortal>
-            {isModalVisible && (
-              <Modal item={modalItem} onClick={handleCardModalClick} />
             )}
-          </ModalPortal>
+            {messages?.map((item) => (
+              <div
+                onClick={() => onCardModalClick(item)}
+                key={item.id}
+                className={styles.cardContainer}
+              >
+                <div className={styles.profileContainer}>
+                  <div className={styles.profile}>
+                    <div
+                      className={styles.img}
+                      style={{
+                        backgroundImage: `url(${item.profileImageURL})`,
+                      }}
+                    />
+                    <div className={styles.nameAndBadgeContainer}>
+                      <div className={styles.nameContainer}>
+                        <span>From.</span>
+                        <span>{item.sender}</span>
+                      </div>
+                      <Badge relation={item.relationship} />
+                    </div>
+                    {!isAddMessageCardVisible && (
+                      <div className={styles.trashButton}>
+                        <Button
+                          type="outlined"
+                          height="standard"
+                          icon="delete"
+                          onClick={(e) => onCardDeleteBtnClick(e, item.id)}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <div className={styles.line} />
+                </div>
+                <div className={styles.textAreaContainer}>
+                  <div
+                    className={styles.textBox}
+                    style={{ fontFamily: `${fontMappings[item.font]}` }}
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(item.content),
+                    }}
+                  />
+                  <span className={styles.date}>
+                    {item.createdAt.slice(0, 10)}
+                  </span>
+                </div>
+              </div>
+            ))}
+            <ModalPortal>
+              {isModalVisible && (
+                <Modal item={modalItem} onClick={onCardModalClick} />
+              )}
+            </ModalPortal>
+          </>
         </div>
-        {messagesLoading && <Spinner />}
+        {messagesLoading && (
+          <div className={styles.spinnerContainer}>
+            <FadeLoader color={texts.color} />
+          </div>
+        )}
       </div>
       <div ref={target} className={styles.intersectionTarget} />
     </>
   );
 }
-
-const Spinner = () => {
-  return (
-    <div className={styles.spinnerContainer}>
-      <div className={styles.spinner} />
-    </div>
-  );
-};
 
 export default Card;
