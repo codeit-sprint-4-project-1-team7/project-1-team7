@@ -56,7 +56,7 @@ function CardList({ rollingPaperList }) {
               </div>
             </div>
 
-            {reactionCount && (
+            {!!reactionCount && (
               <div className={styles.badge}>
                 {topReactions.map(({ id, emoji, count }) => (
                   <EmojiBadge key={id} emoji={emoji} count={count} />
