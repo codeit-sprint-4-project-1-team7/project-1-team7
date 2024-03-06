@@ -121,11 +121,6 @@
 }
 
 @media (max-width: 1200px) {
-  .noCard {
-    margin-left: 24px;
-    width: calc(100% - 48px);
-  }
-
   .cardContainer:first-child {
     margin-left: 24px;
   }
@@ -139,10 +134,8 @@
   .noCard {
     padding: 90px;
     align-items: start;
-    margin-left: 24px;
-    width: calc(100% - 48px);
   }
-  
+
   .cardListContainer {
     gap: 12px;
   }
