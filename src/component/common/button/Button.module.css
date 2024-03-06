@@ -98,6 +98,11 @@
   background-color: var(--white);
 }
 
+.remove {
+  background-color: var(--error);
+  color: var(--white);
+}
+
 .width120 {
   width: 120px;
 }
