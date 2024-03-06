@@ -1,29 +1,28 @@
 import { useEffect } from "react";
+import texts from "./headerCommonTexts";
 const { Kakao } = window;
 
-function KaKaoShare({ className, name, description, image }) {
-  const url = window.location.href;
+function KaKaoShare({ className, name, image, url }) {
   useEffect(() => {
     Kakao.cleanup();
-    Kakao.init("e9dde7fd5c20bdfdf100d47b1f8da3d3");
+    Kakao.init("fe9739da7235c8aa3133ed61bb23d7a0");
   }, []);
 
   const handleKakaoClick = () => {
     Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
-        title: `롤링 페이퍼 | `,
-        description: `${name}님의 롤링 페이퍼를 확인해보세요!`,
+        title: `Rolling | `,
+        description: `${name}${texts.description}!`,
         imageUrl: `${image}`,
         link: {
-          // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
           mobileWebUrl: url,
           webUrl: url,
         },
       },
       buttons: [
         {
-          title: "웹으로 보기",
+          title: `${texts.kakaobuttonTitle}`,
           link: {
             mobileWebUrl: url,
             webUrl: url,
@@ -34,7 +33,7 @@ function KaKaoShare({ className, name, description, image }) {
   };
   return (
     <div onClick={handleKakaoClick} className={className}>
-      카카오톡 공유
+      {texts.kakaoshare}
     </div>
   );
 }

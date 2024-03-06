@@ -1,19 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
 import commonStyles from "./Header.module.css";
 import styles from "./HeaderService.module.css";
 import KaKaoShare from "./KaKaoShare";
 import ProfileImages from "./ProfileImages";
 import { EmojiBadge } from "../badge/EmojiBadge";
-import {
-  getReactionsApiResponse,
-  postReactionApiResponse,
-} from "../../../util/api";
 import EmojiPicker from "emoji-picker-react";
 import Button from "../button/Button";
-import copy from "copy-to-clipboard";
-import { Toast } from "../toast/Toast";
-import ModalPortal from "../modal/ModalPortal";
-
+import texts from "./headerCommonTexts";
 function HeaderService({
   contextMenuVisibleList,
   messageCount,
@@ -21,49 +13,11 @@ function HeaderService({
   name,
   image,
   isImojiContainerSmall,
-  postId,
+  onEmojiClick,
+  onShareUrlClick,
+  contextMenuEmojiList,
+  pageUrl,
 }) {
-  const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
-
-  const [isToastVisible, setIsToastVisible] = useState(false);
-
-  const getEmoji = useCallback(async () => {
-    //test recipientId: 2889
-    const response = await getReactionsApiResponse(postId);
-    if (!response) return;
-    setContextMenuEmojiList(response.results);
-    return response.results;
-  }, [postId]);
-
-  const postEmoji = async (e) => {
-    const obj = { emoji: e.emoji, type: "increase" };
-    const response = await postReactionApiResponse(obj, postId);
-    if (!response) return;
-    return getEmoji();
-  };
-
-  const handleEmojiClick = async (e) => {
-    const emojiLists = await postEmoji(e);
-    setContextMenuEmojiList(emojiLists);
-  };
-
-  const handleShareUrlClick = () => {
-    copy(window.location.href);
-    setIsToastVisible(!isToastVisible);
-  };
-
-  const handleToastCloseClick = () => setIsToastVisible(!isToastVisible);
-
-  useEffect(() => {
-    getEmoji();
-    const timer = setTimeout(() => {
-      if (isToastVisible) setIsToastVisible(false);
-    }, 3000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isToastVisible, getEmoji]);
-
   return (
     <>
       <div className={commonStyles.header}>
@@ -75,16 +29,13 @@ function HeaderService({
           <div className={styles.emojiBadgeContainer}>
             <div className={styles.writedContainer}>
               <ProfileImages
-                imageContainerStyle={styles.imageContainer}
-                imageStyle={styles.image}
-                imageTextStyle={styles.imageText}
                 direction="right"
                 messageCount={messageCount}
                 recentMessages={recentMessages}
               />
               <div className={styles.writed}>
                 <span className={styles.numOfWrited}>{messageCount}</span>
-                <span className={styles.writedText}>명이 작성했어요!</span>
+                <span className={styles.writedText}>{texts.writed}</span>
               </div>
             </div>
             <div className={styles.writedBar} />
@@ -132,14 +83,14 @@ function HeaderService({
                     height="short"
                     icon="add"
                   >
-                    추가
+                    {texts.add}
                   </Button>
                   {contextMenuVisibleList.isEmojiApiContextMenuVisible && (
                     <div className={styles.emojiApiContainer}>
                       <EmojiPicker
                         searchDisabled={true}
                         skinTonesDisabled={true}
-                        onEmojiClick={handleEmojiClick}
+                        onEmojiClick={onEmojiClick}
                       />
                     </div>
                   )}
@@ -158,19 +109,17 @@ function HeaderService({
                         className={styles.shareButtonElement}
                         name={name}
                         image={image}
+                        url={pageUrl}
                       />
                       <div
-                        onClick={handleShareUrlClick}
+                        onClick={onShareUrlClick}
                         className={styles.shareButtonElement}
                       >
-                        URL 공유
+                        {texts.share}
                       </div>
                     </div>
                   )}
                 </div>
-                <ModalPortal>
-                  {isToastVisible && <Toast onClick={handleToastCloseClick} />}
-                </ModalPortal>
               </div>
             </div>
           </div>

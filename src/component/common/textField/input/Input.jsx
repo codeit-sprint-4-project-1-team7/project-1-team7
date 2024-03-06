@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./Input.module.css";
 import { PLACEHOLDER } from "./placeholder";
 
-function Input({ inputValue, onInputValueChange }) {
+function Input({
+  inputValue,
+  onInputValueChange,
+  placeHolderType = PLACEHOLDER.to,
+}) {
   const [isError, setIsError] = useState(false);
   const inputRef = useRef(null);
 
@@ -21,6 +25,8 @@ function Input({ inputValue, onInputValueChange }) {
         !inputRef.current.contains(e.target)
       ) {
         setIsError(true);
+      } else {
+        setIsError(false);
       }
     };
 
@@ -37,7 +43,7 @@ function Input({ inputValue, onInputValueChange }) {
         className={className}
         type="text"
         ref={inputRef}
-        placeholder={PLACEHOLDER.to}
+        placeholder={placeHolderType}
         value={inputValue}
         onChange={handleonChangeValue}
       />

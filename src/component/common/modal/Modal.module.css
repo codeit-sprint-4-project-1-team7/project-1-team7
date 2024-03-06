@@ -78,6 +78,7 @@
 .modalMessage {
   overflow: auto;
   height: 100%;
+  line-height: normal;
 }
 .modalMessage::-webkit-scrollbar {
   width: 20px;

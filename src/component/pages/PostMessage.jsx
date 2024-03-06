@@ -11,6 +11,8 @@ import UserProfileOption from "../common/option/UserProfileOption";
 import baseProfile from "../../asset/img/optionIcon/base_profile_icon.png";
 import { useParams, useNavigate } from "react-router-dom";
 import { postMessageApiResponse } from "../../util/api";
+import ProfileImgSelectList from "../common/option/ProfileImgSelectList";
+import { PLACEHOLDER } from "../common/textField/input/placeholder";
 
 function PostMessage() {
   const [nameValue, setNameValue] = useState("");
@@ -26,17 +28,17 @@ function PostMessage() {
   const textContainerRef = useRef(null);
 
   const handleInputValue = useCallback((value) => {
-    setNameValue(() => value);
+    setNameValue(value);
   }, []);
   const handleCurrentRelation = useCallback((value) => {
-    setCurrentRelation(() => value);
+    setCurrentRelation(value);
   }, []);
   const handleCurrentFont = useCallback((font) => {
-    setCurrentFont(() => font);
+    setCurrentFont(font);
   }, []);
   const handleQuillValue = useCallback((value) => {
     const cleanedHtml = value.replace(/<p><br><\/p>/g, "");
-    setQuillValue(() => cleanedHtml);
+    setQuillValue(cleanedHtml);
   }, []);
   const handleClickProfileImgList = useCallback(
     (idx) => {
@@ -45,7 +47,7 @@ function PostMessage() {
     [profileImgList]
   );
   const handleChangeProfileImg = useCallback((value) => {
-    setCurrentProfileImg(() => value);
+    setCurrentProfileImg(value);
   }, []);
 
   const getImgProfileList = useCallback(async () => {
@@ -100,7 +102,11 @@ function PostMessage() {
       <div className={styles.container}>
         <div className={styles.inputTitle}>From.</div>
         <div className={styles.inputContainer}>
-          <Input inputValue={nameValue} onInputValueChange={handleInputValue} />
+          <Input
+            inputValue={nameValue}
+            onInputValueChange={handleInputValue}
+            placeHolderType={PLACEHOLDER.from}
+          />
         </div>
 
         <div className={styles.profileImgTitle}>프로필 이미지</div>
@@ -115,12 +121,11 @@ function PostMessage() {
             </div>
             <div className={styles.profileImgContainer}>
               {profileImgList?.map((profileImg, i) => (
-                <img
-                  className={styles.img}
+                <ProfileImgSelectList
                   key={i}
-                  onClick={() => handleClickProfileImgList(i)}
-                  src={profileImg}
-                  alt="profileImg"
+                  idx={i}
+                  profileImg={profileImg}
+                  onClickImg={handleClickProfileImgList}
                 />
               ))}
             </div>
@@ -145,7 +150,7 @@ function PostMessage() {
         </div>
 
         <div className={styles.selectBoxTitle}>폰트선택</div>
-        <div className={styles.selectBoxContainer}>
+        <div className={styles.fontSelectBoxContainer}>
           <SelectBox
             selectValue={currentFont}
             onSelectValueChange={handleCurrentFont}

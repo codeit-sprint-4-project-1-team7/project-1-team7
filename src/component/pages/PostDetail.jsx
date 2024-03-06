@@ -1,14 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   deleteMessageApiResponse,
   deleteRecipientApiResponse,
   getMessagesApiResponse,
+  getReactionsApiResponse,
   getRecipientsApiResponse,
+  postReactionApiResponse,
 } from "../../util/api";
 import HeaderService from "../common/header/HeaderService";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Card from "../common/card/Card";
 import { isImageValid } from "../../util/isImageValid";
+import copy from "copy-to-clipboard";
+import ModalPortal from "../common/modal/ModalPortal";
+import { Toast } from "../common/toast/Toast";
 
 function PostDetail({ contextMenuVisibleList }) {
   const navigate = useNavigate();
@@ -25,6 +30,47 @@ function PostDetail({ contextMenuVisibleList }) {
   const [next, setNext] = useState("");
   const [messagesLoading, setMessagesLoading] = useState(false);
 
+  const [contextMenuEmojiList, setContextMenuEmojiList] = useState([]);
+  const [isToastVisible, setIsToastVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalItem, setModalItem] = useState(null);
+  const target = useRef(null);
+  const pageUrl = window.location.href;
+
+  const backgroundImageStyle = (imageUrl) => ({
+    backgroundImage: `url(${imageUrl})`,
+    backgroundRepeat: `repeat`,
+    height: `100%`,
+    backgroundSize: `cover`,
+    backgroundPosition: `center`,
+  });
+
+  const getEmoji = useCallback(async () => {
+    const response = await getReactionsApiResponse(postId);
+    if (!response) return;
+    setContextMenuEmojiList(response.results);
+    return response.results;
+  }, [postId]);
+
+  const postEmoji = async (e) => {
+    const obj = { emoji: e.emoji, type: "increase" };
+    const response = await postReactionApiResponse(obj, postId);
+    if (!response) return;
+    return getEmoji();
+  };
+
+  const handleEmojiClick = async (e) => {
+    const emojiLists = await postEmoji(e);
+    setContextMenuEmojiList(emojiLists);
+  };
+
+  const handleShareUrlClick = () => {
+    copy(pageUrl);
+    setIsToastVisible(!isToastVisible);
+  };
+
+  const handleToastCloseClick = () => setIsToastVisible(!isToastVisible);
+
   const handleCardDeleteBtnClick = useCallback(async (e, id) => {
     e.stopPropagation();
 
@@ -36,7 +82,6 @@ function PostDetail({ contextMenuVisibleList }) {
 
   const handlePaperDeleteBtnClick = useCallback(async () => {
     await deleteRecipientApiResponse(postId);
-
     navigate("/list");
   }, [postId, navigate]);
 
@@ -54,7 +99,29 @@ function PostDetail({ contextMenuVisibleList }) {
     } = response;
 
     isImageValid(backgroundImageURL, function (isValid) {
-      setImage(isValid ? backgroundImageURL : backgroundColor);
+      if (isValid) {
+        setImage(backgroundImageURL);
+      } else {
+        let colorImageUrl = "";
+        switch (backgroundColor) {
+          case "beige":
+            colorImageUrl = "https://i.ibb.co/YPzXQ4s/2024-03-05-170431.png";
+            break;
+          case "green":
+            colorImageUrl = "https://i.ibb.co/8DdHnVT/2024-03-05-170616.png";
+            break;
+          case "blue":
+            colorImageUrl = "https://i.ibb.co/phjpSB8/2024-03-05-170612.png";
+            break;
+          case "purple":
+            colorImageUrl = "https://i.ibb.co/D8dZB0x/2024-03-05-170608.png";
+            break;
+          default:
+            colorImageUrl = "https://i.ibb.co/YPzXQ4s/2024-03-05-170431.png";
+            break;
+        }
+        setImage(colorImageUrl);
+      }
     });
 
     setMessageCount(messageCount);
@@ -89,15 +156,19 @@ function PostDetail({ contextMenuVisibleList }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     setMessages([]);
+
+    getEmoji();
     getRollinginformation();
+    setIsAddMessageCardVisible(!location.pathname.includes("edit"));
+
     if (location.pathname.includes("edit")) {
       getMessagesOfRecipient("edit");
     } else {
       getMessagesOfRecipient();
     }
 
-    setIsAddMessageCardVisible(!location.pathname.includes("edit"));
     window.addEventListener("resize", handleResize);
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -107,6 +178,58 @@ function PostDetail({ contextMenuVisibleList }) {
     navigate,
     getRollinginformation,
     getMessagesOfRecipient,
+    getEmoji,
+  ]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (isToastVisible) setIsToastVisible(false);
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isToastVisible]);
+
+  const handleCardModalClick = (item) => {
+    setModalItem(item);
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const handleAddMessageButtonClick = () => {
+    navigate("message");
+  };
+
+  const handlePreventRightClick = (e) => {
+    e.preventDefault();
+  };
+
+  const handleEditButtonClick = () => {
+    navigate("edit");
+  };
+
+  const handleGoBackClick = () => {
+    navigate(-1);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && next) {
+          getMessagesOfRecipient(messageNextOffset);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (target.current) {
+      observer.observe(target.current);
+    }
+    return () => observer.disconnect();
+  }, [
+    messageNextOffset,
+    getMessagesOfRecipient,
+    next,
+    isAddMessageCardVisible,
   ]);
   return (
     <>
@@ -118,9 +241,22 @@ function PostDetail({ contextMenuVisibleList }) {
         image={image}
         isImojiContainerSmall={isImojiContainerSmall}
         postId={postId}
+        onEmojiClick={handleEmojiClick}
+        onShareUrlClick={handleShareUrlClick}
+        contextMenuEmojiList={contextMenuEmojiList}
+        pageUrl={pageUrl}
       />
 
       <Card
+        isModalVisible={isModalVisible}
+        target={target}
+        modalItem={modalItem}
+        onCardModalClick={handleCardModalClick}
+        onAddMessageButtonClick={handleAddMessageButtonClick}
+        onPreventRightClick={handlePreventRightClick}
+        onEditButtonClick={handleEditButtonClick}
+        onGoBackClick={handleGoBackClick}
+        backgroundImageStyle={backgroundImageStyle}
         messagesLoading={messagesLoading}
         getMessagesOfRecipient={getMessagesOfRecipient}
         isAddMessageCardVisible={isAddMessageCardVisible}
@@ -131,6 +267,9 @@ function PostDetail({ contextMenuVisibleList }) {
         onCardDeleteBtnClick={handleCardDeleteBtnClick}
         onPaperDeleteBtnClick={handlePaperDeleteBtnClick}
       />
+      <ModalPortal>
+        {isToastVisible && <Toast onClick={handleToastCloseClick} />}
+      </ModalPortal>
     </>
   );
 }
