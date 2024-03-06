@@ -50,7 +50,8 @@ function App() {
     if (
       !e.target.closest("#emojiListButton") &&
       !e.target.closest("#shareButton") &&
-      !e.target.closest("#addEmojiButton")
+      !e.target.closest("#addEmojiButton") &&
+      !e.target.closest("#emojiPickerContainer")
     ) {
       setIsShareContextMenuVisible(false);
       setIsEmojiApiContextMenuVisible(false);
@@ -83,6 +84,9 @@ function App() {
                   element={
                     <PostDetail
                       contextMenuVisibleList={contextMenuVisibleList}
+                      setIsEmojiApiContextMenuVisible={
+                        setIsEmojiApiContextMenuVisible
+                      }
                     />
                   }
                 />
