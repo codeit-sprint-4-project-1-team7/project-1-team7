@@ -1,4 +1,7 @@
 .background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--purple-200);
   height: 100vh;
 }
@@ -8,7 +11,21 @@
   flex-direction: column;
   align-items: center;
 }
+.notFoundImg {
+  background-color: var(--white);
+  border: 2px dashed var(--purple-700);
+  border-radius: 50%;
+}
+.errorText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+}
 .text {
+  color: var(--purple-900);
   font-family: "Poppins";
-  font-size: var(--xxxl);
+  font-size: var(--xxl);
+  font-weight: var(--bold);
 }
