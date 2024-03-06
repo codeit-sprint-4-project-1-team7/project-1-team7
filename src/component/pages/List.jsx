@@ -182,6 +182,7 @@ function List() {
         <Button
           type="primary"
           width="width280"
+          height="tall"
           onClick={() => {
             navigate('/post');
           }}
