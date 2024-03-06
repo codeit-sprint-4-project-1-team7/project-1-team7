@@ -37,6 +37,12 @@ function LoadingSpinners() {
   );
 }
 function List() {
+  const navigation = useNavigate();
+
+  const handleCardListClick = (id) => {
+    navigation(`/post/${id}`);
+  };
+
   // cardlist
   const [rollingPaperListOrder, setRollingPaperListOrder] = useState([]);
   const [rollingPaperListPopular, setRollingPaperListPopular] = useState([]);
@@ -57,7 +63,6 @@ function List() {
   };
 
   // scroll-button-popular
-  const navigate = useNavigate();
   const containerPopularRef = useRef(null);
   const [isAtStartPopular, setIsAtStartPopular] = useState(true);
   const [isAtEndPopular, setIsAtEndPopular] = useState(false);
@@ -128,7 +133,10 @@ function List() {
           {isLoading ? (
             <LoadingSpinners />
           ) : (
-            <CardList rollingPaperList={rollingPaperListPopular.slice(0, 8)} />
+            <CardList
+              rollingPaperList={rollingPaperListPopular.slice(0, 8)}
+              onClick={handleCardListClick}
+            />
           )}
         </div>
         {!isAtStartPopular && (
@@ -156,7 +164,10 @@ function List() {
           {isLoading ? (
             <LoadingSpinners />
           ) : (
-            <CardList rollingPaperList={rollingPaperListOrder.slice(0, 8)} />
+            <CardList
+              rollingPaperList={rollingPaperListOrder.slice(0, 8)}
+              onClick={handleCardListClick}
+            />
           )}
         </div>
         {!isAtStartLatest && (
@@ -184,7 +195,7 @@ function List() {
           width="width280"
           height="tall"
           onClick={() => {
-            navigate('/post');
+            navigation('/post');
           }}
         >
           나도 만들어보기

@@ -1,15 +1,8 @@
-import ProfileImages from "../header/ProfileImages";
-import styles from "./CardList.module.css";
-import { EmojiBadge } from "../badge/EmojiBadge";
-import { useNavigate } from "react-router-dom";
+import ProfileImages from '../header/ProfileImages';
+import styles from './CardList.module.css';
+import { EmojiBadge } from '../badge/EmojiBadge';
 
-function CardList({ rollingPaperList }) {
-  const navigation = useNavigate();
-
-  const handleCardListClick = (id) => {
-    navigation(`/post/${id}`);
-  };
-
+function CardList({ rollingPaperList, onClick }) {
   return (
     <div className={styles.cardListContainer}>
       {rollingPaperList?.map(
@@ -26,9 +19,9 @@ function CardList({ rollingPaperList }) {
           <div
             key={id}
             className={`${styles.cardContainer} ${
-              backgroundImageURL ? styles.fontWhite : ""
+              backgroundImageURL ? styles.fontWhite : ''
             }`}
-            onClick={() => handleCardListClick(id)}
+            onClick={onClick}
           >
             <div className={styles.backgroundGroup}>
               {backgroundImageURL ? (
