@@ -6,7 +6,7 @@ import DOMPurify from 'dompurify';
 import { fontMappings } from '../textField/selectBox/fontMappings';
 
 export const Modal = ({ item, onClick }) => {
-  const profileName = `From. ${item.sender}`;
+  const profileName = 'From. ';
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -31,7 +31,10 @@ export const Modal = ({ item, onClick }) => {
               alt="프로필 이미지"
             />
             <div className={styles.profileForm}>
-              <div className={styles.profileName}>{profileName}</div>
+              <div className={styles.profileName}>
+                {profileName}
+                <span className={styles.profileNameBold}>{item.sender}</span>
+              </div>
               <Badge relation={item.relationship}></Badge>
             </div>
           </div>

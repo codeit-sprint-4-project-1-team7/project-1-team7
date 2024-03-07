@@ -38,6 +38,9 @@
   display: inline-flex;
   align-items: center;
   gap: 16px;
+  @media (max-width: 650px) {
+    gap: 10px;
+  }
 }
 .modalProfile .profileImg {
   width: 56px;
@@ -51,7 +54,7 @@
 .modalProfile .profileForm {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   padding: 3px 0px;
 }
 .modalProfile .profileName {
@@ -59,6 +62,12 @@
   font-size: var(--xl);
   font-weight: var(--regular);
   line-height: 24px;
+  @media (max-width: 650px) {
+    font-size: var(--m);
+  }
+}
+.profileNameBold {
+  font-weight: bold;
 }
 .modalDate {
   color: var(--gray-400);
@@ -66,6 +75,10 @@
   font-weight: var(--regular);
   line-height: 20px;
   letter-spacing: -0.07px;
+  width: 90px;
+  @media (max-width: 650px) {
+    font-size: var(--xxs);
+  }
 }
 .modalMessageForm {
   padding-top: 16px;
