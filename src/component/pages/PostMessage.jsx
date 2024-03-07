@@ -123,6 +123,7 @@ function PostMessage() {
                   idx={i}
                   profileImg={profileImg}
                   onClickImg={handleClickProfileImgList}
+                  isSelected={currentProfileImg === profileImg}
                 />
               ))}
             </div>
