@@ -46,7 +46,7 @@ function Input({
         placeholder={placeHolderType}
         value={inputValue}
         onChange={handleonChangeValue}
-        maxlength="20"
+        maxLength="20"
       />
       {isError && <div className={styles.errorMessage}>값을 입력해 주세요</div>}
     </div>
