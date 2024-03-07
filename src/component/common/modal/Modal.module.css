@@ -21,11 +21,18 @@
   background: var(--white);
   flex-shrink: 0;
   gap: 20px;
+
   @media (max-width: 650px) {
     width: 370px;
     height: 320px;
     padding: 15px;
     gap: 10px;
+  }
+
+  @media (max-width: 400px) {
+    width: 330px;
+    height: 280px;
+    padding: 10px;
   }
 }
 .modalHeader {
