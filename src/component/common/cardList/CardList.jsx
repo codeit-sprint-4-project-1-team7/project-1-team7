@@ -22,7 +22,7 @@ function CardList({ rollingPaperList, onClick }) {
               className={`${styles.cardContainer} ${
                 backgroundImageURL ? styles.fontWhite : ""
               }`}
-              onClick={(id) => onClick(id)}
+              onClick={() => onClick(id)}
             >
               <div className={styles.backgroundGroup}>
                 {backgroundImageURL ? (
