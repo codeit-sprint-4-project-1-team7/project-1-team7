@@ -5,14 +5,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 0;
+  padding: 100px 24px;
 }
 
 .buttonArea {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  max-width: 1194px;
+  max-width: 1200px;
   margin-bottom: 11px;
   padding: 0 24px;
   min-width: 364px;
@@ -20,10 +20,9 @@
 
 .cardBox {
   display: grid;
-  max-width: 1194px;
+  max-width: 1200px;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, 384px);
-  grid-template-rows: repeat(auto-fill, 284px);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   align-items: center;
   justify-content: center;
@@ -79,9 +78,15 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding-bottom: 15px;
 }
 
 .profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profileMain {
   display: flex;
   gap: 14px;
 }
@@ -94,6 +99,7 @@
   height: 56px;
   border-radius: 100px;
   border: 1px solid var(--gray-20);
+  flex-shrink: 0;
 }
 
 .nameAndBadgeContainer {
@@ -126,7 +132,9 @@
 .textAreaContainer {
   padding: 16px 24px;
 }
-
+.fontName {
+  font-weight: var(--bold);
+}
 .textBox {
   position: absolute;
   top: 116px;
@@ -145,6 +153,25 @@
   -webkit-line-clamp: 5;
 }
 
+.textBox ol li {
+  counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+  counter-increment: list-0;
+}
+
+.textBox ol li:before {
+  content: counter(list-0, decimal) ". ";
+}
+
+.textBox ul > li::before {
+  content: "\2022";
+}
+
+.textBox ul li::before {
+  display: inline-block;
+  white-space: nowrap;
+  width: 12px;
+}
+
 .date {
   position: absolute;
   left: 24px;
@@ -158,7 +185,6 @@
 }
 
 .trashButton {
-  position: absolute;
   top: 24px;
   right: 24px;
 }
@@ -187,48 +213,24 @@
   background-color: var(--purple-200);
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.intersectionTarget {
-  width: 100%;
-}
-
-@media (max-width: 1240px) {
+@media (max-width: 1248px) {
   .cardBox {
-    grid-template-columns: repeat(auto-fill, 352px);
-    grid-template-rows: repeat(auto-fill, 284px);
-  }
-  .buttonArea {
-    max-width: 1100px;
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
   }
 }
 
-@media (max-width: 1096px) {
-  .buttonArea {
-    max-width: 760px;
+@media (max-width: 1000px) {
+  .cardBox {
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
   }
 }
-@media (max-width: 723px) {
-  .buttonArea {
-    max-width: 384px;
+@media (max-width: 670px) {
+  .cardBox {
+    grid-template-columns: minmax(320px, 1fr);
   }
 }
 
 @media (max-width: 360px) {
-  .cardBox {
-    grid-template-columns: repeat(auto-fill, 320px);
-    grid-template-rows: repeat(auto-fill, 230px);
-  }
-  .cardContainer {
-    height: 230px;
-  }
   .textBox {
     -webkit-line-clamp: 3;
   }

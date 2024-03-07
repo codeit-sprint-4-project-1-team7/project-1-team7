@@ -1,23 +1,34 @@
 import React, { useState } from "react";
 import spinner from "../../../asset/img/loadingGif/spinner.gif";
 import styles from "./ProfileImgSelectList.module.css";
+import check from "../../../asset/img/optionIcon/check_Icon.png";
 
-function ProfileImgSelectList({ idx, profileImg, onClickImg }) {
+function ProfileImgSelectList({ idx, profileImg, onClickImg, isSelected }) {
   const [isLoad, setIsLoad] = useState(false);
+  const [isCheckLoad, setIsCheckLoad] = useState(false);
+
   const handleLoad = () => {
     setTimeout(() => {
       setIsLoad(true);
-    }, 200);
+      if (isLoad) setIsCheckLoad(true);
+    }, 100);
   };
 
   return (
-    <img
-      className={styles.img}
-      onClick={() => onClickImg(idx)}
-      src={isLoad ? profileImg : spinner}
-      alt="profileImg"
-      onLoad={handleLoad}
-    />
+    <div className={styles.container}>
+      <img
+        className={styles.img}
+        onClick={() => onClickImg(idx)}
+        src={isLoad ? profileImg : spinner}
+        alt="profileImg"
+        onLoad={handleLoad}
+      />
+      <img
+        className={isSelected && isCheckLoad ? styles.check : styles.invisible}
+        src={check}
+        alt="check"
+      />
+    </div>
   );
 }
 

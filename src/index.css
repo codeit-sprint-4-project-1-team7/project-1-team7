@@ -72,6 +72,8 @@ h6,
 input,
 li,
 p,
+ol,
+ul,
 select,
 textarea {
   margin: 0;
@@ -120,12 +122,6 @@ img {
 }
 img {
   vertical-align: top;
-}
-ol {
-  list-style-type: decimal;
-}
-ul {
-  list-style-type: disc;
 }
 a {
   color: inherit;
