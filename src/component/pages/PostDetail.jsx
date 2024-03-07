@@ -132,7 +132,7 @@ function PostDetail({
   }, [postId, navigate]);
 
   const handleResize = () => {
-    setIsImojiContainerSmall(window.innerWidth < 768);
+    setIsImojiContainerSmall(window.innerWidth <= 1248);
   };
 
   const getMessagesOfRecipient = useCallback(
@@ -186,7 +186,7 @@ function PostDetail({
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isToastVisible) setIsToastVisible(false);
-    }, 3000);
+    }, 5000);
     return () => {
       clearTimeout(timer);
     };
