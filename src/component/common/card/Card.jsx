@@ -89,18 +89,19 @@ function Card({
               >
                 <div className={styles.profileContainer}>
                   <div className={styles.profile}>
-                    <div
-                      className={styles.img}
-                      style={{
-                        backgroundImage: `url(${item.profileImageURL})`,
-                      }}
-                    />
-                    <div className={styles.nameAndBadgeContainer}>
-                      <div className={styles.nameContainer}>
-                        <span>From.</span>
-                        <span>{item.sender}</span>
+                    <div className={styles.profileMain}>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: `url(${item.profileImageURL})`,
+                        }}
+                      />
+                      <div className={styles.nameAndBadgeContainer}>
+                        <div className={styles.nameContainer}>
+                          <span>From. {item.sender}</span>
+                        </div>
+                        <Badge relation={item.relationship} />
                       </div>
-                      <Badge relation={item.relationship} />
                     </div>
                     {!isAddMessageCardVisible && (
                       <div className={styles.trashButton}>
@@ -113,8 +114,8 @@ function Card({
                       </div>
                     )}
                   </div>
-                  <div className={styles.line} />
                 </div>
+                <div className={styles.line} />
                 <div className={styles.textAreaContainer}>
                   <div
                     className={styles.textBox}
