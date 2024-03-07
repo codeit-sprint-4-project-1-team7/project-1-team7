@@ -175,17 +175,17 @@
   }
 }
 
+@media (max-width: 1248px) {
+  .emojiContainer {
+    width: 248px;
+  }
+}
+
 @media (max-width: 1024px) {
   .imageContainer,
   .writed,
   .writedBar {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .emojiContainer {
-    width: 248px;
   }
 }
 
@@ -221,10 +221,10 @@
   }
 
   .emojiContainer {
-    left: -30px;
+    left: -125px;
   }
 
   .emojiApiContainer {
-    left: -30px;
+    left: -215px;
   }
 }
