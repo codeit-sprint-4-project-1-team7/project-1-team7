@@ -18,21 +18,23 @@ const NEW_PAGE = {
 function Post() {
   const [inputValue, setInputValue] = useState("");
   const [selectedButtonName, setSelectedButtonName] = useState(BUTTON_NAME[0]);
-  const [clickItem, setClickItem] = useState('beige');
   const [baseImages, setBaseImages] = useState([]);
+  const [clickItem, setClickItem] = useState('beige');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
-    setClickItem(e.target.value === clickItem ? '' : e.target.value);
-  }
-  
   const handleInputValue = (value) => setInputValue(value);
   const handleButtonClick = (e) => {
+    if (selectedButtonName === BUTTON_NAME[1]) setClickItem('beige');
+    if (selectedButtonName === BUTTON_NAME[0]) setClickItem('https://picsum.photos/id/683/3840/2160')
     setSelectedButtonName(e.target.innerText);
     setTimeout(() => {
       setIsLoading(true);
     }, 200);
+  }
+
+  const handleClick = (e) => {
+    setClickItem(e.target.value);
   }
 
   const handleAddImageDataChange = async (e) => {
@@ -44,7 +46,6 @@ function Post() {
       const newImageUrl = await upLoadImg(uploadFile);
       setBaseImages((prev) => ([newImageUrl, ...prev]));
     } 
-
 
   const getBaseImages = async () => {
     const { imageUrls } = await getBackgroundImagesApiResponse();
@@ -60,8 +61,12 @@ function Post() {
 
   const createRolling = async () => {
     NEW_PAGE.name = inputValue;
-    clickItem.includes('http') ? NEW_PAGE.backgroundImageURL = clickItem
-    : NEW_PAGE.backgroundColor = clickItem;
+    if (clickItem.includes('http')) {
+      NEW_PAGE.backgroundImageURL = clickItem;
+    } else {
+      NEW_PAGE.backgroundColor = clickItem;
+      NEW_PAGE.backgroundImageURL = null;
+    }
     
     const { id } = await postRecipientApiResponse(NEW_PAGE);
 

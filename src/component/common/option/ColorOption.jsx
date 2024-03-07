@@ -6,7 +6,6 @@ function ColorOption({ clickItem, onClick }) {
   return (
     <div className={styles.backgroundOptions}>
       <button
-        id='option'
         type='button'
         value='beige'
         className={`${styles.option} ${styles.colorBeige}`}
@@ -16,7 +15,6 @@ function ColorOption({ clickItem, onClick }) {
       </button>
 
       <button
-        id='option'
         type='button'
         value='purple'
         className={`${styles.option}
@@ -27,7 +25,6 @@ function ColorOption({ clickItem, onClick }) {
       </button>
 
       <button
-        id='option'
         type='button'
         value='blue'
         className={`${styles.option} ${styles.colorBlue}`}
@@ -37,7 +34,6 @@ function ColorOption({ clickItem, onClick }) {
       </button>
 
       <button
-        id='option'
         type='button'
         value='green'
         className={`${styles.option} ${styles.colorGreen}`}
