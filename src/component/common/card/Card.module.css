@@ -132,7 +132,9 @@
 .textAreaContainer {
   padding: 16px 24px;
 }
-
+.fontName {
+  font-weight: var(--bold);
+}
 .textBox {
   position: absolute;
   top: 116px;
