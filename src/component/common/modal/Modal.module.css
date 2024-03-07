@@ -95,3 +95,21 @@
   justify-content: center;
   align-items: center;
 }
+.modalMessage ol li {
+  counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+  counter-increment: list-0;
+}
+
+.modalMessage ol li:before {
+  content: counter(list-0, decimal) '. ';
+}
+
+.modalMessage ul > li::before {
+  content: '\2022';
+}
+
+.modalMessage ul li::before {
+  display: inline-block;
+  white-space: nowrap;
+  width: 12px;
+}
