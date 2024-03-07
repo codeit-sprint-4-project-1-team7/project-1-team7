@@ -31,3 +31,8 @@ https://codeit.notion.site/7818e11b82394e07ac9299ab266166e3
 https://codeit.notion.site/API-d9eecacf2dbd4f268baf33cd11190a78
 
 ## 충돌이 일어나면 반드시 DM을 주세요! ##
+
+
+# 다들 수고 많으셨습니다 !!! #
+## 배포 페이지입니다 ##
+https://rolling-4-7team.netlify.app/
