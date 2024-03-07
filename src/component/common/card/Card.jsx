@@ -98,7 +98,12 @@ function Card({
                       />
                       <div className={styles.nameAndBadgeContainer}>
                         <div className={styles.nameContainer}>
-                          <span>From. {item.sender}</span>
+                          <span>
+                            From.{" "}
+                            <span className={styles.fontName}>
+                              {item.sender}
+                            </span>
+                          </span>
                         </div>
                         <Badge relation={item.relationship} />
                       </div>
