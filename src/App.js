@@ -78,6 +78,9 @@ function App() {
                   element={
                     <PostDetail
                       contextMenuVisibleList={contextMenuVisibleList}
+                      setIsEmojiApiContextMenuVisible={
+                        setIsEmojiApiContextMenuVisible
+                      }
                     />
                   }
                 />
