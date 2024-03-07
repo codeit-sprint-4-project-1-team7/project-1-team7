@@ -1,6 +1,6 @@
-import ProfileImages from '../header/ProfileImages';
-import styles from './CardList.module.css';
-import { EmojiBadge } from '../badge/EmojiBadge';
+import ProfileImages from "../header/ProfileImages";
+import styles from "./CardList.module.css";
+import { EmojiBadge } from "../badge/EmojiBadge";
 
 function CardList({ rollingPaperList, onClick }) {
   return (
@@ -20,7 +20,7 @@ function CardList({ rollingPaperList, onClick }) {
             <div
               key={id}
               className={`${styles.cardContainer} ${
-                backgroundImageURL ? styles.fontWhite : ''
+                backgroundImageURL ? styles.fontWhite : ""
               }`}
               onClick={() => onClick(id)}
             >
