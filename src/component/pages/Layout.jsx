@@ -12,7 +12,7 @@ function Layout() {
     setIsMakeRollingPaperVisible(!location.pathname.includes("post"));
     const handleResize = () => {
       setIsMobile(
-        window.innerWidth < 360 && location.pathname.includes("post")
+        window.innerWidth <= 360 && location.pathname.includes("post")
       );
     };
     window.addEventListener("resize", handleResize);

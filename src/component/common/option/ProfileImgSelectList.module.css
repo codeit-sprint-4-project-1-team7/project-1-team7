@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .img {
   display: flex;
   width: 56px;
@@ -10,9 +14,27 @@
   cursor: pointer;
 }
 
+.check {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.invisible {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .img {
     width: 40px;
     height: 40px;
+  }
+
+  .check {
+    width: 20px;
+    height: 20px;
   }
 }

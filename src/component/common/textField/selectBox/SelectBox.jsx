@@ -3,6 +3,7 @@ import styles from "./SelectBox.module.css";
 import DropDown from "./DropDown";
 import arrowTop from "../../../../asset/img/textFieldIcon/arrow_top.png";
 import arrowDown from "../../../../asset/img/textFieldIcon/arrow_down.png";
+import { fontMappings } from "./fontMappings";
 
 function SelectBox({ selectValue, onSelectValueChange, selectType }) {
   const [view, setView] = useState(false);
@@ -36,7 +37,9 @@ function SelectBox({ selectValue, onSelectValueChange, selectType }) {
   return (
     <div className={styles.container} ref={selectBoxRef}>
       <button className={styles.button} onClick={handleOnClick}>
-        <div>{selectValue}</div>
+        <div style={{ fontFamily: fontMappings[selectValue] || "Pretendard" }}>
+          {selectValue}
+        </div>
         <div className={styles.imgContainer}>
           {view ? (
             <img className={styles.img} src={arrowDown} alt="arrowDown" />
