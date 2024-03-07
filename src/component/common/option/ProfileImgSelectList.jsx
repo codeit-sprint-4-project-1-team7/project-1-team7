@@ -22,6 +22,7 @@ function ProfileImgSelectList({ idx, profileImg, onClickImg, isSelected }) {
         src={isLoad ? profileImg : spinner}
         alt="profileImg"
         onLoad={handleLoad}
+        style={{ opacity: isSelected && isCheckLoad && "50%" }}
       />
       <img
         className={isSelected && isCheckLoad ? styles.check : styles.invisible}

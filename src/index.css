@@ -89,6 +89,7 @@ textarea {
   line-height: 16px;
   color: #000;
   font-family: "Pretendard", "Poppins", sans-serif;
+  word-break: break-all;
 }
 h1,
 h2,
