@@ -1,5 +1,5 @@
 
-읽어주세요! conflict를 방지하기 위해 아래 사항을 준수해주세요!
+읽어주세요! 
 =============
 ## clone 해서 작업하시면 됩니다 ##
 git clone <레파지토리 URL>
@@ -12,14 +12,7 @@ git checkout <브랜치명(각자의 이름)>
 
 git pull origin main
 
-## 가급적이면 push 후 pr에서 merge 하도록 할게요! ##
-
-## 개발한 내용을 main에 merge할 때 명령어입니다! ## 
-1. git checkout <브랜치명(각자의 이름)>     
-2. git pull origin main                 
-3. git checkout main                    
-4. git merge <브랜치명(각자의 이름)>      
-5. git push origin main                   
+## 가급적이면 push 후 pr에서 merge 하도록 할게요! ##            
 
 ## 기초 프로젝트의 코드 컨벤션 및 commit 메시지 구조에 대한 링크 ##
 [https://www.notion.so/2dd85aea555d40ff872237f2a845ee26?pvs=4](https://few-seed-7cb.notion.site/2dd85aea555d40ff872237f2a845ee26)https://few-seed-7cb.notion.site/2dd85aea555d40ff872237f2a845ee26
@@ -31,7 +24,6 @@ https://codeit.notion.site/7818e11b82394e07ac9299ab266166e3
 https://codeit.notion.site/API-d9eecacf2dbd4f268baf33cd11190a78
 
 ## 충돌이 일어나면 반드시 DM을 주세요! ##
-
 
 # 다들 수고 많으셨습니다 !!! #
 ## 배포 페이지입니다 ##
