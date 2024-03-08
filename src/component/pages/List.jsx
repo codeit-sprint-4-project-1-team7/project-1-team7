@@ -78,7 +78,6 @@ function List() {
 
     if (container) {
       const scrollAmount = 295;
-      console.log(container.scrollLeft);
       container.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
