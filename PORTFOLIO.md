@@ -6,7 +6,6 @@
 - 📝 [개요](#-포트폴리오-개요)
 - 🛠 [기술 및 도구](#-기술-및-도구)
 - 🔗 [링크](#-링크)
-- ✨ [업데이트](#-업데이트)
 - 👨🏻‍💻 [기능 구현](#-기능-구현)
   - [라이트/다크 모드](#1-라이트/다크-모드)
   - [Hash Link](#2-Hash-Link)
@@ -21,42 +20,37 @@
 
 ## **📝 포트폴리오 개요**
 
-<img width="100%" alt="메인 페이지" src="https://user-images.githubusercontent.com/51189962/136147406-e80d9f8a-49b9-42bc-aa3a-301fff182608.png" />
-
-> **프로젝트:** 개인 포트폴리오 사이트
+> **프로젝트명:** Rolling
 >
-> **기획 및 제작:** 김태진
+> **참여자:** 김수환(팀장), 양서연, 윤아영, 최원석, 홍성욱
 >
-> **분류:** 개인 프로젝트
+> **제작 기간:** 2024.02.24 ~ 2024.03.12
 >
-> **제작 기간:** 2021.09 ~ 10.
+> **배포일:** 2024.03.07
 >
-> **배포일:** 2021.10.05.
+> **주요 기능:** 이미지 파일 전송, 텍스트박스 카카오톡 공유, 이모지 추가, 카드 무한 스크롤 방식으로 배치
 >
-> **주요 기능:** 라이트/다크 모드, 반응형 웹, Hash Link, Email 전송, 배포 및 커스텀 도메인 연결, open graph
+> **사용 기술:** React, Css Modules
 >
-> **사용 기술:** React, Styled-components, Firebase Hosting
->
-> **문의:** keemgreat@gmail.com
+> **문의:** shwan_2@naver.com
 
 <br />
 
 ## **🛠 기술 및 도구**
 
-![React](https://img.shields.io/badge/React-53C1DE?style=flat-square&logo=react&logoColor=white) ![Styled-Components](https://img.shields.io/badge/Styled_Components-DB7C85?style=flat-square&logo=styled-components&logoColor=white) ![Firebase](https://img.shields.io/badge/Firebase-%23039BE5.svg?style=flat-square&logo=firebase)
+![React](https://img.shields.io/badge/React-53C1DE?style=flat-square&logo=react&logoColor=white) 
 ![GitHub](https://img.shields.io/badge/Github-%23121011.svg?style=flat-square&logo=github&logoColor=white)
+![CssModule](https://img.shields.io/badge/CssModules-0ABF53?style=flat-square&logo=cssmodules&logoColor=white)
+
+
 
 <br />
 
 ## **🔗 링크**
 
-**링크:** [https://keemtj.com](https://keemtj.com)
+**링크:** [https://keemtj.com](https://rolling-4-7team.netlify.app/)
 
 <br />
-
-## **✨ 업데이트**
-
-- About 섹션에 이력서 및 자기소개서 다운로드 기능 추가(21.10.13)
 
 <br />
 
