@@ -5,6 +5,7 @@
   /* gap: 10px; */
   border-radius: 32px;
   background: rgba(0, 0, 0, 0.54);
+  justify-content: center;
 }
 
 .emoji {
@@ -33,7 +34,7 @@
     font-size: var(--xs);
     letter-spacing: -0.07px;
   }
-  
+
   .count {
     font-size: var(--xs);
     letter-spacing: -0.07px;
