@@ -158,7 +158,7 @@ function PostDetail({
   useEffect(() => {
     window.scrollTo(0, 0);
     setMessages([]);
-
+    handleResize();
     getEmoji();
     getRollinginformation();
     setIsAddMessageCardVisible(!location.pathname.includes("edit"));
