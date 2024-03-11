@@ -121,7 +121,6 @@
 }
 .emojiContainer {
   position: absolute;
-  width: 315px;
   border-radius: 8px;
   border: 1px solid var(--gray-300);
   background-color: var(--white);
@@ -131,7 +130,7 @@
   z-index: 10;
   padding: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 60px);
+  grid-template-columns: repeat(4, 65px);
   grid-template-rows: 1fr 1fr;
   gap: 8px;
 }
@@ -177,7 +176,7 @@
 
 @media (max-width: 1248px) {
   .emojiContainer {
-    width: 248px;
+    grid-template-columns: repeat(3, 63px);
   }
 }
 
@@ -221,7 +220,8 @@
   }
 
   .emojiContainer {
-    left: -125px;
+    grid-template-columns: repeat(3, 55px);
+    right: -30px;
   }
 
   .emojiApiContainer {
