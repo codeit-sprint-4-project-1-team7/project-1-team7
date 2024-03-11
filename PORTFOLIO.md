@@ -7,6 +7,11 @@
 - 🛠 [기술 및 도구](#-기술-및-도구)
 - 🔗 [배포 링크](#-배포-링크)
 - 🤝 [팀원 소개 및 기능 구현](#-팀원-소개-및-기능-구현)
+  - [김수환](#-김수환)
+  - [양서연](#-양서연)
+  - [윤아영](#-윤아영)
+  - [최원석](#-최원석)
+  - [홍성욱](#-홍성욱)
 - 🙋 [Q&A](#-Q&A)
 
 </b>
@@ -49,7 +54,7 @@
 
 ## **🤝 팀원 소개 및 기능 구현**
 
-- 김수환
+## **김수환**
 > **맡은 파트:** post/{id} 페이지, Header, Card_list, Card 컴포넌트
 >
 > **주요 기능:** 무한 스크롤 방식으로 카드 배치, 카카오톡 공유, 이모지 추가
@@ -68,7 +73,7 @@
 https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133655/d2b8b42a-ac7b-4beb-8ae8-7dda714e1a6a
 
 > 
-- 양서연
+## **양서연**
 > **맡은 파트:** post 페이지, color, font, Option 컴포넌트
 >
 > **주요 기능:** 이미지 파일 업로드, 롤링 페이퍼 생성
@@ -86,7 +91,7 @@ https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133
 https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133655/c9b76e7d-f5b2-4c20-ab80-2754e1e97c10
 
 
-- 윤아영
+## **윤아영**
 > **맡은 파트:** post/{id}/edit 페이지, Button 컴포넌트
 >
 > **주요 기능:** 롤링페이퍼 삭제하기, 메시지 삭제하기
@@ -105,7 +110,7 @@ https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133
 
 
 > 
-- 최원석
+## **최원석**
 > **맡은 파트:** post/{id}/message 페이지, TextField 컴포넌트
 >
 > **주요 기능:** 이미지 파일 업로드, TextArea 구현, 롤링페이퍼 메시지 작성
@@ -126,7 +131,7 @@ https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133
 https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133655/54734480-af26-4016-9ac0-65bd2423749f
 
 
-- 홍성욱
+## **홍성욱**
 > **맡은 파트:** 메인 페이지, list 페이지, Modal, Toast, Badge 컴포넌트
 >
 > **주요 기능:** 버튼 클릭으로 스크롤 구현
