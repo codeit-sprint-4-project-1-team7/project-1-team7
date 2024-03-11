@@ -72,8 +72,8 @@
 >   
 
 https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133655/d2b8b42a-ac7b-4beb-8ae8-7dda714e1a6a
+<hr/>
 
-> 
 ### **양서연**
 > **맡은 파트:** post 페이지, color, font, Option 컴포넌트
 >
@@ -91,6 +91,7 @@ https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133
 
 https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133655/c9b76e7d-f5b2-4c20-ab80-2754e1e97c10
 
+<hr/>
 
 ### **윤아영**
 > **맡은 파트:** post/{id}/edit 페이지, Button 컴포넌트
@@ -110,7 +111,8 @@ https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133
 https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133655/7a9fcc87-a262-4410-9886-8acf40751f00
 
 
-> 
+<hr/>
+
 ### **최원석**
 > **맡은 파트:** post/{id}/message 페이지, TextField 컴포넌트
 >
@@ -131,6 +133,7 @@ https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133
 
 https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133655/54734480-af26-4016-9ac0-65bd2423749f
 
+<hr/>
 
 ### **홍성욱**
 > **맡은 파트:** 메인 페이지, list 페이지, Modal, Toast, Badge 컴포넌트
@@ -147,6 +150,7 @@ https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133
 >
 
 https://github.com/codeit-sprint-4-project-1-team7/project-1-team7/assets/155133655/0b3e0172-a809-4560-a1f8-db6e70de4ca7
+<hr/>
 
 ## **🙋 Q&A** 
 
