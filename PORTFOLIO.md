@@ -30,7 +30,7 @@
 >
 > **사용 기술:** React, Css Modules
 >
-> **사용 컨벤션:** 
+> **사용 컨벤션:** Code Formatting(eslint, prettier), UI와 Container 컴포넌트로 역할 분리, Conventional Commits
 >
 > **문의:** shwan_2@naver.com
 
