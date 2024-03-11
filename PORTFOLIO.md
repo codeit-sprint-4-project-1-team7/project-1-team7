@@ -30,6 +30,8 @@
 >
 > **사용 기술:** React, Css Modules
 >
+> **사용 컨벤션:** 
+>
 > **문의:** shwan_2@naver.com
 
 <br />
@@ -39,7 +41,7 @@
 ![React](https://img.shields.io/badge/React-53C1DE?style=flat-square&logo=react&logoColor=white) 
 ![GitHub](https://img.shields.io/badge/Github-%23121011.svg?style=flat-square&logo=github&logoColor=white)
 ![CssModule](https://img.shields.io/badge/CssModules-0ABF53?style=flat-square&logo=cssmodules&logoColor=white)
-react-quill, Intersection Observer API, emoji-picker-react, modal-portal
+,react-quill, Intersection Observer API, emoji-picker-react, modal-portal
 
 
 <br />
