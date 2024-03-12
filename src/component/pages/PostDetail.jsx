@@ -155,14 +155,17 @@ function PostDetail({
     [postId, setMessagesLoading, navigate]
   );
 
-  useEffect(() => {
+  const initial = useCallback(() => {
     window.scrollTo(0, 0);
     setMessages([]);
-    handleResize();
     getEmoji();
     getRollinginformation();
-    setIsAddMessageCardVisible(!location.pathname.includes("edit"));
+  }, [getRollinginformation, getEmoji]);
 
+  useEffect(() => {
+    initial();
+    setIsAddMessageCardVisible(!location.pathname.includes("edit"));
+    handleResize();
     if (location.pathname.includes("edit")) {
       getMessagesOfRecipient("edit");
     } else {
@@ -174,14 +177,7 @@ function PostDetail({
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [
-    location.pathname,
-    postId,
-    navigate,
-    getRollinginformation,
-    getMessagesOfRecipient,
-    getEmoji,
-  ]);
+  }, [initial, location.pathname, postId, navigate, getMessagesOfRecipient]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
