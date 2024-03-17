@@ -14,6 +14,7 @@ import { isImageValid } from "../../util/isImageValid";
 import copy from "copy-to-clipboard";
 import ModalPortal from "../common/modal/ModalPortal";
 import { Toast } from "../common/toast/Toast";
+import { DELETE_MESSAGES } from "../../constants/deleteMessage";
 
 function PostDetail({
   contextMenuVisibleList,
@@ -76,6 +77,10 @@ function PostDetail({
   const handleCardDeleteBtnClick = useCallback(async (e, id) => {
     e.stopPropagation();
 
+    if (!window.confirm(DELETE_MESSAGES.card)) {
+      return;
+    }
+
     await deleteMessageApiResponse(id);
     setMessages((prevMessage) =>
       prevMessage.filter((message) => message.id !== id)
@@ -83,6 +88,10 @@ function PostDetail({
   }, []);
 
   const handlePaperDeleteBtnClick = useCallback(async () => {
+    if (!window.confirm(DELETE_MESSAGES.paper)) {
+      return;
+    }
+
     await deleteRecipientApiResponse(postId);
     navigate("/list");
   }, [postId, navigate]);
