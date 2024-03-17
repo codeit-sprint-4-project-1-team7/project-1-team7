@@ -40,13 +40,6 @@ function PostDetail({
   const target = useRef(null);
   const pageUrl = window.location.href;
 
-  const backgroundImageStyle = (imageUrl) => ({
-    backgroundImage: `url(${imageUrl})`,
-    backgroundRepeat: `repeat`,
-    backgroundSize: `100vw`,
-    backgroundPosition: `top`,
-  });
-
   const getEmoji = useCallback(async () => {
     const response = await getReactionsApiResponse(postId);
     if (!response) return;
@@ -263,7 +256,6 @@ function PostDetail({
         onPreventRightClick={handlePreventRightClick}
         onEditButtonClick={handleEditButtonClick}
         onGoBackClick={handleGoBackClick}
-        backgroundImageStyle={backgroundImageStyle}
         messagesLoading={messagesLoading}
         getMessagesOfRecipient={getMessagesOfRecipient}
         isAddMessageCardVisible={isAddMessageCardVisible}
