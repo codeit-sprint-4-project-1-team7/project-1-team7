@@ -14,6 +14,7 @@ import { isImageValid } from "../../util/isImageValid";
 import copy from "copy-to-clipboard";
 import ModalPortal from "../common/modal/ModalPortal";
 import { Toast } from "../common/toast/Toast";
+import { DELETE_MESSAGES } from "../../constants/deleteMessage";
 
 function PostDetail({
   contextMenuVisibleList,
@@ -38,13 +39,6 @@ function PostDetail({
   const [modalItem, setModalItem] = useState(null);
   const target = useRef(null);
   const pageUrl = window.location.href;
-
-  const backgroundImageStyle = (imageUrl) => ({
-    backgroundImage: `url(${imageUrl})`,
-    backgroundRepeat: `repeat`,
-    backgroundSize: `100vw`,
-    backgroundPosition: `top`,
-  });
 
   const getEmoji = useCallback(async () => {
     const response = await getReactionsApiResponse(postId);
@@ -76,6 +70,10 @@ function PostDetail({
   const handleCardDeleteBtnClick = useCallback(async (e, id) => {
     e.stopPropagation();
 
+    if (!window.confirm(DELETE_MESSAGES.card)) {
+      return;
+    }
+
     await deleteMessageApiResponse(id);
     setMessages((prevMessage) =>
       prevMessage.filter((message) => message.id !== id)
@@ -83,6 +81,10 @@ function PostDetail({
   }, []);
 
   const handlePaperDeleteBtnClick = useCallback(async () => {
+    if (!window.confirm(DELETE_MESSAGES.paper)) {
+      return;
+    }
+
     await deleteRecipientApiResponse(postId);
     navigate("/list");
   }, [postId, navigate]);
@@ -254,7 +256,6 @@ function PostDetail({
         onPreventRightClick={handlePreventRightClick}
         onEditButtonClick={handleEditButtonClick}
         onGoBackClick={handleGoBackClick}
-        backgroundImageStyle={backgroundImageStyle}
         messagesLoading={messagesLoading}
         getMessagesOfRecipient={getMessagesOfRecipient}
         isAddMessageCardVisible={isAddMessageCardVisible}

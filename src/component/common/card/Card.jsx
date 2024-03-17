@@ -20,20 +20,24 @@ function Card({
   onPreventRightClick,
   onEditButtonClick,
   onGoBackClick,
-  backgroundImageStyle,
   modalItem,
   isModalVisible,
   target,
 }) {
   return (
     <>
-      <div
-        onContextMenu={onPreventRightClick}
-        className={`${styles.backGround} ${
-          !image?.includes("http") && styles[image]
-        }`}
-        style={image?.includes("http") ? backgroundImageStyle(image) : {}}
-      >
+      <div className={styles.backgroundContainer}>
+        {image?.includes("http") ? (
+          <img
+            src={image}
+            alt="배경이미지"
+            className={`${styles.background}`}
+          />
+        ) : (
+          <div className={`${styles.background} ${styles[image]}`} />
+        )}
+      </div>
+      <div onContextMenu={onPreventRightClick} className={styles.container}>
         {isAddMessageCardVisible ? (
           <div className={styles.buttonArea}>
             <Button
