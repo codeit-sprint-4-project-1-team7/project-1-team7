@@ -11,6 +11,7 @@ function ColorOption({ clickItem, onClick }) {
         return (
           <button
             type='button'
+            key={item}
             value={item}
             className={`${styles.option} ${styles[item]}`}
             onClick={onClick}>
