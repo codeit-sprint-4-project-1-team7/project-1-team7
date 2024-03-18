@@ -9,6 +9,7 @@ import ColorOption from "../common/option/ColorOption";
 import ImageOption from "../common/option/ImageOption";
 
 const BUTTON_NAME = ["컬러", "이미지"];
+const FIRST_CONTENT = ['beige', 'https://picsum.photos/id/683/3840/2160'];
 const NEW_PAGE = {
   name: '',
   backgroundColor: 'beige',
@@ -19,14 +20,14 @@ function Post() {
   const [inputValue, setInputValue] = useState("");
   const [selectedButtonName, setSelectedButtonName] = useState(BUTTON_NAME[0]);
   const [baseImages, setBaseImages] = useState([]);
-  const [clickItem, setClickItem] = useState('beige');
+  const [clickItem, setClickItem] = useState(FIRST_CONTENT[0]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleInputValue = (value) => setInputValue(value);
   const handleButtonClick = (e) => {
-    if (selectedButtonName === BUTTON_NAME[1]) setClickItem('beige');
-    if (selectedButtonName === BUTTON_NAME[0]) setClickItem('https://picsum.photos/id/683/3840/2160')
+    if (selectedButtonName === BUTTON_NAME[1]) setClickItem(FIRST_CONTENT[0]);
+    if (selectedButtonName === BUTTON_NAME[0]) setClickItem(FIRST_CONTENT[1]);
     setSelectedButtonName(e.target.innerText);
     setTimeout(() => {
       setIsLoading(true);

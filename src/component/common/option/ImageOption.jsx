@@ -4,8 +4,9 @@ import styles from "./ImageOption.module.css";
 import checkIcon from "../../../asset/img/optionIcon/check_Icon.png";
 import spinner from "../../../asset/img/loadingGif/spinner.gif"
 
+const CHECKED_BACKGROUND = 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))'; 
+
 function ImageOption({ clickItem, imageData, onChange, onClick, isLoading }) {
-  const CHECKED_BACKGROUND = 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))'; 
   const fileInput = useRef(null);
 
   return (
