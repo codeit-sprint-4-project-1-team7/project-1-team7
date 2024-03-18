@@ -4,8 +4,9 @@ import styles from "./ImageOption.module.css";
 import checkIcon from "../../../asset/img/optionIcon/check_Icon.png";
 import spinner from "../../../asset/img/loadingGif/spinner.gif"
 
+const CHECKED_BACKGROUND = 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))'; 
+
 function ImageOption({ clickItem, imageData, onChange, onClick, isLoading }) {
-  const CHECKED_BACKGROUND = 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5))'; 
   const fileInput = useRef(null);
 
   return (
@@ -22,7 +23,7 @@ function ImageOption({ clickItem, imageData, onChange, onClick, isLoading }) {
           ref={fileInput}
           onChange={onChange}/>
       </div>
-      {imageData.map((item, i) => {
+      {imageData.map((item) => {
         return (
           <button
             style={clickItem === item 
@@ -30,7 +31,7 @@ function ImageOption({ clickItem, imageData, onChange, onClick, isLoading }) {
                     : {backgroundImage: `url(${isLoading ? item : spinner})`}}
             className={styles.option}
             type='button'
-            key= {i}
+            key= {item}
             value= {item}
             onClick={onClick}>
             { clickItem === item

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBackgroundImagesApiResponse, postRecipientApiResponse, upLoadImg } from "../../util/api";
 import styles from "./Post.module.css";
@@ -9,6 +9,7 @@ import ColorOption from "../common/option/ColorOption";
 import ImageOption from "../common/option/ImageOption";
 
 const BUTTON_NAME = ["컬러", "이미지"];
+const FIRST_CONTENT = ['beige', 'https://picsum.photos/id/683/3840/2160'];
 const NEW_PAGE = {
   name: '',
   backgroundColor: 'beige',
@@ -19,25 +20,25 @@ function Post() {
   const [inputValue, setInputValue] = useState("");
   const [selectedButtonName, setSelectedButtonName] = useState(BUTTON_NAME[0]);
   const [baseImages, setBaseImages] = useState([]);
-  const [clickItem, setClickItem] = useState('beige');
+  const [clickItem, setClickItem] = useState(FIRST_CONTENT[0]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleInputValue = (value) => setInputValue(value);
-  const handleButtonClick = (e) => {
-    if (selectedButtonName === BUTTON_NAME[1]) setClickItem('beige');
-    if (selectedButtonName === BUTTON_NAME[0]) setClickItem('https://picsum.photos/id/683/3840/2160')
+  const handleInputValue = useCallback((value) => setInputValue(value), []);
+  const handleButtonClick = useCallback((e) => {
+    if (selectedButtonName === BUTTON_NAME[1]) setClickItem(FIRST_CONTENT[0]);
+    if (selectedButtonName === BUTTON_NAME[0]) setClickItem(FIRST_CONTENT[1]);
     setSelectedButtonName(e.target.innerText);
     setTimeout(() => {
       setIsLoading(true);
     }, 200);
-  }
+  }, [selectedButtonName]);
 
-  const handleClick = (e) => {
+  const handleClick = useCallback((e) => {
     setClickItem(e.target.value);
-  }
+  }, []);
 
-  const handleAddImageDataChange = async (e) => {
+  const handleAddImageDataChange = useCallback(async (e) => {
     const { files } = e.target;
     const uploadFile = files[0];
 
@@ -45,21 +46,21 @@ function Post() {
 
       const newImageUrl = await upLoadImg(uploadFile);
       setBaseImages((prev) => ([newImageUrl, ...prev]));
-    } 
+    }, []);
 
-  const getBaseImages = async () => {
+  const getBaseImages = useCallback(async () => {
     const { imageUrls } = await getBackgroundImagesApiResponse();
     
     if (!imageUrls) return;
 
     setBaseImages(imageUrls);
-  }
+  }, []);
 
   useEffect(() => {
     getBaseImages();
-  }, [])
+  }, [getBaseImages]);
 
-  const createRolling = async () => {
+  const createRolling = useCallback(async () => {
     NEW_PAGE.name = inputValue;
     if (clickItem.includes('http')) {
       NEW_PAGE.backgroundImageURL = clickItem;
@@ -73,7 +74,7 @@ function Post() {
     if (!id) return;
 
     navigate(`/post/${id}`)
-  }
+  }, [clickItem, inputValue, navigate]);
 
   return (
     <div className={styles.container}>

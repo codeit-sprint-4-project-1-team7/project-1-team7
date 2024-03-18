@@ -16,19 +16,19 @@
   padding: 50% 0;
 }
 
-.colorBeige {
+.beige {
   background-color: var(--orange-200);
 }
 
-.colorPurple {
+.purple {
   background-color: var(--purple-200);
 }
 
-.colorBlue {
+.blue {
   background-color: var(--blue-200);
 }
 
-.colorGreen {
+.green {
   background-color: var(--green-200);
 }
 
